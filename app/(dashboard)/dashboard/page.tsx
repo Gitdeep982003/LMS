@@ -165,183 +165,263 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* 8 Metric Cards Grid - DYNAMIC BASED ON ROLE */}
+      {/* 8 Clickable Metric Cards Grid - DYNAMIC BASED ON ROLE */}
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
         {/* Card 1: Leads */}
-        <Card className="hover:shadow-card-hover transition-all">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-500">
-                {isExecutive ? 'My Assigned Leads' : 'Total Inquiries'}
-              </span>
-              <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
-                <Users2 className="w-4 h-4" />
+        <Link href="/leads" className="block group">
+          <Card className="h-full hover:shadow-lg hover:border-blue-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+            <CardContent className="p-4 sm:p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-500 group-hover:text-blue-700 transition-colors">
+                  {isExecutive ? 'My Assigned Leads' : 'Total Inquiries'}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <Users2 className="w-4 h-4" />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
-                {isExecutive ? myLeads.length : totalLeads}
-              </h3>
-              <p className="text-[11px] text-slate-500 mt-1">
-                {isExecutive ? `${myActiveLeads} active inquiries` : `${newLeads} new today`}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="mt-3">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-blue-600 transition-colors">
+                  {isExecutive ? myLeads.length : totalLeads}
+                </h3>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-[11px] text-slate-500">
+                    {isExecutive ? `${myActiveLeads} active inquiries` : `${newLeads} new today`}
+                  </p>
+                  <span className="text-[10px] text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                    View &rarr;
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
         {/* Card 2: Active / Unassigned */}
-        <Card className="hover:shadow-card-hover transition-all">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-500">
-                {isManager ? 'Unassigned Inflow' : isExecutive ? 'My Active Deals' : 'Active Pipeline'}
-              </span>
-              <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600">
-                {isManager ? <UserPlus className="w-4 h-4" /> : <Clock className="w-4 h-4" />}
+        <Link href={isManager ? '/assignments' : '/pipeline'} className="block group">
+          <Card className="h-full hover:shadow-lg hover:border-indigo-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+            <CardContent className="p-4 sm:p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-500 group-hover:text-indigo-700 transition-colors">
+                  {isManager ? 'Unassigned Inflow' : isExecutive ? 'My Active Deals' : 'Active Pipeline'}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-indigo-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                    {isManager ? <UserPlus className="w-4 h-4" /> : <Clock className="w-4 h-4" />}
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
-                {isManager ? newLeads : isExecutive ? myActiveLeads : activeLeads}
-              </h3>
-              <p className="text-[11px] text-slate-500 mt-1">
-                {isManager ? 'Needs executive allocation' : 'In active negotiation'}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="mt-3">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors">
+                  {isManager ? newLeads : isExecutive ? myActiveLeads : activeLeads}
+                </h3>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-[11px] text-slate-500">
+                    {isManager ? 'Needs executive allocation' : 'In active negotiation'}
+                  </p>
+                  <span className="text-[10px] text-indigo-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                    {isManager ? 'Allocate &rarr;' : 'Pipeline &rarr;'}
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
         {/* Card 3: Pending Follow-ups */}
-        <Card className="hover:shadow-card-hover transition-all">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-500">
-                {isExecutive ? 'My Pending Calls' : 'Pending Follow-ups'}
-              </span>
-              <div className="p-2 rounded-xl bg-amber-50 text-amber-600">
-                <PhoneCall className="w-4 h-4" />
+        <Link href="/follow-ups" className="block group">
+          <Card className="h-full hover:shadow-lg hover:border-amber-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+            <CardContent className="p-4 sm:p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-500 group-hover:text-amber-700 transition-colors">
+                  {isExecutive ? 'My Pending Calls' : 'Pending Follow-ups'}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-amber-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-amber-50 text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                    <PhoneCall className="w-4 h-4" />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
-                {isExecutive ? myPendingFollowups : pendingFollowups}
-              </h3>
-              <p className="text-[11px] text-amber-700 font-medium mt-1">
-                {isExecutive ? 'Due on your desk' : 'Across sales team'}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="mt-3">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-amber-600 transition-colors">
+                  {isExecutive ? myPendingFollowups : pendingFollowups}
+                </h3>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-[11px] text-amber-700 font-medium">
+                    {isExecutive ? 'Due on your desk' : 'Across sales team'}
+                  </p>
+                  <span className="text-[10px] text-amber-700 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                    Open Calls &rarr;
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
         {/* Card 4: Site Visits */}
-        <Card className="hover:shadow-card-hover transition-all">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-500">
-                {isExecutive ? 'My Site Visits Today' : "Today's Site Visits"}
-              </span>
-              <div className="p-2 rounded-xl bg-purple-50 text-purple-600">
-                <CalendarCheck2 className="w-4 h-4" />
+        <Link href="/site-visits" className="block group">
+          <Card className="h-full hover:shadow-lg hover:border-purple-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+            <CardContent className="p-4 sm:p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-500 group-hover:text-purple-700 transition-colors">
+                  {isExecutive ? 'My Site Visits Today' : "Today's Site Visits"}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-purple-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                    <CalendarCheck2 className="w-4 h-4" />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
-                {isExecutive ? myTodayVisits : todayVisits}
-              </h3>
-              <p className="text-[11px] text-purple-700 font-medium mt-1">
-                Scheduled showing appointments
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="mt-3">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-purple-600 transition-colors">
+                  {isExecutive ? myTodayVisits : todayVisits}
+                </h3>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-[11px] text-purple-700 font-medium">
+                    Scheduled showing appointments
+                  </p>
+                  <span className="text-[10px] text-purple-700 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                    Visits &rarr;
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
         {/* Card 5: Closed Deals */}
-        <Card className="hover:shadow-card-hover transition-all">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-500">
-                {isExecutive ? 'My Deals Closed' : 'Total Converted Deals'}
-              </span>
-              <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600">
-                <CheckCircle2 className="w-4 h-4" />
+        <Link href="/bookings" className="block group">
+          <Card className="h-full hover:shadow-lg hover:border-emerald-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+            <CardContent className="p-4 sm:p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-500 group-hover:text-emerald-700 transition-colors">
+                  {isExecutive ? 'My Deals Closed' : 'Total Converted Deals'}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-emerald-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
-                {isExecutive ? myConverted : convertedLeads}
-              </h3>
-              <p className="text-[11px] text-emerald-600 font-medium mt-1">
-                {isExecutive ? 'Deals closed by you' : 'Booked & registered'}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="mt-3">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-emerald-600 transition-colors">
+                  {isExecutive ? myConverted : convertedLeads}
+                </h3>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-[11px] text-emerald-600 font-medium">
+                    {isExecutive ? 'Deals closed by you' : 'Booked & registered'}
+                  </p>
+                  <span className="text-[10px] text-emerald-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                    Deals &rarr;
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
         {/* Card 6: Sales Volume / Quota */}
-        <Card className="hover:shadow-card-hover transition-all">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-500">
-                {isExecutive ? 'My Sales Volume' : 'Total Booked Value'}
-              </span>
-              <div className="p-2 rounded-xl bg-green-50 text-green-600">
-                <Building2 className="w-4 h-4" />
+        <Link href="/bookings" className="block group">
+          <Card className="h-full hover:shadow-lg hover:border-green-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+            <CardContent className="p-4 sm:p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-500 group-hover:text-green-700 transition-colors">
+                  {isExecutive ? 'My Sales Volume' : 'Total Booked Value'}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-green-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-green-50 text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                    <Building2 className="w-4 h-4" />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
-                {isExecutive ? formatINR(myTotalSales) : formatINR(totalBookingValue)}
-              </h3>
-              <p className="text-[11px] text-slate-500 mt-1">
-                {isExecutive ? `Capacity: ${myLeads.length}/${myCapacity}` : `${totalBookings} booked agreements`}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="mt-3">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-green-600 transition-colors">
+                  {isExecutive ? formatINR(myTotalSales) : formatINR(totalBookingValue)}
+                </h3>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-[11px] text-slate-500">
+                    {isExecutive ? `Capacity: ${myLeads.length}/${myCapacity}` : `${totalBookings} booked agreements`}
+                  </p>
+                  <span className="text-[10px] text-green-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                    Revenue &rarr;
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
         {/* Card 7: Conversion Rate */}
-        <Card className="hover:shadow-card-hover transition-all">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-500">
-                {isExecutive ? 'My Conversion Rate' : 'Team Conversion Rate'}
-              </span>
-              <div className="p-2 rounded-xl bg-rose-50 text-rose-600">
-                <Trophy className="w-4 h-4" />
+        <Link href="/reports" className="block group">
+          <Card className="h-full hover:shadow-lg hover:border-rose-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+            <CardContent className="p-4 sm:p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-500 group-hover:text-rose-700 transition-colors">
+                  {isExecutive ? 'My Conversion Rate' : 'Team Conversion Rate'}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-rose-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-rose-50 text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition-colors">
+                    <Trophy className="w-4 h-4" />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
-                {isExecutive ? myConversionRate : globalConversionRate}%
-              </h3>
-              <p className="text-[11px] text-emerald-600 font-medium mt-1">
-                {isExecutive ? 'Personal closing ratio' : 'Organization benchmark'}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="mt-3">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-rose-600 transition-colors">
+                  {isExecutive ? myConversionRate : globalConversionRate}%
+                </h3>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-[11px] text-emerald-600 font-medium">
+                    {isExecutive ? 'Personal closing ratio' : 'Organization benchmark'}
+                  </p>
+                  <span className="text-[10px] text-rose-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                    Analytics &rarr;
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
 
         {/* Card 8: Quota / Team Health */}
-        <Card className="hover:shadow-card-hover transition-all">
-          <CardContent className="p-4 sm:p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-slate-500">
-                {isExecutive ? 'My Quota Fulfillment' : 'Active Sales Force'}
-              </span>
-              <div className="p-2 rounded-xl bg-teal-50 text-teal-600">
-                {isExecutive ? <Target className="w-4 h-4" /> : <UserCheck className="w-4 h-4" />}
+        <Link href={isExecutive ? '/reports' : '/team'} className="block group">
+          <Card className="h-full hover:shadow-lg hover:border-teal-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+            <CardContent className="p-4 sm:p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-500 group-hover:text-teal-700 transition-colors">
+                  {isExecutive ? 'My Quota Fulfillment' : 'Active Sales Force'}
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-teal-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors">
+                    {isExecutive ? <Target className="w-4 h-4" /> : <UserCheck className="w-4 h-4" />}
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
-                {isExecutive ? `${Math.min(100, Math.round((myTotalSales / 500000000) * 100))}%` : `${agents.length} Agents`}
-              </h3>
-              <p className="text-[11px] text-slate-500 mt-1">
-                {isExecutive ? 'Of ₹50 Cr annual target' : 'All actively deployed'}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="mt-3">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-teal-600 transition-colors">
+                  {isExecutive ? `${Math.min(100, Math.round((myTotalSales / 500000000) * 100))}%` : `${agents.length} Agents`}
+                </h3>
+                <div className="flex items-center justify-between mt-1">
+                  <p className="text-[11px] text-slate-500">
+                    {isExecutive ? 'Of ₹50 Cr annual target' : 'All actively deployed'}
+                  </p>
+                  <span className="text-[10px] text-teal-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                    {isExecutive ? 'Targets &rarr;' : 'Team &rarr;'}
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
 
       {/* Analytics Charts */}
