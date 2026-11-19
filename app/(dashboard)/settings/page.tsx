@@ -25,10 +25,10 @@ export default function SettingsPage() {
   const { success, info } = useToast();
 
   const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
-  const [companyName, setCompanyName] = useState('Estatify Real Estate Technologies Pvt Ltd');
+  const [companyName, setCompanyName] = useState('Kalaivani Real Estate Technologies Pvt Ltd');
   const [reraId, setReraId] = useState('PRM/KA/RERA/1251/AG/180214/00018');
   const [headquarters, setHeadquarters] = useState('Indiranagar 100 Feet Road, Bengaluru - 560038');
-  const [contactEmail, setContactEmail] = useState('corporate@estatify.in');
+  const [contactEmail, setContactEmail] = useState('corporate@kalaivani.in');
   const [smsNotification, setSmsNotification] = useState(true);
   const [whatsappAlerts, setWhatsappAlerts] = useState(true);
 
@@ -49,12 +49,12 @@ export default function SettingsPage() {
       agents,
       bookings,
       exportTimestamp: new Date().toISOString(),
-      platform: 'ESTATIFY Real Estate LMS',
+      platform: 'Kalaivani Real Estate LMS',
     };
     const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data, null, 2))}`;
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute('href', jsonString);
-    downloadAnchor.setAttribute('download', `estatify-crm-backup-${Date.now()}.json`);
+    downloadAnchor.setAttribute('download', `kalaivani-crm-backup-${Date.now()}.json`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'ESTATIFY | Real Estate Lead Management System (LMS)',
+  title: 'Kalaivani | Real Estate Lead Management System (LMS)',
   description: 'Enterprise Real Estate CRM and Lead Management Platform',
 };
 

@@ -101,45 +101,60 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6 pb-12">
       {/* Role-Specific Hero Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 via-slate-850 to-blue-950 p-6 rounded-2xl text-white shadow-xl shadow-slate-900/10">
-        <div>
+      <div className="relative overflow-hidden flex flex-col sm:flex-row sm:items-center justify-between gap-5 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 p-6 rounded-2xl text-white border border-slate-800 shadow-md">
+        {/* Subtle ambient lighting to retain color without harshness */}
+        <div className="absolute -right-8 -top-8 w-56 h-56 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute right-1/3 -bottom-10 w-48 h-48 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10">
           <div className="flex items-center gap-2">
-            <span
-              className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border uppercase tracking-wider ${
-                isAdmin
-                  ? 'bg-blue-500/20 text-blue-300 border-blue-500/30'
-                  : isManager
-                  ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30'
-                  : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
-              }`}
-            >
-              {currentUser.role} Workspace
-            </span>
-            <span className="text-xs text-slate-400">
-              {currentUser.name}
-            </span>
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60 text-xs font-medium text-slate-300">
+              <span
+                className={`w-2 h-2 rounded-full ${isAdmin
+                    ? 'bg-blue-400'
+                    : isManager
+                      ? 'bg-indigo-400'
+                      : 'bg-emerald-400'
+                  }`}
+              />
+              <span>{currentUser.role} Workspace</span>
+              <span className="text-slate-500">•</span>
+              <span className="text-slate-400 font-normal">{currentUser.name}</span>
+            </div>
           </div>
 
-          <h1 className="text-xl sm:text-2xl font-bold mt-2">
-            {isAdmin && 'Enterprise Real Estate Executive Dashboard'}
-            {isManager && `Sales Manager Command Center • ${currentAgentRecord?.department || 'Regional Sales'}`}
-            {isExecutive && `My Daily Sales Desk • ${currentAgentRecord?.department || 'Executive Desk'}`}
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white mt-2.5">
+            {isAdmin && 'Brokerage Overview & Performance'}
+            {isManager && `Sales Team Overview • ${currentAgentRecord?.department || 'Regional Sales'}`}
+            {isExecutive && `Welcome back, ${currentUser.name.split(' ')[0]} 👋`}
           </h1>
 
-          <p className="text-xs sm:text-sm text-slate-300 mt-1">
-            {isAdmin && 'Complete brokerage overview: live pipeline valuation, company revenue trajectory, and team quotas.'}
-            {isManager && `Supervising ${agents.length} sales executives. Monitor unassigned leads, team capacity, and booking agreements.`}
-            {isExecutive && `You have ${myActiveLeads} active prospective buyers in your pipeline and ${myPendingFollowups} follow-up calls pending today.`}
+          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
+            {isAdmin && 'Real-time overview of brokerage sales, active pipeline valuation, and executive quota targets.'}
+            {isManager && `Supervising ${agents.length} sales executives. Monitor unassigned inquiries, team capacity, and booking agreements.`}
+            {isExecutive && (
+              <>
+                You have <strong className="text-white font-semibold">{myActiveLeads} active leads</strong> in your pipeline and <strong className="text-amber-300 font-semibold">{myPendingFollowups} follow-up calls</strong> pending today.
+              </>
+            )}
           </p>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="relative z-10 flex items-center gap-3 shrink-0">
           <Link href="/pipeline">
-            <Button variant="secondary" size="sm" className="bg-white/10 text-white hover:bg-white/20 border-white/20 text-xs">
+            <Button
+              variant="secondary"
+              size="sm"
+              className="bg-slate-800/90 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700/80 text-xs font-medium px-3.5 py-2 rounded-xl transition-all shadow-xs"
+            >
               View Pipeline
             </Button>
           </Link>
-          <Button size="sm" onClick={() => setIsAddLeadOpen(true)} className="bg-blue-600 hover:bg-blue-500 gap-1.5 shadow-md text-xs">
+          <Button
+            size="sm"
+            onClick={() => setIsAddLeadOpen(true)}
+            className="bg-blue-600 hover:bg-blue-500 text-white gap-1.5 shadow-sm text-xs font-medium px-4 py-2 rounded-xl transition-all"
+          >
             <Plus className="w-4 h-4" /> Add Lead
           </Button>
         </div>
@@ -446,17 +461,15 @@ export default function DashboardPage() {
               <div className="flex items-center p-1 bg-slate-100 rounded-lg text-xs font-medium">
                 <button
                   onClick={() => setLeadScope('my')}
-                  className={`px-2.5 py-1 rounded-md transition-all ${
-                    leadScope === 'my' ? 'bg-white shadow-xs font-bold text-blue-600' : 'text-slate-600'
-                  }`}
+                  className={`px-2.5 py-1 rounded-md transition-all ${leadScope === 'my' ? 'bg-white shadow-xs font-bold text-blue-600' : 'text-slate-600'
+                    }`}
                 >
                   My Leads ({myLeads.length})
                 </button>
                 <button
                   onClick={() => setLeadScope('all')}
-                  className={`px-2.5 py-1 rounded-md transition-all ${
-                    leadScope === 'all' ? 'bg-white shadow-xs font-bold text-blue-600' : 'text-slate-600'
-                  }`}
+                  className={`px-2.5 py-1 rounded-md transition-all ${leadScope === 'all' ? 'bg-white shadow-xs font-bold text-blue-600' : 'text-slate-600'
+                    }`}
                 >
                   All Team ({leads.length})
                 </button>
@@ -550,9 +563,8 @@ export default function DashboardPage() {
                 return (
                   <div
                     key={ag.id}
-                    className={`flex items-center justify-between text-xs p-1.5 rounded-lg ${
-                      isMe ? 'bg-blue-50 border border-blue-200' : ''
-                    }`}
+                    className={`flex items-center justify-between text-xs p-1.5 rounded-lg ${isMe ? 'bg-blue-50 border border-blue-200' : ''
+                      }`}
                   >
                     <div className="flex items-center gap-2.5">
                       <span className="w-5 text-center font-bold text-slate-400 text-[11px]">

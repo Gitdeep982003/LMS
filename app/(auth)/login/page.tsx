@@ -121,11 +121,11 @@ export default function LoginPage() {
       <div className="w-full max-w-xl z-10 space-y-5 my-6">
         {/* Brand Header */}
         <div className="text-center space-y-1.5">
-          <div className="inline-flex items-center justify-center w-13 h-13 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-emerald-500 shadow-lg shadow-blue-500/30 p-3 mb-1">
+          <div className="inline-flex items-center justify-center w-13 h-13 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 shadow-lg shadow-blue-500/20 p-3 mb-1">
             <Building2 className="w-7 h-7 text-white" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center justify-center gap-2">
-            ESTATIFY <span className="text-blue-500 font-extrabold">LMS</span>
+            KALAIVANI <span className="text-blue-500 font-extrabold">LMS</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-400">
             Real Estate CRM & Lead Management Portal
@@ -471,7 +471,7 @@ export default function LoginPage() {
 
         {/* Footer */}
         <div className="text-center text-xs text-slate-500">
-          ESTATIFY LMS • Real Estate SaaS CRM • Demo Environment
+          Kalaivani LMS • Real Estate SaaS CRM
         </div>
       </div>
     </div>
