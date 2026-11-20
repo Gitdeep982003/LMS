@@ -119,39 +119,29 @@ export function Sidebar({
       >
         {/* Brand Header & Toggle - Luxury Real Estate Emblem */}
         {collapsed ? (
-          <div className="flex flex-col items-center justify-center py-3 px-2 border-b border-[#EAE4D9] bg-[#FAF8F5] shrink-0 gap-2">
+          <div className="flex flex-col items-center justify-center h-16 px-2 border-b border-[#EAE4D9] bg-[#FAF8F5] shrink-0 gap-1">
             <Link href="/dashboard" className="shrink-0 group" title="Kalaivani Real Estate">
-              <div className="w-10 h-10 rounded-full bg-[#0C141F] border border-[#C59B63]/60 flex items-center justify-center shadow-xs group-hover:border-[#C59B63] transition-colors">
-                <Building className="w-4 h-4 text-[#C59B63]" />
+              <div className="w-10 h-10 rounded-xl overflow-hidden border border-[#C59B63]/60 flex items-center justify-center shadow-xs group-hover:border-[#C59B63] transition-colors bg-[#FAF8F5]">
+                <img
+                  src="/kalaivani-logo.png"
+                  alt="Kalaivani Emblem"
+                  className="h-10 max-w-none object-cover object-left"
+                />
               </div>
             </Link>
-            <button
-              onClick={() => setCollapsed(false)}
-              className="p-1.5 rounded-lg text-stone-400 hover:text-stone-800 hover:bg-[#F2EDE4] transition-colors"
-              title="Expand Sidebar"
-              aria-label="Expand Sidebar"
-            >
-              <ChevronsRight className="w-4 h-4" />
-            </button>
           </div>
         ) : (
-          <div className="flex items-center justify-between h-16 px-4 border-b border-[#EAE4D9] bg-[#FAF8F5] shrink-0">
-            <Link href="/dashboard" className="flex items-center gap-3 overflow-hidden flex-1 group">
-              <div className="w-10 h-10 rounded-full bg-[#0C141F] border border-[#C59B63]/60 flex items-center justify-center shrink-0 shadow-xs group-hover:border-[#C59B63] transition-colors">
-                <Building className="w-5 h-5 text-[#C59B63]" />
-              </div>
-              <div className="flex flex-col min-w-0">
-                <span className="font-poppins font-bold text-base tracking-wider text-[#0C141F] truncate">
-                  KALAIVANI
-                </span>
-                <span className="text-[9px] text-[#C59B63] font-bold tracking-[0.2em] uppercase truncate">
-                  Real Estate
-                </span>
-              </div>
+          <div className="flex items-center justify-between h-16 px-3.5 border-b border-[#EAE4D9] bg-[#FAF8F5] shrink-0">
+            <Link href="/dashboard" className="flex items-center gap-2 overflow-hidden flex-1 group">
+              <img
+                src="/kalaivani-logo.png"
+                alt="Kalaivani Real Estate Logo"
+                className="h-11 w-auto max-w-[190px] object-contain group-hover:opacity-95 transition-opacity"
+              />
             </Link>
             <button
               onClick={() => setCollapsed(true)}
-              className="p-1.5 rounded-lg text-stone-400 hover:text-stone-800 hover:bg-[#F2EDE4] transition-colors ml-2 shrink-0"
+              className="p-1.5 rounded-lg text-stone-400 hover:text-stone-800 hover:bg-[#F2EDE4] transition-colors ml-1 shrink-0"
               title="Collapse Sidebar"
               aria-label="Collapse Sidebar"
             >

@@ -12,6 +12,11 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'Kalaivani Real Estate | Lead Management System (LMS)',
   description: 'Your Dream Property, Our Commitment. Real Estate CRM & Brokerage Platform',
+  icons: {
+    icon: '/kalaivani-logo.png',
+    shortcut: '/kalaivani-logo.png',
+    apple: '/kalaivani-logo.png',
+  },
 };
 
 export default function RootLayout({

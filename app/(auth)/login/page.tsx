@@ -72,17 +72,13 @@ export default function LoginPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#0C141F]/90 via-[#0C141F]/30 to-[#0C141F]/40" />
 
           {/* Top-Left: Kalaivani Luxury Brand Emblem */}
-          <div className="relative z-20 flex items-center gap-3">
-            <div className="w-11 h-11 rounded-full bg-[#0C141F] border-2 border-[#C59B63] flex items-center justify-center shadow-lg shrink-0">
-              <Building className="w-5 h-5 text-[#C59B63]" />
-            </div>
-            <div>
-              <span className="font-poppins font-bold text-lg sm:text-xl tracking-wider text-white block leading-tight">
-                KALAIVANI
-              </span>
-              <span className="text-[10px] text-[#C59B63] font-bold tracking-[0.25em] uppercase block">
-                Real Estate
-              </span>
+          <div className="relative z-20 flex items-center">
+            <div className="bg-white/95 backdrop-blur-md rounded-2xl px-4 py-2 shadow-xl border border-[#C59B63]/40">
+              <img
+                src="/kalaivani-logo.png"
+                alt="Kalaivani Real Estate Logo"
+                className="h-12 sm:h-14 md:h-16 w-auto object-contain"
+              />
             </div>
           </div>
 
@@ -117,6 +113,13 @@ export default function LoginPage() {
           <div className="w-full space-y-5">
             {/* Header */}
             <div>
+              <div className="flex items-center gap-2 mb-4">
+                <img
+                  src="/kalaivani-logo.png"
+                  alt="Kalaivani Logo"
+                  className="h-12 sm:h-14 w-auto object-contain"
+                />
+              </div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF5EC] border border-[#E5D0A6] text-[10px] font-bold text-[#8C6228] uppercase tracking-wider mb-2">
                 Enterprise CRM Portal
               </div>

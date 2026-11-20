@@ -45,13 +45,22 @@ export function Header({ onMenuClick }: { onMenuClick: () => void }) {
     <>
       <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 sm:px-6 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#EAE4D9] shadow-xs">
         {/* Left Section: Mobile Menu + Search */}
-        <div className="flex items-center gap-3 lg:gap-4 flex-1 max-w-xl">
+        <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-4 flex-1 max-w-xl">
           <button
             onClick={onMenuClick}
             className="lg:hidden p-2 rounded-xl text-stone-600 hover:bg-[#F2EDE4] focus:outline-none"
+            aria-label="Open Navigation"
           >
             <Menu className="w-5 h-5" />
           </button>
+
+          <Link href="/dashboard" className="lg:hidden shrink-0 flex items-center">
+            <img
+              src="/kalaivani-logo.png"
+              alt="Kalaivani Real Estate"
+              className="h-9 sm:h-10 w-auto object-contain"
+            />
+          </Link>
 
           <form onSubmit={handleSearchSubmit} className="relative w-full max-w-md">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
