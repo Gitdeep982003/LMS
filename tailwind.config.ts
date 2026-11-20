@@ -11,15 +11,35 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        navy: {
-          850: "#0f172a",
-          900: "#0a0f1d",
-          950: "#060913",
+        gold: {
+          50: "#FCFBF7",
+          100: "#FAF5EC",
+          200: "#F2E6CE",
+          300: "#E5D0A6",
+          400: "#D4B87C",
+          500: "#C59B63", // Kalaivani Signature Brand Gold
+          600: "#B88A44",
+          700: "#966D2F",
+          800: "#755220",
+          900: "#543A18",
+        },
+        obsidian: {
+          DEFAULT: "#0C141F", // Deep Midnight Obsidian from landing page
+          hover: "#16202E",
+          light: "#222D3E",
+        },
+        warm: {
+          50: "#FAF8F5", // Warm Ivory Background
+          100: "#F5F1E9",
+          200: "#EAE4D9", // Subtle stone border
+          300: "#DDD4C4",
+          400: "#C2B59F",
         },
         primary: {
-          DEFAULT: "#2563eb",
-          hover: "#1d4ed8",
-          light: "#eff6ff",
+          DEFAULT: "#0C141F",
+          hover: "#16202E",
+          gold: "#C59B63",
+          light: "#FAF5EC",
         },
         emerald: {
           DEFAULT: "#10b981",
@@ -28,11 +48,14 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+        poppins: ["'Poppins'", "var(--font-poppins)", "sans-serif"],
+        sans: ["'Poppins'", "var(--font-poppins)", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+        serif: ["'Poppins'", "var(--font-poppins)", "sans-serif"],
+        display: ["'Poppins'", "var(--font-poppins)", "sans-serif"],
       },
       boxShadow: {
-        card: "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)",
-        "card-hover": "0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.05)",
+        card: "0 1px 3px 0 rgba(12, 20, 31, 0.04), 0 1px 2px -1px rgba(12, 20, 31, 0.04)",
+        "card-hover": "0 8px 16px -2px rgba(197, 155, 99, 0.12), 0 4px 6px -4px rgba(12, 20, 31, 0.05)",
       },
     },
   },

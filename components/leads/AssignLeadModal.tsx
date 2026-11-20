@@ -62,7 +62,7 @@ export function AssignLeadModal({ isOpen, onClose, leadIds }: AssignLeadModalPro
                   onClick={() => setSelectedAgentId(ag.id)}
                   className={`p-3 rounded-xl border cursor-pointer transition-all flex items-center justify-between ${
                     isSelected
-                      ? 'border-blue-500 bg-blue-50/50 ring-1 ring-blue-500'
+                      ? 'border-[#C59B63] bg-[#FAF5EC]/50 ring-1 ring-blue-500'
                       : 'border-slate-200 hover:border-slate-300 bg-white'
                   }`}
                 >

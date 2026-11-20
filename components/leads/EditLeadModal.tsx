@@ -115,7 +115,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               required
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -126,7 +126,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               required
               value={formData.mobile}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
         </div>
@@ -139,7 +139,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -149,7 +149,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               name="preferredLocation"
               value={formData.preferredLocation}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
         </div>
@@ -161,7 +161,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               name="interestedPropertyId"
               value={formData.interestedPropertyId}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               <option value="">-- None / General Inquiry --</option>
               {properties.map((p) => (
@@ -177,7 +177,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               name="propertyType"
               value={formData.propertyType}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               <option value="Apartment">Apartment</option>
               <option value="Villa">Villa</option>
@@ -197,7 +197,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               step="100000"
               value={formData.budget}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -206,7 +206,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
             >
               <option value="New">New</option>
               <option value="Assigned">Assigned</option>
@@ -227,7 +227,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               name="priority"
               value={formData.priority}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               <option value="High">High</option>
               <option value="Medium">Medium</option>
@@ -243,7 +243,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               name="assignedAgentId"
               value={formData.assignedAgentId}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               <option value="">-- Unassigned --</option>
               {agents.map((ag) => (
@@ -260,7 +260,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               name="followUpDate"
               value={formData.followUpDate}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
         </div>
@@ -272,7 +272,7 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
             rows={2}
             value={formData.remarks}
             onChange={handleChange}
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none resize-none"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none resize-none"
           />
         </div>
 

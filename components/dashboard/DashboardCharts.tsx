@@ -20,7 +20,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { useLmsStore } from '@/store/useLmsStore';
 import { formatINR } from '@/lib/utils';
 
-const COLORS = ['#2563eb', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#f97316', '#64748b'];
+const COLORS = ['#C59B63', '#0C141F', '#8C6228', '#10b981', '#E5D0A6', '#64748b', '#D4B87C', '#94a3b8'];
 
 export function DashboardCharts() {
   const { leads, agents } = useLmsStore();
@@ -71,7 +71,7 @@ export function DashboardCharts() {
             <CardTitle>Monthly Lead Inflow & Conversions</CardTitle>
             <p className="text-xs text-slate-500 mt-0.5">Track acquisition volume versus deals closed</p>
           </div>
-          <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-blue-50 text-blue-700">
+          <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#FAF5EC] text-[#8C6228] border border-[#E5D0A6]">
             Last 6 Months
           </span>
         </CardHeader>
@@ -81,23 +81,23 @@ export function DashboardCharts() {
               <AreaChart data={monthlyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
                   <linearGradient id="leadsGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#2563eb" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#2563eb" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#C59B63" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="#C59B63" stopOpacity={0} />
                   </linearGradient>
                   <linearGradient id="convertedGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#0C141F" stopOpacity={0.25} />
+                    <stop offset="95%" stopColor="#0C141F" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="month" stroke="#94a3b8" fontSize={11} tickLine={false} />
-                <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F2EDE4" />
+                <XAxis dataKey="month" stroke="#8C7A63" fontSize={11} tickLine={false} />
+                <YAxis stroke="#8C7A63" fontSize={11} tickLine={false} axisLine={false} />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: '#ffffff',
                     borderRadius: '12px',
-                    border: '1px solid #e2e8f0',
-                    boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
+                    border: '1px solid #EAE4D9',
+                    boxShadow: '0 4px 6px -1px rgba(12,20,31,0.06)',
                     fontSize: '12px',
                   }}
                 />
@@ -106,7 +106,7 @@ export function DashboardCharts() {
                   type="monotone"
                   dataKey="leads"
                   name="Total Inflow"
-                  stroke="#2563eb"
+                  stroke="#C59B63"
                   strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#leadsGradient)"
@@ -115,7 +115,7 @@ export function DashboardCharts() {
                   type="monotone"
                   dataKey="converted"
                   name="Deals Closed"
-                  stroke="#10b981"
+                  stroke="#0C141F"
                   strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#convertedGradient)"
@@ -180,31 +180,38 @@ export function DashboardCharts() {
       </Card>
 
       {/* Sales Agent Closed Value Bar Chart (Full width on 3-col layout or span 3) */}
-      <Card className="lg:col-span-3">
+      <Card className="lg:col-span-3 border-[#EAE4D9] bg-white">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <div>
             <CardTitle>Top Sales Executives Performance</CardTitle>
-            <p className="text-xs text-slate-500 mt-0.5">Gross property sales value closed (in ₹ Crores)</p>
+            <p className="text-xs text-stone-500 mt-0.5">Gross property sales value closed (in ₹ Crores)</p>
           </div>
-          <span className="text-[11px] text-slate-500 font-medium">Revenue metrics in ₹ Cr</span>
+          <span className="text-[11px] text-[#8C6228] font-medium bg-[#FAF5EC] border border-[#E5D0A6] px-2.5 py-0.5 rounded-full">Revenue metrics in ₹ Cr</span>
         </CardHeader>
         <CardContent>
           <div className="h-64 w-full pt-2">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={agentPerformanceData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} />
-                <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} unit=" Cr" />
+                <defs>
+                  <linearGradient id="agentBarGold" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#C59B63" />
+                    <stop offset="100%" stopColor="#8C6228" />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F2EDE4" />
+                <XAxis dataKey="name" stroke="#8C7A63" fontSize={12} tickLine={false} />
+                <YAxis stroke="#8C7A63" fontSize={11} tickLine={false} axisLine={false} unit=" Cr" />
                 <Tooltip
                   formatter={(val: any) => [`₹${val} Cr`, 'Sales Volume']}
                   contentStyle={{
-                    backgroundColor: '#ffffff',
+                    backgroundColor: '#FAF8F5',
                     borderRadius: '12px',
-                    border: '1px solid #e2e8f0',
+                    border: '1px solid #EAE4D9',
                     fontSize: '12px',
+                    color: '#0C141F',
                   }}
                 />
-                <Bar dataKey="salesCr" name="Sales Closed" fill="#2563eb" radius={[6, 6, 0, 0]} maxBarSize={45} />
+                <Bar dataKey="salesCr" name="Sales Closed" fill="url(#agentBarGold)" radius={[6, 6, 0, 0]} maxBarSize={45} />
               </BarChart>
             </ResponsiveContainer>
           </div>

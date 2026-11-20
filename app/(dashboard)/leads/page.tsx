@@ -169,8 +169,8 @@ export default function LeadsPage() {
       {/* Page Title & Action Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <Users2 className="w-6 h-6 text-blue-600" />
+          <h1 className="font-poppins text-2xl sm:text-3xl font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
+            <Users2 className="w-6 h-6 text-[#C59B63]" />
             <span>Leads Management</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
@@ -233,7 +233,7 @@ export default function LeadsPage() {
                   setSearch(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
               />
             </div>
 
@@ -245,7 +245,7 @@ export default function LeadsPage() {
                   setStatusFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
               >
                 <option value="ALL">Status: All</option>
                 <option value="New">New</option>
@@ -270,7 +270,7 @@ export default function LeadsPage() {
                   setAgentFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
               >
                 <option value="ALL">Executive: All</option>
                 <option value="UNASSIGNED">Unassigned Only</option>
@@ -290,7 +290,7 @@ export default function LeadsPage() {
                   setSourceFilter(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
               >
                 <option value="ALL">Source: All</option>
                 <option value="Website">Website</option>
@@ -309,7 +309,7 @@ export default function LeadsPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
               >
                 <option value="createdAt">Sort: Recent</option>
                 <option value="budget">Sort: Budget</option>
@@ -327,7 +327,7 @@ export default function LeadsPage() {
 
           {/* Bulk Action Bar */}
           {selectedLeadIds.length > 0 && (
-            <div className="flex items-center justify-between p-2.5 bg-blue-50/80 border border-blue-200 rounded-lg text-xs animate-in fade-in">
+            <div className="flex items-center justify-between p-2.5 bg-[#FAF5EC]/80 border border-[#EAE4D9] rounded-lg text-xs animate-in fade-in">
               <span className="font-semibold text-blue-900">
                 {selectedLeadIds.length} leads selected
               </span>
@@ -367,7 +367,7 @@ export default function LeadsPage() {
                         paginatedLeads.length > 0 &&
                         selectedLeadIds.length === paginatedLeads.length
                       }
-                      className="rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                      className="rounded border-slate-300 text-[#8C6228] focus:ring-blue-500"
                     />
                   </th>
                   <th className="py-3 px-3">Lead ID & Name</th>
@@ -395,7 +395,7 @@ export default function LeadsPage() {
                       <tr
                         key={lead.id}
                         className={`hover:bg-slate-50 transition-colors group ${
-                          isSelected ? 'bg-blue-50/40' : ''
+                          isSelected ? 'bg-[#FAF5EC]/40' : ''
                         }`}
                       >
                         <td className="py-3 px-4">
@@ -403,12 +403,12 @@ export default function LeadsPage() {
                             type="checkbox"
                             checked={isSelected}
                             onChange={() => handleSelectOne(lead.id)}
-                            className="rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                            className="rounded border-slate-300 text-[#8C6228] focus:ring-blue-500"
                           />
                         </td>
                         <td className="py-3 px-3">
                           <div className="flex items-center gap-2">
-                            <span className="font-bold text-slate-800 hover:text-blue-600 cursor-pointer" onClick={() => setViewingLead(lead)}>
+                            <span className="font-bold text-slate-800 hover:text-[#C59B63] cursor-pointer" onClick={() => setViewingLead(lead)}>
                               {lead.name}
                             </span>
                             <PriorityBadge priority={lead.priority} />
@@ -449,7 +449,7 @@ export default function LeadsPage() {
                           ) : (
                             <button
                               onClick={() => setAssigningLeadIds([lead.id])}
-                              className="text-[11px] text-blue-600 hover:underline font-semibold"
+                              className="text-[11px] text-[#8C6228] hover:underline font-semibold"
                             >
                               + Assign Agent
                             </button>
@@ -462,7 +462,7 @@ export default function LeadsPage() {
                           <div className="flex items-center justify-end gap-1">
                             <button
                               onClick={() => setViewingLead(lead)}
-                              className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                              className="p-1.5 rounded-lg text-slate-400 hover:text-[#C59B63] hover:bg-[#FAF5EC] transition-colors"
                               title="View Lead Details"
                             >
                               <Eye className="w-3.5 h-3.5" />

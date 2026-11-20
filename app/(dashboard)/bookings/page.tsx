@@ -115,8 +115,8 @@ export default function BookingsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <CheckCircle className="w-6 h-6 text-emerald-600" />
+          <h1 className="font-poppins text-2xl sm:text-3xl font-bold text-[#0C141F] tracking-tight flex items-center gap-2">
+            <CheckCircle className="w-6 h-6 text-[#C59B63]" />
             <span>Property Bookings & Agreements</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
@@ -158,7 +158,7 @@ export default function BookingsPage() {
           <CardContent className="p-4 sm:p-5">
             <span className="text-xs text-slate-500 font-medium">Total Bookings Count</span>
             <h3 className="text-2xl font-bold text-slate-900 mt-1">{bookings.length} Units</h3>
-            <p className="text-[11px] text-blue-600 mt-0.5">Inventory locks synced automatically</p>
+            <p className="text-[11px] text-[#8C6228] mt-0.5">Inventory locks synced automatically</p>
           </CardContent>
         </Card>
       </div>
@@ -174,7 +174,7 @@ export default function BookingsPage() {
                 placeholder="Search by customer, agreement #, or unit..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
               />
             </div>
 
@@ -182,7 +182,7 @@ export default function BookingsPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
               >
                 <option value="ALL">Booking Status: All</option>
                 <option value="Confirmed">Confirmed</option>
@@ -195,7 +195,7 @@ export default function BookingsPage() {
               <select
                 value={paymentFilter}
                 onChange={(e) => setPaymentFilter(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
               >
                 <option value="ALL">Payment Status: All</option>
                 <option value="Completed">Payment Completed</option>
@@ -244,7 +244,7 @@ export default function BookingsPage() {
                       </td>
                       <td className="py-3 px-3">
                         <p className="font-medium text-slate-800 truncate max-w-[180px]">{b.propertyName}</p>
-                        <span className="text-[10px] text-blue-600 font-mono">
+                        <span className="text-[10px] text-[#8C6228] font-mono">
                           Agr: {b.agreementNumber}
                         </span>
                       </td>
@@ -277,7 +277,7 @@ export default function BookingsPage() {
                         <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => setViewingBooking(b)}
-                            className="p-1 rounded text-slate-400 hover:text-blue-600"
+                            className="p-1 rounded text-slate-400 hover:text-[#C59B63]"
                             title="View Agreement"
                           >
                             <FileText className="w-4 h-4" />
@@ -306,7 +306,7 @@ export default function BookingsPage() {
           <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 space-y-4 text-xs">
             <div className="flex items-center justify-between border-b pb-3">
               <div>
-                <span className="text-[10px] font-mono text-blue-600 uppercase">Official Sale Memorandum</span>
+                <span className="text-[10px] font-mono text-[#8C6228] uppercase">Official Sale Memorandum</span>
                 <h3 className="text-base font-bold text-slate-900">Agreement #{viewingBooking.agreementNumber}</h3>
               </div>
               <button onClick={() => setViewingBooking(null)} className="text-slate-400 hover:text-slate-600">

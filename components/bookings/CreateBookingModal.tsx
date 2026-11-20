@@ -152,7 +152,7 @@ export function CreateBookingModal({
           <select
             value={leadId}
             onChange={(e) => handleLeadSelect(e.target.value)}
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
           >
             <option value="">-- Direct Booking / New Customer --</option>
             {leads.map((l) => (
@@ -174,7 +174,7 @@ export function CreateBookingModal({
               required
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -186,7 +186,7 @@ export function CreateBookingModal({
               required
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -195,7 +195,7 @@ export function CreateBookingModal({
               type="email"
               value={customerEmail}
               onChange={(e) => setCustomerEmail(e.target.value)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
         </div>
@@ -224,7 +224,7 @@ export function CreateBookingModal({
             value={propertyId}
             onChange={(e) => handlePropertySelect(e.target.value)}
             required
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
           >
             <option value="">-- Choose Unit --</option>
             {properties.map((p) => (
@@ -254,7 +254,7 @@ export function CreateBookingModal({
               required
               value={propertyPrice}
               onChange={(e) => setPropertyPrice(Number(e.target.value))}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
             <span className="text-[11px] text-slate-500 mt-1 block">Formatted: {formatINR(propertyPrice)}</span>
           </div>
@@ -265,7 +265,7 @@ export function CreateBookingModal({
               required
               value={bookingAmount}
               onChange={(e) => setBookingAmount(Number(e.target.value))}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
             <span className="text-[11px] text-slate-500 mt-1 block">Formatted: {formatINR(bookingAmount)}</span>
           </div>
@@ -278,7 +278,7 @@ export function CreateBookingModal({
             <select
               value={paymentStatus}
               onChange={(e) => setPaymentStatus(e.target.value as PaymentStatus)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               <option value="Completed">Completed</option>
               <option value="Partial">Partial</option>
@@ -290,7 +290,7 @@ export function CreateBookingModal({
             <select
               value={paymentMethod}
               onChange={(e) => setPaymentMethod(e.target.value as any)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               <option value="Bank Transfer">Bank Transfer (NEFT/RTGS)</option>
               <option value="Cheque">Cheque</option>
@@ -303,7 +303,7 @@ export function CreateBookingModal({
             <select
               value={agentId}
               onChange={(e) => setAgentId(e.target.value)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               {agents.map((ag) => (
                 <option key={ag.id} value={ag.id}>
@@ -322,7 +322,7 @@ export function CreateBookingModal({
             placeholder="Special conditions, installment milestones, parking slot number..."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none resize-none"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none resize-none"
           />
         </div>
 

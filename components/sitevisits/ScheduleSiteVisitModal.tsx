@@ -93,7 +93,7 @@ export function ScheduleSiteVisitModal({
               if (lead?.assignedAgentId) setAgentId(lead.assignedAgentId);
             }}
             required
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
           >
             <option value="">-- Choose Lead --</option>
             {leads.map((l) => (
@@ -110,7 +110,7 @@ export function ScheduleSiteVisitModal({
             value={propertyId}
             onChange={(e) => setPropertyId(e.target.value)}
             required
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
           >
             <option value="">-- Choose Property --</option>
             {properties.map((p) => (
@@ -129,7 +129,7 @@ export function ScheduleSiteVisitModal({
               required
               value={visitDate}
               onChange={(e) => setVisitDate(e.target.value)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -137,7 +137,7 @@ export function ScheduleSiteVisitModal({
             <select
               value={visitTime}
               onChange={(e) => setVisitTime(e.target.value)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               <option value="10:00 AM">10:00 AM</option>
               <option value="11:30 AM">11:30 AM</option>
@@ -153,7 +153,7 @@ export function ScheduleSiteVisitModal({
           <select
             value={agentId}
             onChange={(e) => setAgentId(e.target.value)}
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
           >
             {agents.map((ag) => (
               <option key={ag.id} value={ag.id}>
@@ -170,7 +170,7 @@ export function ScheduleSiteVisitModal({
             placeholder="e.g. Client bringing parents, keep sample flat key ready, arrange buggy car..."
             value={remarks}
             onChange={(e) => setRemarks(e.target.value)}
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none resize-none"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none resize-none"
           />
         </div>
 

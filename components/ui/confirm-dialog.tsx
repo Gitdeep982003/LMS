@@ -31,7 +31,7 @@ export function ConfirmDialog({
       <div className="flex flex-col items-center text-center py-2">
         <div
           className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${
-            isDestructive ? 'bg-rose-100 text-rose-600' : 'bg-blue-100 text-blue-600'
+            isDestructive ? 'bg-rose-100 text-rose-600' : 'bg-blue-100 text-[#8C6228]'
           }`}
         >
           <AlertTriangle className="w-6 h-6" />

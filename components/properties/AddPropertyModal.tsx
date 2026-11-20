@@ -93,7 +93,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               placeholder="e.g. Prestige Boulevard"
               value={formData.projectName}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -107,7 +107,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               placeholder="e.g. Tower B - 3BHK Premium Suite"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
         </div>
@@ -119,7 +119,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               name="type"
               value={formData.type}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               <option value="Apartment">Apartment</option>
               <option value="Villa">Villa</option>
@@ -135,7 +135,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               name="city"
               value={formData.city}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -146,7 +146,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               placeholder="e.g. Whitefield"
               value={formData.location}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
         </div>
@@ -160,7 +160,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               step="500000"
               value={formData.price}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
             <span className="text-[11px] text-slate-500 mt-1 block">
               {formatINR(Number(formData.price))}
@@ -173,7 +173,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               name="sqft"
               value={formData.sqft}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -183,7 +183,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               name="bedrooms"
               value={formData.bedrooms}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -192,7 +192,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
             >
               <option value="Available">Available</option>
               <option value="Under Offer">Under Offer</option>
@@ -210,7 +210,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               name="imageUrl"
               value={formData.imageUrl}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -221,7 +221,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
               placeholder="e.g. PRM/KA/RERA/..."
               value={formData.reraNumber}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
         </div>
@@ -233,7 +233,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
             name="amenities"
             value={formData.amenities}
             onChange={handleChange}
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
           />
         </div>
 
@@ -245,7 +245,7 @@ export function AddPropertyModal({ isOpen, onClose }: AddPropertyModalProps) {
             value={formData.description}
             onChange={handleChange}
             placeholder="Key highlights, specifications, furnishing status..."
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none resize-none"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none resize-none"
           />
         </div>
 

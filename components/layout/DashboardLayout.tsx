@@ -13,7 +13,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <ToastProvider>
-      <div className="min-h-screen bg-slate-50 text-slate-900 antialiased font-sans flex flex-col">
+      <div className="min-h-screen bg-[#FAF8F5] text-[#0C141F] antialiased font-sans flex flex-col selection:bg-[#C59B63] selection:text-white">
         {/* Sidebar */}
         <Sidebar
           mobileOpen={mobileOpen}

@@ -125,11 +125,11 @@ export default function CustomersPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <Contact2 className="w-6 h-6 text-blue-600" />
+          <h1 className="text-xl sm:text-2xl font-poppins font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
+            <Contact2 className="w-6 h-6 text-[#C59B63]" />
             <span>Customer Profiles & Accounts</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-stone-500 mt-0.5">
             Consolidated 360-degree client profiles with cross-project inquiries, bookings, and site visit logs.
           </p>
         </div>
@@ -137,47 +137,47 @@ export default function CustomersPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card>
+        <Card className="border-[#EAE4D9] bg-white">
           <CardContent className="p-4 sm:p-5">
-            <span className="text-xs text-slate-500 font-medium">Total Individual Clients</span>
-            <h3 className="text-2xl font-bold text-slate-900 mt-1">{customers.length} Profiles</h3>
-            <p className="text-[11px] text-blue-600 mt-0.5">Consolidated from lead inquiries</p>
+            <span className="text-xs text-stone-500 font-medium">Total Individual Clients</span>
+            <h3 className="text-2xl font-poppins font-bold text-[#0C141F] mt-1">{customers.length} Profiles</h3>
+            <p className="text-[11px] text-[#8C6228] mt-0.5">Consolidated from lead inquiries</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-[#EAE4D9] bg-white">
           <CardContent className="p-4 sm:p-5">
-            <span className="text-xs text-slate-500 font-medium">VIP & High Net-Worth Buyers</span>
-            <h3 className="text-2xl font-bold text-purple-600 mt-1">
+            <span className="text-xs text-stone-500 font-medium">VIP & High Net-Worth Buyers</span>
+            <h3 className="text-2xl font-poppins font-bold text-[#8C6228] mt-1">
               {customers.filter((c) => c.status === 'VIP').length} VIP Clients
             </h3>
-            <p className="text-[11px] text-slate-500 mt-0.5">Portfolio value &gt; ₹5 Crores</p>
+            <p className="text-[11px] text-stone-500 mt-0.5">Portfolio value &gt; ₹5 Crores</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-[#EAE4D9] bg-white">
           <CardContent className="p-4 sm:p-5">
-            <span className="text-xs text-slate-500 font-medium">Active Buyers</span>
-            <h3 className="text-2xl font-bold text-emerald-600 mt-1">
+            <span className="text-xs text-stone-500 font-medium">Active Buyers</span>
+            <h3 className="text-2xl font-poppins font-bold text-emerald-700 mt-1">
               {customers.filter((c) => c.status === 'Active').length} Active Contract Holders
             </h3>
-            <p className="text-[11px] text-slate-500 mt-0.5">Under active purchase agreements</p>
+            <p className="text-[11px] text-stone-500 mt-0.5">Under active purchase agreements</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Filter and Search */}
-      <Card>
+      <Card className="border-[#EAE4D9] bg-white">
         <CardContent className="p-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
               <input
                 type="text"
                 placeholder="Search customers by name, phone, or location..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-[#FAF8F5]/50"
               />
             </div>
 
@@ -185,7 +185,7 @@ export default function CustomersPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium text-[#0C141F]"
               >
                 <option value="ALL">All Client Tiers</option>
                 <option value="VIP">VIP Portfolio Tier</option>
@@ -198,12 +198,12 @@ export default function CustomersPage() {
       </Card>
 
       {/* Customers Table */}
-      <Card>
+      <Card className="border-[#EAE4D9] bg-white">
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-slate-200 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider text-[11px]">
+                <tr className="border-b border-[#EAE4D9] bg-[#FAF5EC]/60 text-stone-600 font-poppins font-semibold uppercase tracking-wider text-[11px]">
                   <th className="py-3 px-4">Client Name</th>
                   <th className="py-3 px-3">Contact</th>
                   <th className="py-3 px-3">Location</th>
@@ -214,10 +214,10 @@ export default function CustomersPage() {
                   <th className="py-3 px-4 text-right">360 View</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-[#EAE4D9]/60">
                 {filteredCustomers.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="py-12 text-center text-slate-400">
+                    <td colSpan={8} className="py-12 text-center text-stone-400">
                       No customer profiles found.
                     </td>
                   </tr>
@@ -226,43 +226,43 @@ export default function CustomersPage() {
                     <tr
                       key={cust.key}
                       onClick={() => setSelectedCustomer(cust)}
-                      className="hover:bg-slate-50 transition-colors cursor-pointer group"
+                      className="hover:bg-[#FAF8F5] transition-colors cursor-pointer group"
                     >
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-slate-900 group-hover:text-blue-600">
+                          <span className="font-poppins font-bold text-[#0C141F] group-hover:text-[#8C6228]">
                             {cust.name}
                           </span>
                         </div>
-                        <span className="text-[10px] text-slate-400">
+                        <span className="text-[10px] text-stone-400">
                           Since {formatDate(cust.firstDate)}
                         </span>
                       </td>
-                      <td className="py-3 px-3 text-slate-700">
+                      <td className="py-3 px-3 text-stone-700">
                         <p>{cust.phone}</p>
-                        <p className="text-[11px] text-slate-400 truncate max-w-[150px]">{cust.email}</p>
+                        <p className="text-[11px] text-stone-400 truncate max-w-[150px]">{cust.email}</p>
                       </td>
-                      <td className="py-3 px-3 font-medium text-slate-700">{cust.location}</td>
+                      <td className="py-3 px-3 font-medium text-stone-700">{cust.location}</td>
                       <td className="py-3 px-3">
                         <span
                           className={`px-2 py-0.5 rounded-full text-[11px] font-semibold ${
                             cust.status === 'VIP'
-                              ? 'bg-purple-50 text-purple-700 border border-purple-200'
+                              ? 'bg-[#FAF5EC] text-[#8C6228] border border-[#C59B63]/40'
                               : cust.status === 'Active'
-                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                              : 'bg-slate-100 text-slate-700'
+                              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                              : 'bg-[#F2EDE4] text-stone-700'
                           }`}
                         >
                           {cust.status}
                         </span>
                       </td>
-                      <td className="py-3 px-3 font-semibold text-slate-800">{cust.leads.length}</td>
-                      <td className="py-3 px-3 font-semibold text-slate-800">{cust.bookingsCount}</td>
-                      <td className="py-3 px-3 font-bold text-slate-900">
+                      <td className="py-3 px-3 font-semibold text-stone-800">{cust.leads.length}</td>
+                      <td className="py-3 px-3 font-semibold text-stone-800">{cust.bookingsCount}</td>
+                      <td className="py-3 px-3 font-poppins font-bold text-[#0C141F]">
                         {cust.totalSpent > 0 ? formatINR(cust.totalSpent) : '-'}
                       </td>
                       <td className="py-3 px-4 text-right">
-                        <span className="text-blue-600 font-semibold group-hover:underline flex items-center justify-end gap-1">
+                        <span className="text-[#8C6228] font-semibold group-hover:underline flex items-center justify-end gap-1">
                           Profile &rarr;
                         </span>
                       </td>
@@ -286,18 +286,18 @@ export default function CustomersPage() {
         {selectedCustomer && (
           <div className="space-y-6 text-xs">
             {/* Tier banner */}
-            <div className="p-4 rounded-xl bg-gradient-to-r from-slate-900 to-blue-900 text-white flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-slate-900 flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-blue-300">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                   Client Tier Classification
                 </span>
-                <h3 className="text-lg font-bold mt-0.5">{selectedCustomer.status} Client</h3>
-                <p className="text-xs text-slate-300 mt-0.5">
+                <h3 className="text-lg font-bold mt-0.5 text-slate-900">{selectedCustomer.status} Client</h3>
+                <p className="text-xs text-slate-500 mt-0.5">
                   Total Bookings: {selectedCustomer.bookingsCount} • Portfolio: {formatINR(selectedCustomer.totalSpent)}
                 </p>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/10 text-white">
-                <Star className="w-6 h-6 fill-current text-amber-400" />
+              <div className="p-2.5 rounded-xl bg-amber-50 text-amber-500 border border-amber-200/70">
+                <Star className="w-6 h-6 fill-current" />
               </div>
             </div>
 

@@ -110,21 +110,21 @@ export default function SiteVisitsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <MapPin className="w-6 h-6 text-purple-600" />
+          <h1 className="text-xl sm:text-2xl font-poppins font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
+            <MapPin className="w-6 h-6 text-[#C59B63]" />
             <span>Site Visit Management</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-stone-500 mt-0.5">
             Coordinate on-ground property tours, sample flat inspections, and client feedback.
           </p>
         </div>
 
         <div className="flex items-center gap-2.5">
-          <div className="flex items-center p-1 bg-slate-200/60 rounded-xl border border-slate-200">
+          <div className="flex items-center p-1 bg-[#F2EDE4] rounded-xl border border-[#EAE4D9]">
             <button
               onClick={() => setViewMode('table')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'table' ? 'bg-white shadow-xs text-blue-600' : 'text-slate-500'
+                viewMode === 'table' ? 'bg-white shadow-xs text-[#8C6228]' : 'text-stone-500'
               }`}
               title="Table View"
             >
@@ -133,7 +133,7 @@ export default function SiteVisitsPage() {
             <button
               onClick={() => setViewMode('cards')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'cards' ? 'bg-white shadow-xs text-blue-600' : 'text-slate-500'
+                viewMode === 'cards' ? 'bg-white shadow-xs text-[#8C6228]' : 'text-stone-500'
               }`}
               title="Cards View"
             >
@@ -141,7 +141,7 @@ export default function SiteVisitsPage() {
             </button>
           </div>
 
-          <Button size="sm" onClick={() => setIsAddOpen(true)} className="gap-1.5 text-xs shadow-sm bg-purple-600 hover:bg-purple-700">
+          <Button size="sm" onClick={() => setIsAddOpen(true)} className="gap-1.5 text-xs shadow-sm bg-[#0C141F] text-[#C59B63] hover:bg-[#16202E] border border-[#C59B63]/30">
             <Plus className="w-4 h-4" />
             <span>Schedule Site Visit</span>
           </Button>
@@ -152,32 +152,40 @@ export default function SiteVisitsPage() {
       <div className="flex flex-wrap items-center gap-2">
         <button
           onClick={() => setActiveTab('all')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
-            activeTab === 'all' ? 'bg-slate-900 text-white' : 'bg-white border text-slate-600'
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            activeTab === 'all'
+              ? 'bg-[#0C141F] text-[#C59B63] border border-[#C59B63]/30 shadow-xs'
+              : 'bg-white border border-[#EAE4D9] text-stone-600 hover:bg-[#FAF8F5]'
           }`}
         >
           All Visits ({siteVisits.length})
         </button>
         <button
           onClick={() => setActiveTab('scheduled')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
-            activeTab === 'scheduled' ? 'bg-purple-600 text-white' : 'bg-white border text-slate-600'
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            activeTab === 'scheduled'
+              ? 'bg-[#8C6228] text-white shadow-xs'
+              : 'bg-white border border-[#EAE4D9] text-stone-600 hover:bg-[#FAF8F5]'
           }`}
         >
           Scheduled ({siteVisits.filter((v) => v.status === 'Scheduled').length})
         </button>
         <button
           onClick={() => setActiveTab('completed')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
-            activeTab === 'completed' ? 'bg-emerald-600 text-white' : 'bg-white border text-slate-600'
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            activeTab === 'completed'
+              ? 'bg-emerald-700 text-white shadow-xs'
+              : 'bg-white border border-[#EAE4D9] text-stone-600 hover:bg-[#FAF8F5]'
           }`}
         >
           Completed ({siteVisits.filter((v) => v.status === 'Completed').length})
         </button>
         <button
           onClick={() => setActiveTab('cancelled')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
-            activeTab === 'cancelled' ? 'bg-rose-600 text-white' : 'bg-white border text-slate-600'
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            activeTab === 'cancelled'
+              ? 'bg-rose-700 text-white shadow-xs'
+              : 'bg-white border border-[#EAE4D9] text-stone-600 hover:bg-[#FAF8F5]'
           }`}
         >
           Cancelled
@@ -185,24 +193,24 @@ export default function SiteVisitsPage() {
       </div>
 
       {/* Search and Project Filter */}
-      <Card>
+      <Card className="border-[#EAE4D9] bg-white">
         <CardContent className="p-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
               <input
                 type="text"
                 placeholder="Search by customer, property, or agent..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-[#FAF8F5]/50"
               />
             </div>
             <div>
               <select
                 value={propertyFilter}
                 onChange={(e) => setPropertyFilter(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium text-[#0C141F]"
               >
                 <option value="ALL">All Properties</option>
                 {properties.map((p) => (
@@ -218,12 +226,12 @@ export default function SiteVisitsPage() {
 
       {/* Table Mode */}
       {viewMode === 'table' && (
-        <Card>
+        <Card className="border-[#EAE4D9] bg-white">
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider text-[11px]">
+                  <tr className="border-b border-[#EAE4D9] bg-[#FAF5EC]/60 text-stone-600 font-poppins font-semibold uppercase tracking-wider text-[11px]">
                     <th className="py-3 px-4">Visit ID & Schedule</th>
                     <th className="py-3 px-3">Lead Name</th>
                     <th className="py-3 px-3">Property Project</th>
@@ -233,39 +241,39 @@ export default function SiteVisitsPage() {
                     <th className="py-3 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-[#EAE4D9]/60">
                   {filteredVisits.length === 0 ? (
                     <tr>
-                      <td colSpan={7} className="py-12 text-center text-slate-400">
+                      <td colSpan={7} className="py-12 text-center text-stone-400">
                         No site visits match the criteria.
                       </td>
                     </tr>
                   ) : (
                     filteredVisits.map((v) => (
-                      <tr key={v.id} className="hover:bg-slate-50 transition-colors">
+                      <tr key={v.id} className="hover:bg-[#FAF8F5] transition-colors">
                         <td className="py-3 px-4">
-                          <span className="font-bold text-slate-900 block">{formatDate(v.visitDate)}</span>
-                          <span className="text-[11px] text-purple-700 font-semibold">
+                          <span className="font-bold text-[#0C141F] block">{formatDate(v.visitDate)}</span>
+                          <span className="text-[11px] text-[#8C6228] font-semibold">
                             {v.visitTime} • {v.id}
                           </span>
                         </td>
-                        <td className="py-3 px-3 font-semibold text-slate-800">{v.leadName}</td>
-                        <td className="py-3 px-3 text-slate-700 font-medium">{v.propertyName}</td>
-                        <td className="py-3 px-3 text-slate-600">{v.agentName}</td>
+                        <td className="py-3 px-3 font-poppins font-semibold text-[#0C141F]">{v.leadName}</td>
+                        <td className="py-3 px-3 text-stone-700 font-medium">{v.propertyName}</td>
+                        <td className="py-3 px-3 text-stone-600">{v.agentName}</td>
                         <td className="py-3 px-3">
                           <span
                             className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
                               v.status === 'Completed'
-                                ? 'bg-emerald-50 text-emerald-700'
+                                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                                 : v.status === 'Cancelled'
-                                ? 'bg-rose-50 text-rose-700'
-                                : 'bg-purple-50 text-purple-700'
+                                ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                                : 'bg-[#FAF5EC] text-[#8C6228] border border-[#EAE4D9]'
                             }`}
                           >
                             {v.status}
                           </span>
                         </td>
-                        <td className="py-3 px-3 text-slate-600 max-w-[200px]">
+                        <td className="py-3 px-3 text-stone-600 max-w-[200px]">
                           {v.rating && (
                             <div className="flex items-center gap-0.5 text-amber-500 mb-0.5">
                               {Array.from({ length: v.rating }).map((_, i) => (
@@ -281,7 +289,7 @@ export default function SiteVisitsPage() {
                               <>
                                 <button
                                   onClick={() => setCompletingVisit(v)}
-                                  className="px-2 py-1 rounded bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold text-[11px]"
+                                  className="px-2 py-1 rounded bg-[#FAF5EC] hover:bg-[#F2EDE4] text-[#8C6228] border border-[#EAE4D9] font-semibold text-[11px]"
                                 >
                                   Complete
                                 </button>
@@ -291,13 +299,13 @@ export default function SiteVisitsPage() {
                                     setNewDate(v.visitDate);
                                     setNewTime(v.visitTime);
                                   }}
-                                  className="px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-[11px]"
+                                  className="px-2 py-1 rounded bg-[#F2EDE4] hover:bg-[#EAE4D9] text-stone-700 font-medium text-[11px]"
                                 >
                                   Reschedule
                                 </button>
                                 <button
                                   onClick={() => handleCancelVisit(v)}
-                                  className="p-1 rounded text-slate-400 hover:text-rose-600"
+                                  className="p-1 rounded text-stone-400 hover:text-rose-600"
                                   title="Cancel Visit"
                                 >
                                   <XCircle className="w-3.5 h-3.5" />
@@ -306,7 +314,7 @@ export default function SiteVisitsPage() {
                             )}
                             <button
                               onClick={() => setDeletingVisit(v)}
-                              className="p-1 rounded text-slate-400 hover:text-rose-600"
+                              className="p-1 rounded text-stone-400 hover:text-rose-600"
                               title="Delete Record"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -327,18 +335,18 @@ export default function SiteVisitsPage() {
       {viewMode === 'cards' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredVisits.map((v) => (
-            <Card key={v.id} className="p-4 space-y-3">
+            <Card key={v.id} className="p-4 space-y-3 border-[#EAE4D9] bg-white hover:border-[#C59B63]/40">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-xs text-purple-700 bg-purple-50 px-2.5 py-1 rounded-lg">
+                <span className="font-semibold text-xs text-[#8C6228] bg-[#FAF5EC] border border-[#EAE4D9] px-2.5 py-1 rounded-lg">
                   {formatDate(v.visitDate)} at {v.visitTime}
                 </span>
                 <span
                   className={`text-[10px] font-bold px-2 py-0.5 rounded ${
                     v.status === 'Completed'
-                      ? 'bg-emerald-50 text-emerald-700'
+                      ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                       : v.status === 'Cancelled'
-                      ? 'bg-rose-50 text-rose-700'
-                      : 'bg-purple-50 text-purple-700'
+                      ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                      : 'bg-[#FAF5EC] text-[#8C6228] border border-[#EAE4D9]'
                   }`}
                 >
                   {v.status}
@@ -346,13 +354,13 @@ export default function SiteVisitsPage() {
               </div>
 
               <div>
-                <h4 className="font-bold text-slate-900 text-sm">{v.propertyName}</h4>
-                <p className="text-xs text-slate-600 mt-0.5">Customer: <strong>{v.leadName}</strong></p>
-                <p className="text-xs text-slate-500">Sales Agent: {v.agentName}</p>
+                <h4 className="font-poppins font-bold text-[#0C141F] text-sm">{v.propertyName}</h4>
+                <p className="text-xs text-stone-600 mt-0.5">Customer: <strong>{v.leadName}</strong></p>
+                <p className="text-xs text-stone-500">Sales Agent: {v.agentName}</p>
               </div>
 
               {v.customerFeedback && (
-                <div className="p-2.5 bg-emerald-50/60 rounded-lg text-xs text-emerald-900">
+                <div className="p-2.5 bg-[#FAF5EC] border border-[#EAE4D9] rounded-lg text-xs text-stone-800">
                   <div className="flex items-center gap-1 text-amber-500 mb-1">
                     {Array.from({ length: v.rating || 5 }).map((_, i) => (
                       <Star key={i} className="w-3 h-3 fill-current" />
@@ -363,11 +371,11 @@ export default function SiteVisitsPage() {
               )}
 
               {v.status === 'Scheduled' && (
-                <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
-                  <Button size="sm" variant="outline" onClick={() => setReschedulingVisit(v)} className="h-7 text-xs">
+                <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#EAE4D9]">
+                  <Button size="sm" variant="outline" onClick={() => setReschedulingVisit(v)} className="h-7 text-xs border-[#EAE4D9]">
                     Reschedule
                   </Button>
-                  <Button size="sm" variant="emerald" onClick={() => setCompletingVisit(v)} className="h-7 text-xs">
+                  <Button size="sm" onClick={() => setCompletingVisit(v)} className="h-7 text-xs bg-[#0C141F] text-[#C59B63] hover:bg-[#16202E]">
                     Mark Done
                   </Button>
                 </div>
@@ -419,7 +427,7 @@ export default function SiteVisitsPage() {
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
                 placeholder="e.g. Loved the master bedroom view and clubhouse amenities. Requested a quote for 4th floor unit..."
-                className="w-full p-2.5 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none resize-none"
+                className="w-full p-2.5 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none resize-none"
               />
             </div>
 
@@ -452,7 +460,7 @@ export default function SiteVisitsPage() {
                 required
                 value={newDate}
                 onChange={(e) => setNewDate(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
               />
             </div>
             <div>
@@ -460,7 +468,7 @@ export default function SiteVisitsPage() {
               <select
                 value={newTime}
                 onChange={(e) => setNewTime(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
               >
                 <option value="10:00 AM">10:00 AM</option>
                 <option value="11:30 AM">11:30 AM</option>

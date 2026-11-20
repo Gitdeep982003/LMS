@@ -77,7 +77,7 @@ export function ScheduleFollowUpModal({ isOpen, onClose, initialLeadId }: Schedu
               if (lead?.assignedAgentId) setAgentId(lead.assignedAgentId);
             }}
             required
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
           >
             <option value="">-- Choose Lead --</option>
             {leads.map((l) => (
@@ -96,7 +96,7 @@ export function ScheduleFollowUpModal({ isOpen, onClose, initialLeadId }: Schedu
               required
               value={scheduledDate}
               onChange={(e) => setScheduledDate(e.target.value)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
           <div>
@@ -104,7 +104,7 @@ export function ScheduleFollowUpModal({ isOpen, onClose, initialLeadId }: Schedu
             <select
               value={scheduledTime}
               onChange={(e) => setScheduledTime(e.target.value)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               <option value="10:00 AM">10:00 AM</option>
               <option value="11:30 AM">11:30 AM</option>
@@ -122,7 +122,7 @@ export function ScheduleFollowUpModal({ isOpen, onClose, initialLeadId }: Schedu
             <select
               value={type}
               onChange={(e) => setType(e.target.value as FollowUpType)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               <option value="Call">Phone Call</option>
               <option value="WhatsApp">WhatsApp Chat</option>
@@ -136,7 +136,7 @@ export function ScheduleFollowUpModal({ isOpen, onClose, initialLeadId }: Schedu
             <select
               value={agentId}
               onChange={(e) => setAgentId(e.target.value)}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white"
             >
               {agents.map((ag) => (
                 <option key={ag.id} value={ag.id}>
@@ -154,7 +154,7 @@ export function ScheduleFollowUpModal({ isOpen, onClose, initialLeadId }: Schedu
             placeholder="e.g. Discuss floor plans, price negotiation, bank loan documentation..."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 outline-none resize-none"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none resize-none"
           />
         </div>
 

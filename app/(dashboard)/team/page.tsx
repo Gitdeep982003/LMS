@@ -109,44 +109,44 @@ export default function TeamPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <ShieldAlert className="w-6 h-6 text-blue-600" />
+          <h1 className="text-xl sm:text-2xl font-poppins font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
+            <ShieldAlert className="w-6 h-6 text-[#C59B63]" />
             <span>Sales Team & Role Permissions</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-stone-500 mt-0.5">
             Manage sales managers, executive assignments, quotas, and role-based access.
           </p>
         </div>
 
-        <Button size="sm" onClick={() => setIsAddOpen(true)} className="gap-1.5 text-xs shadow-sm">
+        <Button size="sm" onClick={() => setIsAddOpen(true)} className="gap-1.5 text-xs shadow-sm bg-[#0C141F] text-[#C59B63] hover:bg-[#16202E] border border-[#C59B63]/30">
           <Plus className="w-4 h-4" />
           <span>Add Team Member</span>
         </Button>
       </div>
 
       {/* Role Permission Matrix Card */}
-      <Card className="bg-gradient-to-r from-slate-900 via-slate-850 to-blue-950 text-white border-0">
+      <Card className="bg-gradient-to-r from-[#0C141F] via-[#16202E] to-[#1a2536] text-white border-0 shadow-sm">
         <CardContent className="p-5 space-y-3">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-emerald-400" />
-            <h3 className="font-bold text-sm">Role-Based Access Control (RBAC) System</h3>
+            <ShieldCheck className="w-5 h-5 text-[#C59B63]" />
+            <h3 className="font-poppins font-bold text-sm text-[#FAF5EC]">Role-Based Access Control (RBAC) System</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
             <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
-              <span className="font-bold text-blue-300">Admin</span>
-              <p className="text-slate-300 text-[11px] leading-relaxed">
+              <span className="font-bold text-[#C59B63]">Admin</span>
+              <p className="text-stone-300 text-[11px] leading-relaxed">
                 Full administrative clearance. Access to all 12 modules, configuration settings, user management, and system database resets.
               </p>
             </div>
             <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
-              <span className="font-bold text-indigo-300">Sales Manager</span>
-              <p className="text-slate-300 text-[11px] leading-relaxed">
+              <span className="font-bold text-amber-300">Sales Manager</span>
+              <p className="text-stone-300 text-[11px] leading-relaxed">
                 Oversees sales pipelines, reallocates unassigned leads, monitors quota fulfillment, and audits booking agreements.
               </p>
             </div>
             <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
-              <span className="font-bold text-emerald-300">Sales Executive</span>
-              <p className="text-slate-300 text-[11px] leading-relaxed">
+              <span className="font-bold text-emerald-400">Sales Executive</span>
+              <p className="text-stone-300 text-[11px] leading-relaxed">
                 Direct customer engagement: executes scheduled calls, conducts property site visits, logs notes, and prepares deal tokens.
               </p>
             </div>
@@ -163,9 +163,8 @@ export default function TeamPage() {
           return (
             <Card
               key={ag.id}
-              className={`hover:shadow-md transition-all flex flex-col justify-between ${
-                isCurrentUser ? 'ring-2 ring-blue-500 bg-blue-50/20' : ''
-              }`}
+              className={`border-[#EAE4D9] hover:border-[#C59B63]/40 bg-white transition-all flex flex-col justify-between ${isCurrentUser ? 'ring-2 ring-[#C59B63] bg-[#FAF5EC]/30 border-[#C59B63]' : ''
+                }`}
             >
               <CardContent className="p-5 space-y-4">
                 {/* Header */}
@@ -174,75 +173,72 @@ export default function TeamPage() {
                     <img
                       src={ag.avatar}
                       alt={ag.name}
-                      className="w-11 h-11 rounded-full object-cover ring-2 ring-slate-200"
+                      className="w-11 h-11 rounded-full object-cover ring-2 ring-[#EAE4D9]"
                     />
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm leading-tight">{ag.name}</h4>
-                      <p className="text-[11px] text-blue-600 font-semibold">{ag.role}</p>
-                      <p className="text-[10px] text-slate-400">{ag.department}</p>
+                      <h4 className="font-poppins font-bold text-[#0C141F] text-sm leading-tight">{ag.name}</h4>
+                      <p className="text-[11px] text-[#8C6228] font-semibold">{ag.role}</p>
+                      <p className="text-[10px] text-stone-400">{ag.department}</p>
                     </div>
                   </div>
 
                   <span
-                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                      ag.status === 'Active' ? 'bg-emerald-50 text-emerald-700' : 'bg-slate-100 text-slate-600'
-                    }`}
+                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${ag.status === 'Active' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-[#FAF5EC] text-stone-600'
+                      }`}
                   >
                     {ag.status}
                   </span>
                 </div>
 
                 {/* Contact */}
-                <div className="space-y-1 text-xs text-slate-600 pt-1">
+                <div className="space-y-1 text-xs text-stone-600 pt-1">
                   <div className="flex items-center gap-2 truncate">
-                    <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <Mail className="w-3.5 h-3.5 text-stone-400 shrink-0" />
                     <span className="truncate">{ag.email}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <Phone className="w-3.5 h-3.5 text-stone-400 shrink-0" />
                     <span>{ag.phone}</span>
                   </div>
                 </div>
 
                 {/* Performance stats */}
-                <div className="grid grid-cols-2 gap-2 p-2.5 bg-slate-50 rounded-xl border border-slate-200/60 text-xs">
+                <div className="grid grid-cols-2 gap-2 p-2.5 bg-[#FAF8F5] rounded-xl border border-[#EAE4D9] text-xs">
                   <div>
-                    <span className="text-[10px] text-slate-400 block uppercase font-medium">Deals Closed</span>
-                    <strong className="text-slate-900 text-sm">{ag.convertedLeadsCount}</strong>
+                    <span className="text-[10px] text-stone-500 block uppercase font-medium">Deals Closed</span>
+                    <strong className="text-[#0C141F] text-sm font-poppins">{ag.convertedLeadsCount}</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 block uppercase font-medium">Sales Volume</span>
-                    <strong className="text-emerald-700 text-sm">{formatINR(ag.totalSalesValue)}</strong>
+                    <span className="text-[10px] text-stone-500 block uppercase font-medium">Sales Volume</span>
+                    <strong className="text-[#8C6228] text-sm font-semibold">{formatINR(ag.totalSalesValue)}</strong>
                   </div>
                 </div>
 
                 {/* Capacity */}
                 <div>
-                  <div className="flex items-center justify-between text-[11px] text-slate-600 mb-1">
+                  <div className="flex items-center justify-between text-[11px] text-stone-600 mb-1">
                     <span>Lead Capacity</span>
-                    <span className="font-bold text-slate-800">
+                    <span className="font-bold text-[#0C141F]">
                       {ag.activeLeadsCount} / {ag.maxLeadCapacity} ({workloadPct}%)
                     </span>
                   </div>
-                  <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                  <div className="w-full h-1.5 bg-[#F2EDE4] rounded-full overflow-hidden">
                     <div
-                      className={`h-full rounded-full ${
-                        workloadPct > 80 ? 'bg-rose-500' : 'bg-blue-600'
-                      }`}
+                      className={`h-full rounded-full ${workloadPct > 80 ? 'bg-rose-500' : 'bg-[#C59B63]'
+                        }`}
                       style={{ width: `${workloadPct}%` }}
                     />
                   </div>
                 </div>
 
                 {/* Bottom Actions */}
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-1 text-xs">
+                <div className="pt-3 border-t border-[#EAE4D9] flex items-center justify-between gap-1 text-xs">
                   <button
                     onClick={() => handleQuickSwitch(ag)}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
-                      isCurrentUser
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-slate-100 text-slate-700 hover:bg-blue-50 hover:text-blue-700'
-                    }`}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${isCurrentUser
+                      ? 'bg-[#0C141F] text-[#C59B63] border border-[#C59B63]/30 shadow-xs'
+                      : 'bg-[#F2EDE4] text-stone-700 hover:bg-[#FAF5EC] hover:text-[#0C141F]'
+                      }`}
                   >
                     {isCurrentUser ? 'Active Session' : 'Switch Role'}
                   </button>
@@ -250,13 +246,13 @@ export default function TeamPage() {
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => setEditingAgent(ag)}
-                      className="p-1 rounded text-slate-400 hover:text-slate-700"
+                      className="p-1 rounded text-stone-400 hover:text-stone-700"
                     >
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => setDeletingAgent(ag)}
-                      className="p-1 rounded text-slate-400 hover:text-rose-600"
+                      className="p-1 rounded text-stone-400 hover:text-rose-600"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -279,7 +275,7 @@ export default function TeamPage() {
               placeholder="e.g. Rahul Sharma"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-blue-500 outline-none text-xs"
+              className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none text-xs"
             />
           </div>
 
@@ -292,7 +288,7 @@ export default function TeamPage() {
                 placeholder="rahul@estatify.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-blue-500 outline-none text-xs"
+                className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none text-xs"
               />
             </div>
             <div>
@@ -302,7 +298,7 @@ export default function TeamPage() {
                 placeholder="+91 98765 43210"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-blue-500 outline-none text-xs"
+                className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none text-xs"
               />
             </div>
           </div>
@@ -313,7 +309,7 @@ export default function TeamPage() {
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value as UserRole)}
-                className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium text-xs"
+                className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium text-xs"
               >
                 <option value="Admin">Admin</option>
                 <option value="Sales Manager">Sales Manager</option>
@@ -326,7 +322,7 @@ export default function TeamPage() {
                 type="number"
                 value={maxCapacity}
                 onChange={(e) => setMaxCapacity(Number(e.target.value))}
-                className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-blue-500 outline-none text-xs"
+                className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none text-xs"
               />
             </div>
           </div>
@@ -337,7 +333,7 @@ export default function TeamPage() {
               type="text"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-blue-500 outline-none text-xs"
+              className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none text-xs"
             />
           </div>
 

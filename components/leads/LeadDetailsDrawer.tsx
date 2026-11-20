@@ -98,7 +98,7 @@ export function LeadDetailsDrawer({
           </a>
           <a
             href={`mailto:${lead.email}`}
-            className="p-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors"
+            className="p-2 rounded-lg bg-[#FAF5EC] text-[#0C141F] hover:bg-blue-100 transition-colors"
             title="Email Lead"
           >
             <Mail className="w-4 h-4" />
@@ -147,7 +147,7 @@ export function LeadDetailsDrawer({
           onClick={() => setActiveTab('details')}
           className={`pb-2.5 px-3 border-b-2 font-semibold transition-colors ${
             activeTab === 'details'
-              ? 'border-blue-600 text-blue-600'
+              ? 'border-blue-600 text-[#8C6228]'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
@@ -157,7 +157,7 @@ export function LeadDetailsDrawer({
           onClick={() => setActiveTab('notes')}
           className={`pb-2.5 px-3 border-b-2 font-semibold transition-colors flex items-center gap-1.5 ${
             activeTab === 'notes'
-              ? 'border-blue-600 text-blue-600'
+              ? 'border-blue-600 text-[#8C6228]'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
@@ -170,7 +170,7 @@ export function LeadDetailsDrawer({
           onClick={() => setActiveTab('activities')}
           className={`pb-2.5 px-3 border-b-2 font-semibold transition-colors flex items-center gap-1.5 ${
             activeTab === 'activities'
-              ? 'border-blue-600 text-blue-600'
+              ? 'border-blue-600 text-[#8C6228]'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
@@ -228,7 +228,7 @@ export function LeadDetailsDrawer({
               <span className="text-slate-500 flex items-center gap-2">
                 <User className="w-3.5 h-3.5 text-slate-400" /> Assigned Executive
               </span>
-              <span className="font-semibold text-blue-700">
+              <span className="font-semibold text-[#0C141F]">
                 {lead.assignedAgentName || 'Unassigned'}
               </span>
             </div>
@@ -268,7 +268,7 @@ export function LeadDetailsDrawer({
               value={newNote}
               onChange={(e) => setNewNote(e.target.value)}
               placeholder="Log follow-up discussion, client feedback, or negotiation points..."
-              className="w-full p-3 text-xs rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none resize-none"
+              className="w-full p-3 text-xs rounded-xl border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none resize-none"
             />
             <div className="flex justify-end">
               <Button size="sm" type="submit" disabled={!newNote.trim()} className="text-xs">
@@ -288,7 +288,7 @@ export function LeadDetailsDrawer({
                   </div>
                   <p className="text-slate-700 leading-relaxed">{n.text}</p>
                   {n.stage && (
-                    <span className="inline-block mt-1 text-[10px] font-medium text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">
+                    <span className="inline-block mt-1 text-[10px] font-medium text-[#8C6228] bg-[#FAF5EC] px-1.5 py-0.5 rounded">
                       Stage: {n.stage}
                     </span>
                   )}

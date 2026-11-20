@@ -87,22 +87,22 @@ export default function PropertiesPage() {
       {/* Page Title & Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <Building2 className="w-6 h-6 text-blue-600" />
+          <h1 className="font-poppins text-2xl sm:text-3xl font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
+            <Building2 className="w-6 h-6 text-[#C59B63]" />
             <span>Property Inventory</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-stone-500 mt-0.5">
             Manage residential villas, luxury apartments, commercial floors, and plotted developments.
           </p>
         </div>
 
         <div className="flex items-center gap-2.5">
           {/* View Mode Toggle */}
-          <div className="flex items-center p-1 bg-slate-200/60 rounded-xl border border-slate-200">
+          <div className="flex items-center p-1 bg-[#F2EDE4] rounded-xl border border-[#EAE4D9]">
             <button
               onClick={() => setViewMode('grid')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'grid' ? 'bg-white shadow-xs text-blue-600' : 'text-slate-500 hover:text-slate-800'
+                viewMode === 'grid' ? 'bg-white shadow-xs text-[#C59B63]' : 'text-stone-500 hover:text-stone-800'
               }`}
               title="Grid View"
             >
@@ -111,7 +111,7 @@ export default function PropertiesPage() {
             <button
               onClick={() => setViewMode('table')}
               className={`p-1.5 rounded-lg transition-colors ${
-                viewMode === 'table' ? 'bg-white shadow-xs text-blue-600' : 'text-slate-500 hover:text-slate-800'
+                viewMode === 'table' ? 'bg-white shadow-xs text-[#C59B63]' : 'text-stone-500 hover:text-stone-800'
               }`}
               title="Table View"
             >
@@ -138,7 +138,7 @@ export default function PropertiesPage() {
                 placeholder="Search by project name, locality, city..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
               />
             </div>
 
@@ -147,7 +147,7 @@ export default function PropertiesPage() {
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
               >
                 <option value="ALL">All Types</option>
                 <option value="Apartment">Apartment</option>
@@ -163,7 +163,7 @@ export default function PropertiesPage() {
               <select
                 value={cityFilter}
                 onChange={(e) => setCityFilter(e.target.value)}
-                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
               >
                 <option value="ALL">All Cities</option>
                 {cities.map((city) => (
@@ -179,7 +179,7 @@ export default function PropertiesPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                className="w-full px-2.5 py-2 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
               >
                 <option value="ALL">All Statuses</option>
                 <option value="Available">Available</option>
@@ -226,7 +226,7 @@ export default function PropertiesPage() {
                 {/* Details */}
                 <CardContent className="p-4 flex-1 flex flex-col justify-between space-y-3">
                   <div>
-                    <span className="text-[11px] font-semibold text-blue-600 block truncate">
+                    <span className="text-[11px] font-semibold text-[#8C6228] block truncate">
                       {property.projectName}
                     </span>
                     <h3 className="font-bold text-slate-900 text-sm leading-snug truncate mt-0.5">
@@ -261,7 +261,7 @@ export default function PropertiesPage() {
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => setViewingProperty(property)}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-[#C59B63] hover:bg-[#FAF5EC] transition-colors"
                         title="View Full Details"
                       >
                         <Eye className="w-4 h-4" />
@@ -328,7 +328,7 @@ export default function PropertiesPage() {
                     <tr key={p.id} className="hover:bg-slate-50 transition-colors">
                       <td className="py-3 px-4">
                         <p className="font-bold text-slate-800">{p.name}</p>
-                        <p className="text-[11px] text-blue-600 font-medium">{p.projectName}</p>
+                        <p className="text-[11px] text-[#8C6228] font-medium">{p.projectName}</p>
                       </td>
                       <td className="py-3 px-3">
                         <span className="font-medium text-slate-700">{p.location}</span>
@@ -355,7 +355,7 @@ export default function PropertiesPage() {
                         <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => setViewingProperty(p)}
-                            className="p-1 rounded text-slate-400 hover:text-blue-600"
+                            className="p-1 rounded text-slate-400 hover:text-[#C59B63]"
                           >
                             <Eye className="w-3.5 h-3.5" />
                           </button>
@@ -406,7 +406,7 @@ export default function PropertiesPage() {
             <div className="p-6 overflow-y-auto space-y-4 text-xs">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-blue-600 font-semibold">{viewingProperty.projectName}</span>
+                  <span className="text-[#8C6228] font-semibold">{viewingProperty.projectName}</span>
                   <h2 className="text-lg font-bold text-slate-900">{viewingProperty.name}</h2>
                   <p className="text-slate-500 mt-0.5">{viewingProperty.address || `${viewingProperty.location}, ${viewingProperty.city}`}</p>
                 </div>
@@ -455,7 +455,7 @@ export default function PropertiesPage() {
 
               {/* RERA */}
               {viewingProperty.reraNumber && (
-                <div className="p-2.5 rounded-lg bg-blue-50/70 border border-blue-200/80 text-blue-900 text-[11px]">
+                <div className="p-2.5 rounded-lg bg-[#FAF5EC]/70 border border-[#EAE4D9]/80 text-blue-900 text-[11px]">
                   <strong>RERA Approved:</strong> {viewingProperty.reraNumber}
                 </div>
               )}

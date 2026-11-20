@@ -114,7 +114,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               placeholder="e.g. Rahul Deshmukh"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none"
             />
           </div>
           <div>
@@ -128,7 +128,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               placeholder="e.g. +91 98765 43210"
               value={formData.mobile}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none"
             />
           </div>
         </div>
@@ -143,7 +143,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               placeholder="e.g. rahul@example.com"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none"
             />
           </div>
           <div>
@@ -154,7 +154,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               placeholder="e.g. Whitefield, Bengaluru"
               value={formData.preferredLocation}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none"
             />
           </div>
         </div>
@@ -167,7 +167,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               name="interestedPropertyId"
               value={formData.interestedPropertyId}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
             >
               <option value="">-- Select Property (Optional) --</option>
               {properties.map((p) => (
@@ -183,7 +183,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               name="propertyType"
               value={formData.propertyType}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
             >
               <option value="Apartment">Apartment</option>
               <option value="Villa">Villa</option>
@@ -205,7 +205,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               placeholder="e.g. 8500000"
               value={formData.budget}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none"
             />
             <span className="text-[11px] text-slate-500 mt-1 block">
               Formatted: ₹{(Number(formData.budget) / 100000 || 0).toFixed(1)} Lakhs
@@ -217,7 +217,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               name="leadSource"
               value={formData.leadSource}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
             >
               <option value="Website">Website</option>
               <option value="MagicBricks">MagicBricks</option>
@@ -239,7 +239,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
             >
               <option value="New">New</option>
               <option value="Assigned">Assigned</option>
@@ -255,7 +255,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               name="priority"
               value={formData.priority}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
             >
               <option value="High">High</option>
               <option value="Medium">Medium</option>
@@ -268,7 +268,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
               name="assignedAgentId"
               value={formData.assignedAgentId}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
+              className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none bg-white"
             >
               <option value="">-- Unassigned --</option>
               {agents.map((ag) => (
@@ -288,7 +288,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
             name="followUpDate"
             value={formData.followUpDate}
             onChange={handleChange}
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none"
           />
         </div>
 
@@ -301,7 +301,7 @@ export function AddLeadModal({ isOpen, onClose }: AddLeadModalProps) {
             placeholder="Add initial notes, customer preferences, or key requirements..."
             value={formData.remarks}
             onChange={handleChange}
-            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none resize-none"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] focus:ring-2 focus:ring-blue-500/20 outline-none resize-none"
           />
         </div>
 

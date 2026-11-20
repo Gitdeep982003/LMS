@@ -32,7 +32,7 @@ interface PipelineColumn {
 }
 
 const PIPELINE_COLUMNS: PipelineColumn[] = [
-  { id: 'New', label: 'New Lead', color: 'text-blue-700', bgColor: 'bg-blue-50/60', borderColor: 'border-blue-200' },
+  { id: 'New', label: 'New Lead', color: 'text-[#8C6228]', bgColor: 'bg-[#FAF5EC]', borderColor: 'border-[#E5D0A6]' },
   { id: 'Contacted', label: 'Contacted', color: 'text-cyan-700', bgColor: 'bg-cyan-50/60', borderColor: 'border-cyan-200' },
   { id: 'Interested', label: 'Interested', color: 'text-teal-700', bgColor: 'bg-teal-50/60', borderColor: 'border-teal-200' },
   { id: 'Site Visit Scheduled', label: 'Site Visit', color: 'text-purple-700', bgColor: 'bg-purple-50/60', borderColor: 'border-purple-200' },
@@ -136,7 +136,7 @@ export default function PipelinePage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <Kanban className="w-6 h-6 text-blue-600" />
+            <Kanban className="w-6 h-6 text-[#8C6228]" />
             <span>Sales Pipeline Kanban</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
@@ -149,7 +149,7 @@ export default function PipelinePage() {
           <select
             value={selectedAgent}
             onChange={(e) => setSelectedAgent(e.target.value)}
-            className="px-3 py-1.5 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+            className="px-3 py-1.5 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
           >
             <option value="ALL">All Executives</option>
             {agents.map((ag) => (
@@ -167,7 +167,7 @@ export default function PipelinePage() {
               placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-8 pr-2.5 py-1.5 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+              className="w-full pl-8 pr-2.5 py-1.5 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
             />
           </div>
 
@@ -193,13 +193,13 @@ export default function PipelinePage() {
                 onDragLeave={handleDragLeave}
                 onDrop={(e) => handleDrop(e, col.id)}
                 className={`w-72 shrink-0 flex flex-col h-full rounded-2xl border transition-all duration-200 bg-slate-100/70 ${
-                  isTarget ? 'ring-2 ring-blue-500 border-blue-400 bg-blue-50/50' : 'border-slate-200'
+                  isTarget ? 'ring-2 ring-[#C59B63] border-[#C59B63] bg-[#FAF5EC]/50' : 'border-slate-200'
                 }`}
               >
                 {/* Column Header */}
                 <div className={`p-3.5 rounded-t-2xl border-b ${col.borderColor} ${col.bgColor} flex items-center justify-between`}>
                   <div className="flex items-center gap-2">
-                    <span className={`w-2.5 h-2.5 rounded-full ${col.id === 'Booked' || col.id === 'Converted' ? 'bg-emerald-500' : 'bg-blue-600'}`} />
+                    <span className={`w-2.5 h-2.5 rounded-full ${col.id === 'Booked' || col.id === 'Converted' ? 'bg-emerald-500' : 'bg-[#C59B63]'}`} />
                     <h3 className={`font-bold text-xs uppercase tracking-wider ${col.color}`}>
                       {col.label}
                     </h3>
@@ -239,7 +239,7 @@ export default function PipelinePage() {
                         </div>
 
                         {/* Customer & Project */}
-                        <h4 className="font-bold text-slate-900 text-xs group-hover:text-blue-600 transition-colors">
+                        <h4 className="font-bold text-slate-900 text-xs group-hover:text-[#C59B63] transition-colors">
                           {lead.name}
                         </h4>
                         <p className="text-[11px] text-slate-500 truncate mt-0.5">
@@ -251,7 +251,7 @@ export default function PipelinePage() {
                           <span className="font-extrabold text-slate-800">
                             {formatINR(lead.budget)}
                           </span>
-                          <span className="text-[10px] text-blue-600 font-medium truncate max-w-[100px]">
+                          <span className="text-[10px] text-[#8C6228] font-medium truncate max-w-[100px]">
                             {lead.assignedAgentName || 'Unassigned'}
                           </span>
                         </div>

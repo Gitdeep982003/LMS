@@ -8,38 +8,38 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 export function StatusBadge({ status, className }: { status: LeadStatus | string; className?: string }) {
-  let colorClasses = 'bg-slate-100 text-slate-700 border-slate-200';
+  let colorClasses = 'bg-[#FAF8F5] text-stone-700 border-[#EAE4D9]';
 
   switch (status) {
     case 'New':
-      colorClasses = 'bg-blue-50 text-blue-700 border-blue-200';
+      colorClasses = 'bg-[#FAF5EC] text-[#8C6228] border-[#E5D0A6]';
       break;
     case 'Assigned':
-      colorClasses = 'bg-indigo-50 text-indigo-700 border-indigo-200';
+      colorClasses = 'bg-[#F2EDE4] text-[#0C141F] border-[#EAE4D9]';
       break;
     case 'Contacted':
-      colorClasses = 'bg-cyan-50 text-cyan-700 border-cyan-200';
+      colorClasses = 'bg-[#FAF8F5] text-stone-700 border-[#EAE4D9]';
       break;
     case 'Interested':
-      colorClasses = 'bg-teal-50 text-teal-700 border-teal-200';
+      colorClasses = 'bg-[#FAF5EC] text-[#B88A44] border-[#E5D0A6]';
       break;
     case 'Follow-up':
-      colorClasses = 'bg-amber-50 text-amber-700 border-amber-200';
+      colorClasses = 'bg-[#FAF3E8] text-[#966D2F] border-[#E5D0A6]';
       break;
     case 'Site Visit Scheduled':
-      colorClasses = 'bg-purple-50 text-purple-700 border-purple-200';
+      colorClasses = 'bg-[#FAF5EC] text-[#8C6228] border-[#C59B63]/50 font-medium';
       break;
     case 'Site Visited':
-      colorClasses = 'bg-violet-50 text-violet-700 border-violet-200';
+      colorClasses = 'bg-[#F2EDE4] text-[#8C6228] border-[#EAE4D9]';
       break;
     case 'Negotiation':
-      colorClasses = 'bg-orange-50 text-orange-700 border-orange-200';
+      colorClasses = 'bg-[#FAF3E8] text-[#966D2F] border-[#D4B87C] font-medium';
       break;
     case 'Booked':
-      colorClasses = 'bg-emerald-50 text-emerald-700 border-emerald-200 font-semibold';
+      colorClasses = 'bg-emerald-50 text-emerald-800 border-emerald-200 font-semibold';
       break;
     case 'Converted':
-      colorClasses = 'bg-green-100 text-green-800 border-green-300 font-semibold';
+      colorClasses = 'bg-emerald-100 text-emerald-900 border-emerald-300 font-semibold';
       break;
     case 'Lost':
       colorClasses = 'bg-rose-50 text-rose-700 border-rose-200';
@@ -61,20 +61,20 @@ export function StatusBadge({ status, className }: { status: LeadStatus | string
 }
 
 export function PropertyStatusBadge({ status, className }: { status: PropertyStatus | string; className?: string }) {
-  let colorClasses = 'bg-slate-100 text-slate-700 border-slate-200';
+  let colorClasses = 'bg-[#FAF8F5] text-stone-700 border-[#EAE4D9]';
 
   switch (status) {
     case 'Available':
-      colorClasses = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      colorClasses = 'bg-emerald-50 text-emerald-800 border-emerald-200';
       break;
     case 'Booked':
-      colorClasses = 'bg-amber-50 text-amber-700 border-amber-200';
+      colorClasses = 'bg-[#FAF5EC] text-[#8C6228] border-[#E5D0A6]';
       break;
     case 'Sold':
       colorClasses = 'bg-rose-50 text-rose-700 border-rose-200';
       break;
     case 'Under Offer':
-      colorClasses = 'bg-blue-50 text-blue-700 border-blue-200';
+      colorClasses = 'bg-[#F2EDE4] text-[#0C141F] border-[#EAE4D9]';
       break;
   }
 
@@ -92,17 +92,17 @@ export function PropertyStatusBadge({ status, className }: { status: PropertySta
 }
 
 export function PriorityBadge({ priority, className }: { priority: LeadPriority | string; className?: string }) {
-  let colorClasses = 'bg-slate-100 text-slate-700 border-slate-200';
+  let colorClasses = 'bg-[#FAF8F5] text-stone-700 border-[#EAE4D9]';
 
   switch (priority) {
     case 'High':
       colorClasses = 'bg-rose-50 text-rose-700 border-rose-200';
       break;
     case 'Medium':
-      colorClasses = 'bg-amber-50 text-amber-700 border-amber-200';
+      colorClasses = 'bg-[#FAF5EC] text-[#8C6228] border-[#E5D0A6]';
       break;
     case 'Low':
-      colorClasses = 'bg-slate-50 text-slate-600 border-slate-200';
+      colorClasses = 'bg-[#F2EDE4] text-stone-600 border-[#EAE4D9]';
       break;
   }
 
@@ -119,14 +119,15 @@ export function PriorityBadge({ priority, className }: { priority: LeadPriority 
   );
 }
 
-export function Badge({ children, className, variant = 'default' }: { children: React.ReactNode; className?: string; variant?: 'default' | 'outline' | 'secondary' }) {
+export function Badge({ children, className, variant = 'default' }: { children: React.ReactNode; className?: string; variant?: 'default' | 'outline' | 'secondary' | 'gold' }) {
   return (
     <span
       className={cn(
-        'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-        variant === 'default' && 'bg-blue-50 text-blue-700 border border-blue-200',
-        variant === 'secondary' && 'bg-slate-100 text-slate-700 border border-slate-200',
-        variant === 'outline' && 'border border-slate-300 text-slate-700',
+        'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold',
+        variant === 'default' && 'bg-[#FAF5EC] text-[#8C6228] border border-[#E5D0A6]',
+        variant === 'secondary' && 'bg-[#F2EDE4] text-[#0C141F] border border-[#EAE4D9]',
+        variant === 'gold' && 'bg-[#0C141F] text-[#C59B63] border border-[#C59B63]/40',
+        variant === 'outline' && 'border border-[#C59B63] text-[#0C141F]',
         className
       )}
     >

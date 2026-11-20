@@ -35,7 +35,7 @@ import { Button } from '@/components/ui/button';
 import { formatINR } from '@/lib/utils';
 import { exportDataToCSV } from '@/lib/csv';
 
-const COLORS = ['#2563eb', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#f97316', '#64748b'];
+const COLORS = ['#C59B63', '#0C141F', '#8C6228', '#10b981', '#B88A44', '#64748b', '#D4AF77', '#1E293B'];
 
 export default function ReportsPage() {
   const { leads, bookings, siteVisits, agents, properties } = useLmsStore();
@@ -107,7 +107,7 @@ export default function ReportsPage() {
 
     return [
       { name: 'Completed Tours', count: completed, fill: '#10b981' },
-      { name: 'Scheduled Tours', count: scheduled, fill: '#2563eb' },
+      { name: 'Scheduled Tours', count: scheduled, fill: '#C59B63' },
       { name: 'Cancelled / Rescheduled', count: cancelled, fill: '#f43f5e' },
     ];
   }, [siteVisits]);
@@ -132,7 +132,7 @@ export default function ReportsPage() {
   };
 
   if (!mounted) {
-    return <div className="p-8 text-xs text-slate-400">Loading analytics...</div>;
+    return <div className="p-8 text-xs text-stone-400">Loading analytics...</div>;
   }
 
   return (
@@ -140,11 +140,11 @@ export default function ReportsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <BarChart3 className="w-6 h-6 text-blue-600" />
+          <h1 className="text-xl sm:text-2xl font-poppins font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
+            <BarChart3 className="w-6 h-6 text-[#C59B63]" />
             <span>Reports & Analytics Dashboard</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-stone-500 mt-0.5">
             Enterprise analytics covering marketing channel attribution, sales quotas, and revenue realization.
           </p>
         </div>
@@ -154,7 +154,7 @@ export default function ReportsPage() {
           <select
             value={dateRange}
             onChange={(e) => setDateRange(e.target.value as any)}
-            className="px-3 py-1.5 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+            className="px-3 py-1.5 text-xs rounded-lg border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium text-[#0C141F]"
           >
             <option value="30days">Last 30 Days</option>
             <option value="quarter">Current Quarter (Q4)</option>
@@ -162,8 +162,8 @@ export default function ReportsPage() {
             <option value="all">All-Time Cumulative</option>
           </select>
 
-          <Button size="sm" variant="outline" onClick={handleExportReportCSV} className="gap-1.5 text-xs">
-            <Download className="w-3.5 h-3.5" />
+          <Button size="sm" variant="outline" onClick={handleExportReportCSV} className="gap-1.5 text-xs border-[#C59B63] text-[#0C141F] hover:bg-[#FAF5EC]">
+            <Download className="w-3.5 h-3.5 text-[#C59B63]" />
             <span>Export Report CSV</span>
           </Button>
         </div>
@@ -172,13 +172,13 @@ export default function ReportsPage() {
       {/* Row 1: Area Trends & Source Performance */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Monthly Trend Area Chart */}
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-2 border-[#EAE4D9] bg-white">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <div>
               <CardTitle>Lead Flow & Closed Revenue Trajectory</CardTitle>
-              <p className="text-xs text-slate-500 mt-0.5">Total inquiry influx vs total property value closed</p>
+              <p className="text-xs text-stone-500 mt-0.5">Total inquiry influx vs total property value closed</p>
             </div>
-            <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700">
+            <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-[#FAF5EC] text-[#8C6228] border border-[#EAE4D9]">
               Positive Growth
             </span>
           </CardHeader>
@@ -188,19 +188,20 @@ export default function ReportsPage() {
                 <AreaChart data={monthlyLeadsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="volumeGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                      <stop offset="5%" stopColor="#C59B63" stopOpacity={0.35} />
+                      <stop offset="95%" stopColor="#C59B63" stopOpacity={0.02} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                  <XAxis dataKey="month" stroke="#94a3b8" fontSize={11} tickLine={false} />
-                  <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} unit=" Cr" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#EAE4D9" />
+                  <XAxis dataKey="month" stroke="#78716c" fontSize={11} tickLine={false} />
+                  <YAxis stroke="#78716c" fontSize={11} tickLine={false} axisLine={false} unit=" Cr" />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: '#ffffff',
+                      backgroundColor: '#FAF8F5',
                       borderRadius: '12px',
-                      border: '1px solid #e2e8f0',
+                      border: '1px solid #EAE4D9',
                       fontSize: '12px',
+                      color: '#0C141F',
                     }}
                   />
                   <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
@@ -208,7 +209,7 @@ export default function ReportsPage() {
                     type="monotone"
                     dataKey="volumeCr"
                     name="Closed Volume (₹ Cr)"
-                    stroke="#10b981"
+                    stroke="#C59B63"
                     strokeWidth={2.5}
                     fillOpacity={1}
                     fill="url(#volumeGrad)"
@@ -220,10 +221,10 @@ export default function ReportsPage() {
         </Card>
 
         {/* Property Category Booking Breakdown */}
-        <Card>
+        <Card className="border-[#EAE4D9] bg-white">
           <CardHeader className="pb-2">
             <CardTitle>Sales Volume by Property Type</CardTitle>
-            <p className="text-xs text-slate-500 mt-0.5">Asset class revenue distribution</p>
+            <p className="text-xs text-stone-500 mt-0.5">Asset class revenue distribution</p>
           </CardHeader>
           <CardContent>
             <div className="h-72 w-full flex flex-col items-center justify-center">
@@ -245,16 +246,16 @@ export default function ReportsPage() {
                   <Tooltip
                     formatter={(val: any) => [formatINR(Number(val)), 'Total Value']}
                     contentStyle={{
-                      backgroundColor: '#ffffff',
+                      backgroundColor: '#FAF8F5',
                       borderRadius: '10px',
-                      border: '1px solid #e2e8f0',
+                      border: '1px solid #EAE4D9',
                       fontSize: '11px',
                     }}
                   />
                 </PieChart>
               </ResponsiveContainer>
 
-              <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 mt-1 text-[11px] text-slate-600">
+              <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 mt-1 text-[11px] text-stone-600">
                 {categoryRevenue.map((entry, index) => (
                   <div key={entry.name} className="flex items-center gap-1.5">
                     <span
@@ -273,16 +274,16 @@ export default function ReportsPage() {
       {/* Row 2: Channel Performance Table & Site Visit Outcomes */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Channel Table */}
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-2 border-[#EAE4D9] bg-white">
           <CardHeader className="pb-3">
             <CardTitle>Marketing Source ROI & Attribution</CardTitle>
-            <p className="text-xs text-slate-500 mt-0.5">Inquiry volumes and actual closing rates per portal</p>
+            <p className="text-xs text-stone-500 mt-0.5">Inquiry volumes and actual closing rates per portal</p>
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr className="border-y border-slate-200 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider text-[11px]">
+                  <tr className="border-y border-[#EAE4D9] bg-[#FAF5EC]/60 text-stone-600 font-poppins font-semibold uppercase tracking-wider text-[11px]">
                     <th className="py-2.5 px-4">Channel / Portal</th>
                     <th className="py-2.5 px-3">Total Inquiries</th>
                     <th className="py-2.5 px-3">Deals Booked</th>
@@ -290,19 +291,19 @@ export default function ReportsPage() {
                     <th className="py-2.5 px-4 text-right">Performance Bar</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-[#EAE4D9]/60">
                   {sourceStats.map((src) => (
-                    <tr key={src.source} className="hover:bg-slate-50">
-                      <td className="py-3 px-4 font-bold text-slate-800">{src.source}</td>
-                      <td className="py-3 px-3 text-slate-700">{src.inquiries}</td>
-                      <td className="py-3 px-3 font-semibold text-emerald-700">{src.deals}</td>
+                    <tr key={src.source} className="hover:bg-[#FAF8F5]">
+                      <td className="py-3 px-4 font-poppins font-bold text-[#0C141F]">{src.source}</td>
+                      <td className="py-3 px-3 text-stone-700">{src.inquiries}</td>
+                      <td className="py-3 px-3 font-semibold text-[#8C6228]">{src.deals}</td>
                       <td className="py-3 px-3">
-                        <span className="font-bold text-slate-900">{src.rate}%</span>
+                        <span className="font-bold text-[#0C141F]">{src.rate}%</span>
                       </td>
                       <td className="py-3 px-4 text-right">
-                        <div className="w-28 h-2 bg-slate-100 rounded-full overflow-hidden ml-auto">
+                        <div className="w-28 h-2 bg-[#F2EDE4] rounded-full overflow-hidden ml-auto">
                           <div
-                            className="h-full bg-blue-600 rounded-full"
+                            className="h-full bg-[#C59B63] rounded-full"
                             style={{ width: `${Math.min(100, src.rate * 3)}%` }}
                           />
                         </div>
@@ -316,20 +317,20 @@ export default function ReportsPage() {
         </Card>
 
         {/* Site Visit Outcomes Bar */}
-        <Card>
+        <Card className="border-[#EAE4D9] bg-white">
           <CardHeader className="pb-3">
             <CardTitle>Site Tour Success Metrics</CardTitle>
-            <p className="text-xs text-slate-500 mt-0.5">Physical property showing execution</p>
+            <p className="text-xs text-stone-500 mt-0.5">Physical property showing execution</p>
           </CardHeader>
           <CardContent>
             <div className="space-y-4 pt-2 text-xs">
               {visitStatusData.map((item) => (
                 <div key={item.name} className="space-y-1.5">
                   <div className="flex items-center justify-between font-medium">
-                    <span className="text-slate-700">{item.name}</span>
-                    <strong className="text-slate-900">{item.count} Tours</strong>
+                    <span className="text-stone-700">{item.name}</span>
+                    <strong className="text-[#0C141F]">{item.count} Tours</strong>
                   </div>
-                  <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div className="w-full h-2.5 bg-[#F2EDE4] rounded-full overflow-hidden">
                     <div
                       className="h-full rounded-full"
                       style={{
@@ -341,10 +342,10 @@ export default function ReportsPage() {
                 </div>
               ))}
 
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/60 mt-4 text-[11px] text-slate-600 space-y-1">
-                <span className="font-bold text-slate-800 block">Site Visit Insights</span>
+              <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#EAE4D9] mt-4 text-[11px] text-stone-600 space-y-1">
+                <span className="font-poppins font-bold text-[#0C141F] block">Site Visit Insights</span>
                 <p>
-                  Tours completed with 4+ star customer satisfaction produce a <strong>42% faster booking cycle</strong> within 10 days.
+                  Tours completed with 4+ star customer satisfaction produce a <strong className="text-[#8C6228]">42% faster booking cycle</strong> within 10 days.
                 </p>
               </div>
             </div>
@@ -353,18 +354,18 @@ export default function ReportsPage() {
       </div>
 
       {/* Row 3: Full Sales Team Quota & Volume Table */}
-      <Card>
+      <Card className="border-[#EAE4D9] bg-white">
         <CardHeader className="flex flex-row items-center justify-between pb-3">
           <div>
             <CardTitle>Executive Quota & Revenue Realization Leaderboard</CardTitle>
-            <p className="text-xs text-slate-500 mt-0.5">Comprehensive team quota metrics</p>
+            <p className="text-xs text-stone-500 mt-0.5">Comprehensive team quota metrics</p>
           </div>
         </CardHeader>
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-y border-slate-200 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider text-[11px]">
+                <tr className="border-y border-[#EAE4D9] bg-[#FAF5EC]/60 text-stone-600 font-poppins font-semibold uppercase tracking-wider text-[11px]">
                   <th className="py-3 px-4">Rank & Executive</th>
                   <th className="py-3 px-3">Role & Division</th>
                   <th className="py-3 px-3">Active Pipeline</th>
@@ -373,40 +374,40 @@ export default function ReportsPage() {
                   <th className="py-3 px-4 text-right">Quota Fulfillment</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-[#EAE4D9]/60">
                 {agentRanks.map((ag, index) => {
                   const quotaTarget = 500000000; // 50 Cr Target
                   const fulfillmentPct = Math.min(100, Math.round((ag.totalSalesValue / quotaTarget) * 100));
 
                   return (
-                    <tr key={ag.id} className="hover:bg-slate-50">
+                    <tr key={ag.id} className="hover:bg-[#FAF8F5]">
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-2.5">
-                          <span className="w-5 font-bold text-slate-400">#{index + 1}</span>
+                          <span className="w-5 font-poppins font-bold text-[#C59B63]">#{index + 1}</span>
                           <img
                             src={ag.avatar}
                             alt={ag.name}
-                            className="w-8 h-8 rounded-full object-cover ring-1 ring-slate-200"
+                            className="w-8 h-8 rounded-full object-cover ring-1 ring-[#EAE4D9]"
                           />
                           <div>
-                            <p className="font-bold text-slate-900">{ag.name}</p>
-                            <p className="text-[10px] text-slate-400">{ag.email}</p>
+                            <p className="font-poppins font-bold text-[#0C141F]">{ag.name}</p>
+                            <p className="text-[10px] text-stone-400">{ag.email}</p>
                           </div>
                         </div>
                       </td>
-                      <td className="py-3 px-3 text-slate-700">
+                      <td className="py-3 px-3 text-stone-700">
                         <span className="font-semibold">{ag.role}</span>
-                        <span className="block text-[10px] text-slate-400">{ag.department}</span>
+                        <span className="block text-[10px] text-stone-400">{ag.department}</span>
                       </td>
-                      <td className="py-3 px-3 font-semibold text-slate-800">{ag.activeLeadsCount} Leads</td>
+                      <td className="py-3 px-3 font-semibold text-stone-800">{ag.activeLeadsCount} Leads</td>
                       <td className="py-3 px-3 font-bold text-emerald-700">{ag.convertedLeadsCount} Units</td>
-                      <td className="py-3 px-3 font-extrabold text-slate-900">{formatINR(ag.totalSalesValue)}</td>
+                      <td className="py-3 px-3 font-poppins font-extrabold text-[#0C141F]">{formatINR(ag.totalSalesValue)}</td>
                       <td className="py-3 px-4 text-right">
                         <div className="flex items-center justify-end gap-2">
-                          <span className="font-semibold text-slate-800 text-[11px]">{fulfillmentPct}%</span>
-                          <div className="w-20 h-2 bg-slate-100 rounded-full overflow-hidden">
+                          <span className="font-semibold text-stone-800 text-[11px]">{fulfillmentPct}%</span>
+                          <div className="w-20 h-2 bg-[#F2EDE4] rounded-full overflow-hidden">
                             <div
-                              className="h-full bg-emerald-500 rounded-full"
+                              className="h-full bg-[#C59B63] rounded-full"
                               style={{ width: `${fulfillmentPct}%` }}
                             />
                           </div>

@@ -81,11 +81,11 @@ export default function LeadAssignmentPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <UserCheck className="w-6 h-6 text-blue-600" />
+          <h1 className="text-xl sm:text-2xl font-poppins font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
+            <UserCheck className="w-6 h-6 text-[#C59B63]" />
             <span>Lead Assignment & Workload</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-stone-500 mt-0.5">
             Allocate inbound buyer inquiries across sales representatives based on pipeline capacity.
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function LeadAssignmentPage() {
           <Button
             size="sm"
             onClick={() => setIsBulkAssignOpen(true)}
-            className="gap-1.5 shadow-sm text-xs"
+            className="gap-1.5 shadow-sm text-xs bg-[#0C141F] text-[#C59B63] hover:bg-[#16202E] border border-[#C59B63]/30"
           >
             <UserCheck className="w-4 h-4" />
             <span>Bulk Assign ({selectedLeadIds.length})</span>
@@ -104,7 +104,7 @@ export default function LeadAssignmentPage() {
 
       {/* Agent Workload Overview Cards */}
       <div className="space-y-2">
-        <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+        <h3 className="text-xs font-poppins font-semibold text-stone-600 uppercase tracking-wider">
           Sales Team Capacity & Workload Balance
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
@@ -115,8 +115,8 @@ export default function LeadAssignmentPage() {
             return (
               <Card
                 key={ag.id}
-                className={`transition-all ${
-                  selectedAgentFilter === ag.id ? 'ring-2 ring-blue-500 bg-blue-50/20' : ''
+                className={`transition-all border-[#EAE4D9] hover:border-[#C59B63]/40 ${
+                  selectedAgentFilter === ag.id ? 'ring-2 ring-[#C59B63] bg-[#FAF5EC]/50 border-[#C59B63]' : 'bg-white'
                 }`}
               >
                 <CardContent className="p-4 space-y-3">
@@ -125,18 +125,18 @@ export default function LeadAssignmentPage() {
                       <img
                         src={ag.avatar}
                         alt={ag.name}
-                        className="w-9 h-9 rounded-full object-cover ring-2 ring-slate-100"
+                        className="w-9 h-9 rounded-full object-cover ring-2 ring-[#EAE4D9]"
                       />
                       <div>
-                        <p className="text-xs font-bold text-slate-800 leading-tight">{ag.name}</p>
-                        <p className="text-[10px] text-slate-500">{ag.role}</p>
+                        <p className="text-xs font-poppins font-bold text-[#0C141F] leading-tight">{ag.name}</p>
+                        <p className="text-[10px] text-stone-500">{ag.role}</p>
                       </div>
                     </div>
                     <button
                       onClick={() =>
                         setSelectedAgentFilter(selectedAgentFilter === ag.id ? 'ALL' : ag.id)
                       }
-                      className="text-[10px] font-semibold text-blue-600 hover:underline"
+                      className="text-[10px] font-semibold text-[#8C6228] hover:text-[#C59B63] hover:underline"
                     >
                       {selectedAgentFilter === ag.id ? 'Clear' : 'Filter'}
                     </button>
@@ -144,16 +144,16 @@ export default function LeadAssignmentPage() {
 
                   {/* Workload Progress */}
                   <div>
-                    <div className="flex items-center justify-between text-[11px] font-medium text-slate-600 mb-1">
+                    <div className="flex items-center justify-between text-[11px] font-medium text-stone-600 mb-1">
                       <span>Active Capacity</span>
-                      <span className={isHigh ? 'text-rose-600 font-bold' : 'text-slate-800'}>
+                      <span className={isHigh ? 'text-rose-600 font-bold' : 'text-[#0C141F] font-semibold'}>
                         {ag.activeLeadsCount} / {ag.maxLeadCapacity} ({usagePct}%)
                       </span>
                     </div>
-                    <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-[#F2EDE4] rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full transition-all duration-300 ${
-                          isHigh ? 'bg-rose-500' : usagePct > 50 ? 'bg-amber-500' : 'bg-emerald-500'
+                          isHigh ? 'bg-rose-500' : usagePct > 50 ? 'bg-[#C59B63]' : 'bg-emerald-600'
                         }`}
                         style={{ width: `${usagePct}%` }}
                       />
@@ -161,9 +161,9 @@ export default function LeadAssignmentPage() {
                   </div>
 
                   {/* Deal stats */}
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-                    <span>Won Deals: <strong className="text-slate-800">{ag.convertedLeadsCount}</strong></span>
-                    <span>Volume: <strong className="text-emerald-700">{formatINR(ag.totalSalesValue)}</strong></span>
+                  <div className="pt-2 border-t border-[#EAE4D9] flex items-center justify-between text-[11px] text-stone-500">
+                    <span>Won Deals: <strong className="text-[#0C141F]">{ag.convertedLeadsCount}</strong></span>
+                    <span>Volume: <strong className="text-[#8C6228] font-semibold">{formatINR(ag.totalSalesValue)}</strong></span>
                   </div>
                 </CardContent>
               </Card>
@@ -173,9 +173,9 @@ export default function LeadAssignmentPage() {
       </div>
 
       {/* Tabs & Search Filter */}
-      <Card>
+      <Card className="border-[#EAE4D9] bg-white">
         <CardContent className="p-4 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EAE4D9] pb-3">
             {/* Tabs */}
             <div className="flex items-center gap-2">
               <button
@@ -185,12 +185,12 @@ export default function LeadAssignmentPage() {
                 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
                   activeTab === 'unassigned'
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                    ? 'bg-[#0C141F] text-[#C59B63] border border-[#C59B63]/30 shadow-xs'
+                    : 'bg-[#F2EDE4] text-stone-600 hover:text-[#0C141F]'
                 }`}
               >
                 <span>Unassigned Leads</span>
-                <span className="px-1.5 py-0.2 rounded-full bg-white/20 text-[10px]">
+                <span className="px-1.5 py-0.2 rounded-full bg-[#C59B63]/20 text-[10px] text-[#C59B63]">
                   {unassignedCount}
                 </span>
               </button>
@@ -202,8 +202,8 @@ export default function LeadAssignmentPage() {
                 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                   activeTab === 'all'
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                    ? 'bg-[#0C141F] text-[#C59B63] border border-[#C59B63]/30 shadow-xs'
+                    : 'bg-[#F2EDE4] text-stone-600 hover:text-[#0C141F]'
                 }`}
               >
                 All Assigned Leads
@@ -212,13 +212,13 @@ export default function LeadAssignmentPage() {
 
             {/* Search Input */}
             <div className="relative w-full sm:w-64">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-400" />
               <input
                 type="text"
                 placeholder="Search leads..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none"
+                className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-[#FAF8F5]/50"
               />
             </div>
           </div>
@@ -227,7 +227,7 @@ export default function LeadAssignmentPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-slate-200 bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider text-[11px]">
+                <tr className="border-b border-[#EAE4D9] bg-[#FAF5EC]/60 text-stone-600 font-poppins font-semibold uppercase tracking-wider text-[11px]">
                   <th className="py-2.5 px-3 w-8">
                     <input
                       type="checkbox"
@@ -236,7 +236,7 @@ export default function LeadAssignmentPage() {
                         displayedLeads.length > 0 &&
                         selectedLeadIds.length === displayedLeads.length
                       }
-                      className="rounded border-slate-300 text-blue-600"
+                      className="rounded border-[#EAE4D9] text-[#C59B63] focus:ring-[#C59B63]"
                     />
                   </th>
                   <th className="py-2.5 px-3">Lead & Location</th>
@@ -247,10 +247,10 @@ export default function LeadAssignmentPage() {
                   <th className="py-2.5 px-3 text-right">Assign / Reassign To</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-[#EAE4D9]/60">
                 {displayedLeads.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="py-10 text-center text-slate-400">
+                    <td colSpan={7} className="py-10 text-center text-stone-400">
                       {activeTab === 'unassigned'
                         ? 'Awesome! All leads are currently assigned to sales executives.'
                         : 'No leads found matching your search.'}
@@ -263,8 +263,8 @@ export default function LeadAssignmentPage() {
                     return (
                       <tr
                         key={l.id}
-                        className={`hover:bg-slate-50 transition-colors ${
-                          isSelected ? 'bg-blue-50/40' : ''
+                        className={`hover:bg-[#FAF8F5] transition-colors ${
+                          isSelected ? 'bg-[#FAF5EC]' : ''
                         }`}
                       >
                         <td className="py-3 px-3">
@@ -272,29 +272,29 @@ export default function LeadAssignmentPage() {
                             type="checkbox"
                             checked={isSelected}
                             onChange={() => handleSelectOne(l.id)}
-                            className="rounded border-slate-300 text-blue-600"
+                            className="rounded border-[#EAE4D9] text-[#C59B63] focus:ring-[#C59B63]"
                           />
                         </td>
                         <td className="py-3 px-3">
-                          <p className="font-bold text-slate-800">{l.name}</p>
-                          <p className="text-[11px] text-slate-500">
+                          <p className="font-poppins font-bold text-[#0C141F]">{l.name}</p>
+                          <p className="text-[11px] text-stone-500">
                             {l.preferredLocation} • {l.propertyType}
                           </p>
                         </td>
-                        <td className="py-3 px-3 font-semibold text-slate-800">
+                        <td className="py-3 px-3 font-semibold text-[#8C6228]">
                           {formatINR(l.budget)}
                         </td>
-                        <td className="py-3 px-3 text-slate-600">{l.leadSource}</td>
+                        <td className="py-3 px-3 text-stone-600">{l.leadSource}</td>
                         <td className="py-3 px-3">
                           <StatusBadge status={l.status} />
                         </td>
                         <td className="py-3 px-3">
                           {l.assignedAgentName ? (
-                            <span className="font-medium text-slate-700">
+                            <span className="font-medium text-stone-700">
                               {l.assignedAgentName}
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full">
+                            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
                               <AlertCircle className="w-3 h-3" /> Unassigned
                             </span>
                           )}
@@ -303,7 +303,7 @@ export default function LeadAssignmentPage() {
                           <select
                             value={l.assignedAgentId || ''}
                             onChange={(e) => handleQuickReassign(l.id, e.target.value)}
-                            className="px-2.5 py-1 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none bg-white font-medium"
+                            className="px-2.5 py-1 text-xs rounded-lg border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium text-[#0C141F]"
                           >
                             <option value="">-- Choose Agent --</option>
                             {agents.map((ag) => (
