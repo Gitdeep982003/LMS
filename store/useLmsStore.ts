@@ -734,7 +734,7 @@ export const useLmsStore = create<LmsState>()(
         const newAgent: SalesAgent = {
           id,
           name: data.name || 'New Executive',
-          email: data.email || 'agent@estatify.in',
+          email: data.email || 'agent@kalaivani.in',
           phone: data.phone || '+91 90000 00000',
           role: data.role || 'Sales Executive',
           avatar:

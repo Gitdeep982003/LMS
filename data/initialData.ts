@@ -4,7 +4,7 @@ export const initialSalesAgents: SalesAgent[] = [
   {
     id: "AGT-101",
     name: "Arjun Mehta",
-    email: "arjun.mehta@estatify.in",
+    email: "arjun.mehta@kalaivani.in",
     phone: "+91 98201 12345",
     role: "Admin",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
@@ -18,7 +18,7 @@ export const initialSalesAgents: SalesAgent[] = [
   {
     id: "AGT-102",
     name: "Pooja Hegde",
-    email: "pooja.hegde@estatify.in",
+    email: "pooja.hegde@kalaivani.in",
     phone: "+91 98450 67890",
     role: "Sales Manager",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
@@ -32,7 +32,7 @@ export const initialSalesAgents: SalesAgent[] = [
   {
     id: "AGT-103",
     name: "Vikram Singhania",
-    email: "vikram.s@estatify.in",
+    email: "vikram.s@kalaivani.in",
     phone: "+91 99302 45678",
     role: "Sales Executive",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
@@ -46,7 +46,7 @@ export const initialSalesAgents: SalesAgent[] = [
   {
     id: "AGT-104",
     name: "Sneha Roy",
-    email: "sneha.roy@estatify.in",
+    email: "sneha.roy@kalaivani.in",
     phone: "+91 98113 98765",
     role: "Sales Executive",
     avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
@@ -60,7 +60,7 @@ export const initialSalesAgents: SalesAgent[] = [
   {
     id: "AGT-105",
     name: "Rohan Deshmukh",
-    email: "rohan.d@estatify.in",
+    email: "rohan.d@kalaivani.in",
     phone: "+91 97654 32109",
     role: "Sales Executive",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
@@ -74,7 +74,7 @@ export const initialSalesAgents: SalesAgent[] = [
   {
     id: "AGT-106",
     name: "Ananya Iyer",
-    email: "ananya.iyer@estatify.in",
+    email: "ananya.iyer@kalaivani.in",
     phone: "+91 94440 11223",
     role: "Sales Executive",
     avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=150&auto=format&fit=crop&q=80",
@@ -88,7 +88,7 @@ export const initialSalesAgents: SalesAgent[] = [
   {
     id: "AGT-107",
     name: "Karthik Reddy",
-    email: "karthik.r@estatify.in",
+    email: "karthik.r@kalaivani.in",
     phone: "+91 99890 33445",
     role: "Sales Executive",
     avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80",
@@ -102,7 +102,7 @@ export const initialSalesAgents: SalesAgent[] = [
   {
     id: "AGT-108",
     name: "Divya Nambiar",
-    email: "divya.n@estatify.in",
+    email: "divya.n@kalaivani.in",
     phone: "+91 98470 55667",
     role: "Sales Executive",
     avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
@@ -1492,7 +1492,7 @@ export const defaultUserSessions: Record<string, UserSession> = {
   admin: {
     id: "AGT-101",
     name: "Arjun Mehta",
-    email: "arjun.mehta@estatify.in",
+    email: "arjun.mehta@kalaivani.in",
     role: "Admin",
     avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
     phone: "+91 98201 12345",
@@ -1500,7 +1500,7 @@ export const defaultUserSessions: Record<string, UserSession> = {
   manager: {
     id: "AGT-102",
     name: "Pooja Hegde",
-    email: "pooja.hegde@estatify.in",
+    email: "pooja.hegde@kalaivani.in",
     role: "Sales Manager",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
     phone: "+91 98450 67890",
@@ -1508,7 +1508,7 @@ export const defaultUserSessions: Record<string, UserSession> = {
   executive: {
     id: "AGT-103",
     name: "Vikram Singhania",
-    email: "vikram.s@estatify.in",
+    email: "vikram.s@kalaivani.in",
     role: "Sales Executive",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
     phone: "+91 99302 45678",

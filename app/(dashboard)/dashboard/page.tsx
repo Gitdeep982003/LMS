@@ -184,25 +184,25 @@ export default function DashboardPage() {
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
         {/* Card 1: Leads */}
         <Link href="/leads" className="block group">
-          <Card className="h-full hover:shadow-lg hover:border-blue-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+          <Card className="h-full bg-blue-50/60 bg-gradient-to-br from-blue-100/70 via-blue-50/50 to-blue-50/30 border-blue-200/90 hover:bg-blue-100/60 hover:from-blue-100/95 hover:via-blue-100/70 hover:to-blue-50/60 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/15 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
             <CardContent className="p-4 sm:p-5">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-500 group-hover:text-blue-700 transition-colors">
+                <span className="text-xs font-semibold text-slate-600 group-hover:text-blue-700 transition-colors">
                   {isExecutive ? 'My Assigned Leads' : 'Total Inquiries'}
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  <div className="p-2 rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-blue-400/80 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-xs">
                     <Users2 className="w-4 h-4" />
                   </div>
                 </div>
               </div>
               <div className="mt-3">
-                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-blue-600 transition-colors">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-blue-700 transition-colors">
                   {isExecutive ? myLeads.length : totalLeads}
                 </h3>
                 <div className="flex items-center justify-between mt-1">
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-slate-600 font-medium">
                     {isExecutive ? `${myActiveLeads} active inquiries` : `${newLeads} new today`}
                   </p>
                   <span className="text-[10px] text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
@@ -216,25 +216,25 @@ export default function DashboardPage() {
 
         {/* Card 2: Active / Unassigned */}
         <Link href={isManager ? '/assignments' : '/pipeline'} className="block group">
-          <Card className="h-full hover:shadow-lg hover:border-indigo-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+          <Card className="h-full bg-indigo-50/60 bg-gradient-to-br from-indigo-100/70 via-indigo-50/50 to-indigo-50/30 border-indigo-200/90 hover:bg-indigo-100/60 hover:from-indigo-100/95 hover:via-indigo-100/70 hover:to-indigo-50/60 hover:border-indigo-400 hover:shadow-lg hover:shadow-indigo-500/15 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
             <CardContent className="p-4 sm:p-5">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-500 group-hover:text-indigo-700 transition-colors">
+                <span className="text-xs font-semibold text-slate-600 group-hover:text-indigo-700 transition-colors">
                   {isManager ? 'Unassigned Inflow' : isExecutive ? 'My Active Deals' : 'Active Pipeline'}
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-indigo-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-indigo-400/80 group-hover:text-indigo-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-indigo-100 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors shadow-xs">
                     {isManager ? <UserPlus className="w-4 h-4" /> : <Clock className="w-4 h-4" />}
                   </div>
                 </div>
               </div>
               <div className="mt-3">
-                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-indigo-700 transition-colors">
                   {isManager ? newLeads : isExecutive ? myActiveLeads : activeLeads}
                 </h3>
                 <div className="flex items-center justify-between mt-1">
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-slate-600 font-medium">
                     {isManager ? 'Needs executive allocation' : 'In active negotiation'}
                   </p>
                   <span className="text-[10px] text-indigo-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
@@ -248,25 +248,25 @@ export default function DashboardPage() {
 
         {/* Card 3: Pending Follow-ups */}
         <Link href="/follow-ups" className="block group">
-          <Card className="h-full hover:shadow-lg hover:border-amber-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+          <Card className="h-full bg-amber-50/60 bg-gradient-to-br from-amber-100/70 via-amber-50/50 to-amber-50/30 border-amber-200/90 hover:bg-amber-100/60 hover:from-amber-100/95 hover:via-amber-100/70 hover:to-amber-50/60 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-500/15 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
             <CardContent className="p-4 sm:p-5">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-500 group-hover:text-amber-700 transition-colors">
+                <span className="text-xs font-semibold text-slate-600 group-hover:text-amber-800 transition-colors">
                   {isExecutive ? 'My Pending Calls' : 'Pending Follow-ups'}
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-amber-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  <div className="p-2 rounded-xl bg-amber-50 text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-amber-500/80 group-hover:text-amber-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-amber-100 text-amber-700 group-hover:bg-amber-600 group-hover:text-white transition-colors shadow-xs">
                     <PhoneCall className="w-4 h-4" />
                   </div>
                 </div>
               </div>
               <div className="mt-3">
-                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-amber-600 transition-colors">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-amber-800 transition-colors">
                   {isExecutive ? myPendingFollowups : pendingFollowups}
                 </h3>
                 <div className="flex items-center justify-between mt-1">
-                  <p className="text-[11px] text-amber-700 font-medium">
+                  <p className="text-[11px] text-amber-800 font-medium">
                     {isExecutive ? 'Due on your desk' : 'Across sales team'}
                   </p>
                   <span className="text-[10px] text-amber-700 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
@@ -280,25 +280,25 @@ export default function DashboardPage() {
 
         {/* Card 4: Site Visits */}
         <Link href="/site-visits" className="block group">
-          <Card className="h-full hover:shadow-lg hover:border-purple-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+          <Card className="h-full bg-purple-50/60 bg-gradient-to-br from-purple-100/70 via-purple-50/50 to-purple-50/30 border-purple-200/90 hover:bg-purple-100/60 hover:from-purple-100/95 hover:via-purple-100/70 hover:to-purple-50/60 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/15 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
             <CardContent className="p-4 sm:p-5">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-500 group-hover:text-purple-700 transition-colors">
+                <span className="text-xs font-semibold text-slate-600 group-hover:text-purple-700 transition-colors">
                   {isExecutive ? 'My Site Visits Today' : "Today's Site Visits"}
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-purple-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  <div className="p-2 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-purple-400/80 group-hover:text-purple-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-purple-100 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors shadow-xs">
                     <CalendarCheck2 className="w-4 h-4" />
                   </div>
                 </div>
               </div>
               <div className="mt-3">
-                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-purple-600 transition-colors">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-purple-700 transition-colors">
                   {isExecutive ? myTodayVisits : todayVisits}
                 </h3>
                 <div className="flex items-center justify-between mt-1">
-                  <p className="text-[11px] text-purple-700 font-medium">
+                  <p className="text-[11px] text-purple-800 font-medium">
                     Scheduled showing appointments
                   </p>
                   <span className="text-[10px] text-purple-700 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
@@ -312,25 +312,25 @@ export default function DashboardPage() {
 
         {/* Card 5: Closed Deals */}
         <Link href="/bookings" className="block group">
-          <Card className="h-full hover:shadow-lg hover:border-emerald-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+          <Card className="h-full bg-emerald-50/60 bg-gradient-to-br from-emerald-100/70 via-emerald-50/50 to-emerald-50/30 border-emerald-200/90 hover:bg-emerald-100/60 hover:from-emerald-100/95 hover:via-emerald-100/70 hover:to-emerald-50/60 hover:border-emerald-400 hover:shadow-lg hover:shadow-emerald-500/15 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
             <CardContent className="p-4 sm:p-5">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-500 group-hover:text-emerald-700 transition-colors">
+                <span className="text-xs font-semibold text-slate-600 group-hover:text-emerald-700 transition-colors">
                   {isExecutive ? 'My Deals Closed' : 'Total Converted Deals'}
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-emerald-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-emerald-500/80 group-hover:text-emerald-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-xs">
                     <CheckCircle2 className="w-4 h-4" />
                   </div>
                 </div>
               </div>
               <div className="mt-3">
-                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-emerald-600 transition-colors">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-emerald-700 transition-colors">
                   {isExecutive ? myConverted : convertedLeads}
                 </h3>
                 <div className="flex items-center justify-between mt-1">
-                  <p className="text-[11px] text-emerald-600 font-medium">
+                  <p className="text-[11px] text-emerald-700 font-medium">
                     {isExecutive ? 'Deals closed by you' : 'Booked & registered'}
                   </p>
                   <span className="text-[10px] text-emerald-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
@@ -344,25 +344,25 @@ export default function DashboardPage() {
 
         {/* Card 6: Sales Volume / Quota */}
         <Link href="/bookings" className="block group">
-          <Card className="h-full hover:shadow-lg hover:border-green-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+          <Card className="h-full bg-green-50/60 bg-gradient-to-br from-green-100/70 via-green-50/50 to-green-50/30 border-green-200/90 hover:bg-green-100/60 hover:from-green-100/95 hover:via-green-100/70 hover:to-green-50/60 hover:border-green-400 hover:shadow-lg hover:shadow-green-500/15 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
             <CardContent className="p-4 sm:p-5">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-500 group-hover:text-green-700 transition-colors">
+                <span className="text-xs font-semibold text-slate-600 group-hover:text-green-700 transition-colors">
                   {isExecutive ? 'My Sales Volume' : 'Total Booked Value'}
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-green-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  <div className="p-2 rounded-xl bg-green-50 text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-green-500/80 group-hover:text-green-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-green-100 text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors shadow-xs">
                     <Building2 className="w-4 h-4" />
                   </div>
                 </div>
               </div>
               <div className="mt-3">
-                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-green-600 transition-colors">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-green-700 transition-colors">
                   {isExecutive ? formatINR(myTotalSales) : formatINR(totalBookingValue)}
                 </h3>
                 <div className="flex items-center justify-between mt-1">
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-slate-600 font-medium">
                     {isExecutive ? `Capacity: ${myLeads.length}/${myCapacity}` : `${totalBookings} booked agreements`}
                   </p>
                   <span className="text-[10px] text-green-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
@@ -376,25 +376,25 @@ export default function DashboardPage() {
 
         {/* Card 7: Conversion Rate */}
         <Link href="/reports" className="block group">
-          <Card className="h-full hover:shadow-lg hover:border-rose-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+          <Card className="h-full bg-rose-50/60 bg-gradient-to-br from-rose-100/70 via-rose-50/50 to-rose-50/30 border-rose-200/90 hover:bg-rose-100/60 hover:from-rose-100/95 hover:via-rose-100/70 hover:to-rose-50/60 hover:border-rose-400 hover:shadow-lg hover:shadow-rose-500/15 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
             <CardContent className="p-4 sm:p-5">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-500 group-hover:text-rose-700 transition-colors">
+                <span className="text-xs font-semibold text-slate-600 group-hover:text-rose-700 transition-colors">
                   {isExecutive ? 'My Conversion Rate' : 'Team Conversion Rate'}
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-rose-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  <div className="p-2 rounded-xl bg-rose-50 text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition-colors">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-rose-400/80 group-hover:text-rose-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-rose-100 text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition-colors shadow-xs">
                     <Trophy className="w-4 h-4" />
                   </div>
                 </div>
               </div>
               <div className="mt-3">
-                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-rose-600 transition-colors">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-rose-700 transition-colors">
                   {isExecutive ? myConversionRate : globalConversionRate}%
                 </h3>
                 <div className="flex items-center justify-between mt-1">
-                  <p className="text-[11px] text-emerald-600 font-medium">
+                  <p className="text-[11px] text-emerald-700 font-semibold">
                     {isExecutive ? 'Personal closing ratio' : 'Organization benchmark'}
                   </p>
                   <span className="text-[10px] text-rose-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
@@ -408,25 +408,25 @@ export default function DashboardPage() {
 
         {/* Card 8: Quota / Team Health */}
         <Link href={isExecutive ? '/reports' : '/team'} className="block group">
-          <Card className="h-full hover:shadow-lg hover:border-teal-400 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
+          <Card className="h-full bg-teal-50/60 bg-gradient-to-br from-teal-100/70 via-teal-50/50 to-teal-50/30 border-teal-200/90 hover:bg-teal-100/60 hover:from-teal-100/95 hover:via-teal-100/70 hover:to-teal-50/60 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/15 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer relative overflow-hidden">
             <CardContent className="p-4 sm:p-5">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-500 group-hover:text-teal-700 transition-colors">
+                <span className="text-xs font-semibold text-slate-600 group-hover:text-teal-700 transition-colors">
                   {isExecutive ? 'My Quota Fulfillment' : 'Active Sales Force'}
                 </span>
                 <div className="flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 opacity-60 group-hover:opacity-100 group-hover:text-teal-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  <div className="p-2 rounded-xl bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors">
+                  <ArrowUpRight className="w-3.5 h-3.5 text-teal-400/80 group-hover:text-teal-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="p-2 rounded-xl bg-teal-100 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors shadow-xs">
                     {isExecutive ? <Target className="w-4 h-4" /> : <UserCheck className="w-4 h-4" />}
                   </div>
                 </div>
               </div>
               <div className="mt-3">
-                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-teal-600 transition-colors">
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight group-hover:text-teal-700 transition-colors">
                   {isExecutive ? `${Math.min(100, Math.round((myTotalSales / 500000000) * 100))}%` : `${agents.length} Agents`}
                 </h3>
                 <div className="flex items-center justify-between mt-1">
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-slate-600 font-medium">
                     {isExecutive ? 'Of ₹50 Cr annual target' : 'All actively deployed'}
                   </p>
                   <span className="text-[10px] text-teal-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
