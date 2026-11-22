@@ -134,22 +134,23 @@ export default function PipelinePage() {
     <div className="space-y-6 pb-12 flex flex-col h-[calc(100vh-6.5rem)]">
       {/* Header & Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <Kanban className="w-6 h-6 text-[#8C6228]" />
-            <span>Sales Pipeline Kanban</span>
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-            Drag and drop buyer deals across progression stages from initial inquiry to final registration.
-          </p>
+        <div className="flex items-center gap-2.5">
+          <div className="w-10 h-10 rounded-xl bg-[#FAF5EC] border border-[#E5D0A6] flex items-center justify-center shrink-0 text-[#C59B63] shadow-2xs">
+            <Kanban className="w-5 h-5 text-[#C59B63]" />
+          </div>
+          <div>
+            <h1 className="font-poppins text-2xl font-bold text-[#0C141F] tracking-tight">
+              Sales Pipeline
+            </h1>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 shrink-0 flex-wrap sm:flex-nowrap">
           {/* Agent Filter */}
           <select
             value={selectedAgent}
             onChange={(e) => setSelectedAgent(e.target.value)}
-            className="px-3 py-1.5 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
+            className="h-9 px-3 text-xs rounded-xl border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium text-[#0C141F] shadow-xs cursor-pointer"
           >
             <option value="ALL">All Executives</option>
             {agents.map((ag) => (
@@ -160,19 +161,23 @@ export default function PipelinePage() {
           </select>
 
           {/* Search */}
-          <div className="relative w-48">
-            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+          <div className="relative w-48 sm:w-56">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-400" />
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search buyer or property..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-8 pr-2.5 py-1.5 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none"
+              className="w-full h-9 pl-9 pr-3 text-xs rounded-xl border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white text-[#0C141F] shadow-xs placeholder:text-stone-400"
             />
           </div>
 
-          <Button size="sm" onClick={() => setIsAddOpen(true)} className="gap-1.5 text-xs shadow-sm">
-            <Plus className="w-4 h-4" />
+          <Button
+            size="sm"
+            onClick={() => setIsAddOpen(true)}
+            className="h-9 px-4 gap-1.5 text-xs shadow-xs bg-[#0C141F] hover:bg-[#16202E] text-[#C59B63] hover:text-[#D4AF77] border border-[#C59B63]/40 rounded-xl whitespace-nowrap shrink-0"
+          >
+            <Plus className="w-4 h-4 text-[#C59B63]" />
             <span>Add Lead</span>
           </Button>
         </div>
@@ -218,8 +223,8 @@ export default function PipelinePage() {
                 {/* Cards Container */}
                 <div className="flex-1 overflow-y-auto p-2.5 space-y-2.5 scrollbar-thin">
                   {colLeads.length === 0 ? (
-                    <div className="h-32 flex items-center justify-center border-2 border-dashed border-slate-200/80 rounded-xl text-[11px] text-slate-400">
-                      Drop leads here
+                    <div className="h-32 flex items-center justify-center border-2 border-dashed border-[#EAE4D9] rounded-xl text-[11px] text-stone-400">
+                      No deals in this stage
                     </div>
                   ) : (
                     colLeads.map((lead) => (

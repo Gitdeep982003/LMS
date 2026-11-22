@@ -100,82 +100,82 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Role-Specific Hero Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-white via-[#FAF8F5] to-[#FAF5EC] p-6 sm:p-7 rounded-2xl border border-[#EAE4D9] shadow-xs">
-        <div>
-          <div className="flex items-center gap-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF5EC] border border-[#E5D0A6] text-xs font-semibold text-[#8C6228]">
-              <span
-                className={`w-2 h-2 rounded-full ${
-                  isAdmin
-                    ? 'bg-[#C59B63]'
-                    : isManager
-                      ? 'bg-[#8C6228]'
-                      : 'bg-emerald-600'
-                }`}
-              />
-              <span>{currentUser.role} Workspace</span>
-              <span className="text-[#C59B63]/60">•</span>
-              <span className="text-stone-600 font-normal">{currentUser.name}</span>
+      {/* Role-Specific Hero Header with Integrated Alert */}
+      <div className="rounded-2xl border border-[#EAE4D9] bg-gradient-to-r from-white via-[#FAF8F5] to-[#FAF5EC] shadow-xs overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-7">
+          <div>
+            <div className="flex items-center gap-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF5EC] border border-[#E5D0A6] text-xs font-semibold text-[#8C6228]">
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    isAdmin
+                      ? 'bg-[#C59B63]'
+                      : isManager
+                        ? 'bg-[#8C6228]'
+                        : 'bg-emerald-600'
+                  }`}
+                />
+                <span>{currentUser.role}</span>
+                <span className="text-[#C59B63]/60">•</span>
+                <span className="text-stone-600 font-normal">{currentUser.name}</span>
+              </div>
             </div>
+
+            <h1 className="font-poppins text-2xl sm:text-3xl font-bold tracking-tight text-[#0C141F] mt-2.5">
+              {isAdmin && 'Brokerage Overview & Performance'}
+              {isManager && `Sales Team Overview • ${currentAgentRecord?.department || 'Regional Sales'}`}
+              {isExecutive && `Welcome back, ${currentUser.name.split(' ')[0]} 👋`}
+            </h1>
           </div>
 
-          <h1 className="font-poppins text-2xl sm:text-3xl font-bold tracking-tight text-[#0C141F] mt-2.5">
-            {isAdmin && 'Brokerage Overview & Performance'}
-            {isManager && `Sales Team Overview • ${currentAgentRecord?.department || 'Regional Sales'}`}
-            {isExecutive && `Welcome back, ${currentUser.name.split(' ')[0]} 👋`}
-          </h1>
-
-          <p className="text-xs sm:text-sm text-stone-600 mt-1.5 max-w-2xl leading-relaxed">
-            {isAdmin && 'Real-time overview of brokerage sales, active pipeline valuation, and executive quota targets.'}
-            {isManager && `Supervising ${agents.length} sales executives. Monitor unassigned inquiries, team capacity, and booking agreements.`}
-            {isExecutive && (
-              <>
-                You have <strong className="text-[#0C141F] font-semibold">{myActiveLeads} active leads</strong> in your pipeline and <strong className="text-[#C59B63] font-bold">{myPendingFollowups} follow-up calls</strong> pending today.
-              </>
-            )}
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2.5 shrink-0">
-          <Link href="/pipeline">
+          <div className="flex items-center gap-2.5 shrink-0">
+            <Link href="/pipeline">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-[#C59B63] text-[#0C141F] hover:bg-[#FAF5EC] text-xs font-semibold px-4 py-2 rounded-xl transition-all"
+              >
+                View Pipeline
+              </Button>
+            </Link>
             <Button
-              variant="outline"
               size="sm"
-              className="border-[#C59B63] text-[#0C141F] hover:bg-[#FAF5EC] text-xs font-semibold px-4 py-2 rounded-xl transition-all"
+              onClick={() => setIsAddLeadOpen(true)}
+              className="bg-[#0C141F] hover:bg-[#16202E] text-[#C59B63] hover:text-[#D4AF77] border border-[#C59B63]/40 gap-1.5 shadow-xs text-xs font-semibold px-4 py-2 rounded-xl transition-all"
             >
-              View Pipeline
+              <Plus className="w-4 h-4 text-[#C59B63]" /> Add Lead
             </Button>
-          </Link>
-          <Button
-            size="sm"
-            onClick={() => setIsAddLeadOpen(true)}
-            className="bg-[#0C141F] hover:bg-[#16202E] text-[#C59B63] hover:text-[#D4AF77] border border-[#C59B63]/40 gap-1.5 shadow-xs text-xs font-semibold px-4 py-2 rounded-xl transition-all"
-          >
-            <Plus className="w-4 h-4 text-[#C59B63]" /> Add Lead
-          </Button>
-        </div>
-      </div>
-
-      {/* Sales Manager Alert Banner (if unassigned leads exist) */}
-      {isManager && newLeads > 0 && (
-        <div className="p-4 rounded-xl bg-[#FAF5EC] border border-[#E5D0A6] text-[#543A18] flex items-center justify-between gap-3 text-xs animate-in fade-in">
-          <div className="flex items-center gap-2.5">
-            <AlertCircle className="w-5 h-5 text-[#C59B63] shrink-0" />
-            <div>
-              <strong className="font-bold text-[#543A18]">{newLeads} Inbound Leads are Unassigned!</strong>
-              <p className="text-[#755220] mt-0.5">
-                New buyer inquiries arrived through digital portals. Assign them to team members to balance agent workload.
-              </p>
-            </div>
           </div>
-          <Link href="/assignments">
-            <Button size="sm" variant="outline" className="border-[#C59B63] text-[#0C141F] bg-white hover:bg-[#FAF5EC]">
-              Assign Leads &rarr;
-            </Button>
-          </Link>
         </div>
-      )}
+
+        {/* Integrated Sales Manager Alert Banner (Inside Header Card with seamless alignment) */}
+        {isManager && newLeads > 0 && (
+          <div className="border-t border-[#E5D0A6]/70 bg-[#FAF5EC]/70 px-6 sm:px-7 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs animate-in fade-in">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-white border border-[#E5D0A6] flex items-center justify-center shrink-0 shadow-xs">
+                <AlertCircle className="w-4 h-4 text-[#C59B63]" />
+              </div>
+              <div>
+                <strong className="font-bold text-[#543A18] text-xs sm:text-sm">
+                  {newLeads} Inbound Leads are Unassigned!
+                </strong>
+                <p className="text-[#755220] text-xs mt-0.5">
+                  New prospective buyer inquiries received. Assign them to sales executives to balance team workload.
+                </p>
+              </div>
+            </div>
+            <Link href="/assignments" className="shrink-0">
+              <Button
+                size="sm"
+                variant="outline"
+                className="border-[#C59B63] text-[#0C141F] bg-white hover:bg-[#FAF5EC] text-xs font-semibold px-4 py-2 rounded-xl shadow-xs hover:border-[#8C6228] transition-all"
+              >
+                Assign Leads &rarr;
+              </Button>
+            </Link>
+          </div>
+        )}
+      </div>
 
       {/* 8 Clickable Metric Cards Grid - DYNAMIC BASED ON ROLE */}
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">

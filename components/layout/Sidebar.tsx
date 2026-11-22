@@ -1,24 +1,22 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard,
   Users2,
   UserCheck,
-  Building2,
   CalendarClock,
   MapPin,
   Kanban,
   CheckCircle,
-  Contact2,
-  ShieldAlert,
   BarChart3,
   Settings,
   ChevronsLeft,
   ChevronsRight,
-  Building,
+  ChevronDown,
+  Layers,
 } from 'lucide-react';
 import { useLmsStore } from '@/store/useLmsStore';
 import { cn } from '@/lib/utils';
@@ -45,7 +43,7 @@ export function Sidebar({
   const isExecutive = currentUser.role === 'Sales Executive';
   const isManager = currentUser.role === 'Sales Manager';
 
-  // Dynamic counts for sidebar badges tailored to role
+  // Dynamic counts for sidebar badges tailored to role (pure counts without long keywords)
   const pendingFollowupsCount = followUps.filter(
     (f) =>
       (f.status === 'Pending' || f.status === 'Overdue') &&
@@ -60,37 +58,67 @@ export function Sidebar({
   const newLeadsCount = leads.filter((l) => l.status === 'New').length;
   const myAssignedCount = leads.filter((l) => l.assignedAgentId === currentUser.id).length;
 
-  const navigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-    {
-      name: isExecutive ? 'My Assigned Leads' : 'Leads Management',
-      href: '/leads',
-      icon: Users2,
-      badge: isExecutive ? `${myAssignedCount}` : newLeadsCount > 0 ? `${newLeadsCount} New` : undefined,
-    },
-    {
-      name: 'Lead Assignment',
-      href: '/assignments',
-      icon: UserCheck,
-      badge: isManager && unassignedCount > 0 ? `${unassignedCount} Allocate` : undefined,
-    },
-    { name: 'Properties', href: '/properties', icon: Building2 },
+  // Dropdown state for Activities & Bookings (Follow-ups, Site Visits, Bookings)
+  const isActivitiesActive =
+    pathname.startsWith('/follow-ups') ||
+    pathname.startsWith('/site-visits') ||
+    pathname.startsWith('/bookings');
+
+  const [activitiesOpen, setActivitiesOpen] = useState(isActivitiesActive);
+
+  useEffect(() => {
+    if (isActivitiesActive) {
+      setActivitiesOpen(true);
+    }
+  }, [isActivitiesActive]);
+
+  const activitySubItems = [
     {
       name: 'Follow-ups',
       href: '/follow-ups',
       icon: CalendarClock,
-      badge: pendingFollowupsCount > 0 ? `${pendingFollowupsCount}` : undefined,
+      badge: pendingFollowupsCount > 0 ? String(pendingFollowupsCount) : undefined,
     },
     {
       name: 'Site Visits',
       href: '/site-visits',
       icon: MapPin,
-      badge: scheduledVisitsCount > 0 ? `${scheduledVisitsCount}` : undefined,
+      badge: scheduledVisitsCount > 0 ? String(scheduledVisitsCount) : undefined,
     },
+    {
+      name: 'Bookings',
+      href: '/bookings',
+      icon: CheckCircle,
+      badge: bookings.length > 0 ? String(bookings.length) : undefined,
+    },
+  ];
+
+  const totalActivitiesCount =
+    (pendingFollowupsCount > 0 ? pendingFollowupsCount : 0) +
+    (scheduledVisitsCount > 0 ? scheduledVisitsCount : 0) +
+    (bookings.length > 0 ? bookings.length : 0);
+
+  // Clean navigation items with concise count badges (no "New" or "Allocate" words)
+  const mainNavigation = [
+    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+    {
+      name: isExecutive ? 'My Assigned Leads' : 'Leads Management',
+      href: '/leads',
+      icon: Users2,
+      badge: isExecutive
+        ? (myAssignedCount > 0 ? String(myAssignedCount) : undefined)
+        : (newLeadsCount > 0 ? String(newLeadsCount) : undefined),
+    },
+    {
+      name: 'Lead Assignment',
+      href: '/assignments',
+      icon: UserCheck,
+      badge: isManager && unassignedCount > 0 ? String(unassignedCount) : undefined,
+    },
+  ];
+
+  const bottomNavigation = [
     { name: 'Sales Pipeline', href: '/pipeline', icon: Kanban },
-    { name: 'Bookings', href: '/bookings', icon: CheckCircle, badge: bookings.length > 0 ? `${bookings.length}` : undefined },
-    { name: 'Customers', href: '/customers', icon: Contact2 },
-    { name: 'Sales Team', href: '/team', icon: ShieldAlert },
     { name: 'Reports & Analytics', href: '/reports', icon: BarChart3 },
     {
       name: 'Settings',
@@ -117,41 +145,39 @@ export function Sidebar({
           mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         )}
       >
-        {/* Brand Header & Toggle - Luxury Real Estate Emblem */}
+        {/* Brand Header */}
         {collapsed ? (
-          <div className="flex flex-col items-center justify-center h-16 px-2 border-b border-[#EAE4D9] bg-[#FAF8F5] shrink-0 gap-1">
-            <Link href="/dashboard" className="shrink-0 group" title="Kalaivani Real Estate">
-              <div className="w-10 h-10 rounded-xl overflow-hidden border border-[#C59B63]/60 flex items-center justify-center shadow-xs group-hover:border-[#C59B63] transition-colors bg-[#FAF8F5]">
-                <img
-                  src="/kalaivani-logo.png"
-                  alt="Kalaivani Emblem"
-                  className="h-10 max-w-none object-cover object-left"
-                />
-              </div>
+          <div className="flex items-center justify-center h-16 px-2 border-b border-[#EAE4D9] bg-[#FAF8F5] shrink-0">
+            <Link href="/dashboard" className="shrink-0 group flex items-center justify-center" title="Kalaivani Real Estate">
+              <img
+                src="/kalaivani-emblem.png"
+                alt="Kalaivani Real Estate"
+                className="w-11 h-11 rounded-full object-contain drop-shadow-xs group-hover:scale-105 transition-transform"
+              />
             </Link>
           </div>
         ) : (
-          <div className="flex items-center justify-between h-16 px-3.5 border-b border-[#EAE4D9] bg-[#FAF8F5] shrink-0">
-            <Link href="/dashboard" className="flex items-center gap-2 overflow-hidden flex-1 group">
+          <div className="flex items-center h-16 px-4 border-b border-[#EAE4D9] bg-[#FAF8F5] shrink-0">
+            <Link href="/dashboard" className="flex items-center gap-3 w-full h-full group" title="Kalaivani Real Estate">
               <img
-                src="/kalaivani-logo.png"
-                alt="Kalaivani Real Estate Logo"
-                className="h-11 w-auto max-w-[190px] object-contain group-hover:opacity-95 transition-opacity"
+                src="/kalaivani-emblem.png"
+                alt="Kalaivani Emblem"
+                className="w-11 h-11 rounded-full object-contain shrink-0 drop-shadow-xs group-hover:scale-105 transition-transform"
               />
+              <div className="flex flex-col min-w-0 justify-center">
+                <span className="font-poppins font-extrabold text-[17px] tracking-[0.06em] text-[#0C141F] leading-tight">
+                  KALAIVANI
+                </span>
+                <span className="font-poppins font-bold text-[9.5px] text-[#C59B63] tracking-[0.24em] uppercase leading-tight mt-0.5">
+                  REAL ESTATE
+                </span>
+              </div>
             </Link>
-            <button
-              onClick={() => setCollapsed(true)}
-              className="p-1.5 rounded-lg text-stone-400 hover:text-stone-800 hover:bg-[#F2EDE4] transition-colors ml-1 shrink-0"
-              title="Collapse Sidebar"
-              aria-label="Collapse Sidebar"
-            >
-              <ChevronsLeft className="w-4 h-4" />
-            </button>
           </div>
         )}
 
         {/* Navigation Items */}
-        <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden bg-[#FAF8F5]">
           {!collapsed ? (
             <div className="px-3 pb-2 text-[10px] font-semibold text-[#8C7A63] uppercase tracking-widest">
               Navigation
@@ -160,7 +186,8 @@ export function Sidebar({
             <div className="w-8 h-px bg-[#EAE4D9] mx-auto my-2" />
           )}
 
-          {navigation.map((item) => {
+          {/* Top navigation items (Dashboard, Leads, Lead Assignment) */}
+          {mainNavigation.map((item) => {
             const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href));
             const Icon = item.icon;
 
@@ -170,20 +197,30 @@ export function Sidebar({
                 href={item.href}
                 onClick={() => setMobileOpen?.(false)}
                 className={cn(
-                  'group flex items-center rounded-xl text-xs sm:text-sm transition-all duration-150 relative',
+                  'group flex items-center rounded-xl transition-all duration-150 relative',
                   collapsed
                     ? 'w-11 h-11 mx-auto justify-center p-0'
-                    : 'gap-3 px-3 py-2.5 w-full',
-                  isActive
-                    ? 'bg-[#F2EDE4] text-[#8C6228] font-bold shadow-xs border-l-4 border-[#C59B63]'
-                    : 'text-stone-700 hover:bg-[#F2EDE4]/70 hover:text-[#0C141F] font-medium'
+                    : 'gap-3 px-3 py-2.5 w-full text-xs sm:text-sm',
+                  collapsed
+                    ? isActive
+                      ? 'bg-[#0C141F] text-[#C59B63] shadow-md shadow-[#0C141F]/15 border border-[#C59B63]/40'
+                      : 'text-[#0C141F] hover:text-[#C59B63] hover:bg-[#F2EDE4]'
+                    : isActive
+                      ? 'bg-[#F2EDE4] text-[#8C6228] font-bold shadow-xs border-l-4 border-[#C59B63]'
+                      : 'text-stone-700 hover:bg-[#F2EDE4]/70 hover:text-[#0C141F] font-medium'
                 )}
                 title={collapsed ? item.name : undefined}
               >
                 <Icon
                   className={cn(
                     'w-5 h-5 shrink-0 transition-colors',
-                    isActive ? 'text-[#C59B63]' : 'text-stone-400 group-hover:text-[#C59B63]'
+                    collapsed
+                      ? isActive
+                        ? 'text-[#C59B63]'
+                        : 'text-[#0C141F] group-hover:text-[#C59B63]'
+                      : isActive
+                        ? 'text-[#C59B63]'
+                        : 'text-stone-500 group-hover:text-[#C59B63]'
                   )}
                 />
 
@@ -191,13 +228,7 @@ export function Sidebar({
                   <span className="truncate flex-1 font-medium">{item.name}</span>
                 )}
 
-                {!collapsed && item.restrictedRole && (
-                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#FAF5EC] text-[#8C6228] font-medium border border-[#E5D0A6]">
-                    {item.restrictedRole}
-                  </span>
-                )}
-
-                {!collapsed && item.badge && !item.restrictedRole && (
+                {!collapsed && item.badge && (
                   <span
                     className={cn(
                       'text-[10px] font-semibold px-2 py-0.5 rounded-full tracking-wide shrink-0',
@@ -212,52 +243,196 @@ export function Sidebar({
 
                 {/* Collapsed dot badge indicator */}
                 {collapsed && item.badge && (
-                  <span
+                  <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#C59B63] ring-2 ring-[#FAF8F5]" />
+                )}
+              </Link>
+            );
+          })}
+
+          {/* Activities & Bookings Dropdown Group (Site Visits, Follow-ups, Bookings) */}
+          {collapsed ? (
+            <Link
+              href="/follow-ups"
+              onClick={() => setMobileOpen?.(false)}
+              className={cn(
+                'group flex items-center rounded-xl transition-all duration-150 relative w-11 h-11 mx-auto justify-center p-0',
+                isActivitiesActive
+                  ? 'bg-[#0C141F] text-[#C59B63] shadow-md shadow-[#0C141F]/15 border border-[#C59B63]/40'
+                  : 'text-[#0C141F] hover:text-[#C59B63] hover:bg-[#F2EDE4]'
+              )}
+              title="Activities & Bookings"
+            >
+              <Layers
+                className={cn(
+                  'w-5 h-5 shrink-0 transition-colors',
+                  isActivitiesActive ? 'text-[#C59B63]' : 'text-[#0C141F] group-hover:text-[#C59B63]'
+                )}
+              />
+              {totalActivitiesCount > 0 && (
+                <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#C59B63] ring-2 ring-[#FAF8F5]" />
+              )}
+            </Link>
+          ) : (
+            <div className="space-y-1">
+              <button
+                type="button"
+                onClick={() => setActivitiesOpen(!activitiesOpen)}
+                className={cn(
+                  'group flex items-center justify-between rounded-xl px-3 py-2.5 w-full text-xs sm:text-sm font-medium transition-all duration-150',
+                  isActivitiesActive
+                    ? 'bg-[#FAF5EC]/80 text-[#8C6228] font-semibold'
+                    : 'text-stone-700 hover:bg-[#F2EDE4]/70 hover:text-[#0C141F]'
+                )}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <Layers
                     className={cn(
-                      'absolute top-2 right-2 w-2 h-2 rounded-full ring-2 ring-[#FAF8F5]',
-                      isActive ? 'bg-[#0C141F]' : 'bg-[#C59B63]'
+                      'w-5 h-5 shrink-0 transition-colors',
+                      isActivitiesActive ? 'text-[#C59B63]' : 'text-stone-500 group-hover:text-[#C59B63]'
                     )}
                   />
+                  <span className="truncate">Activities & Bookings</span>
+                </div>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {totalActivitiesCount > 0 && (
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#FAF5EC] text-[#8C6228] border border-[#E5D0A6]">
+                      {totalActivitiesCount}
+                    </span>
+                  )}
+                  <ChevronDown
+                    className={cn(
+                      'w-4 h-4 text-stone-400 transition-transform duration-200',
+                      activitiesOpen && 'rotate-180 text-[#8C6228]'
+                    )}
+                  />
+                </div>
+              </button>
+
+              {/* Sub-menu items (Follow-ups, Site Visits, Bookings) */}
+              {activitiesOpen && (
+                <div className="pl-4 pr-1 py-1 space-y-1 animate-in fade-in slide-in-from-top-1 duration-150 border-l-2 border-[#EAE4D9] ml-5 my-1">
+                  {activitySubItems.map((subItem) => {
+                    const isSubActive = pathname === subItem.href || pathname.startsWith(subItem.href);
+                    const SubIcon = subItem.icon;
+
+                    return (
+                      <Link
+                        key={subItem.name}
+                        href={subItem.href}
+                        onClick={() => setMobileOpen?.(false)}
+                        className={cn(
+                          'flex items-center justify-between px-3 py-2 rounded-lg text-xs transition-all duration-150 group',
+                          isSubActive
+                            ? 'bg-[#0C141F] text-[#C59B63] font-bold shadow-xs'
+                            : 'text-stone-600 hover:bg-[#F2EDE4] hover:text-[#0C141F]'
+                        )}
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <SubIcon
+                            className={cn(
+                              'w-4 h-4 shrink-0 transition-colors',
+                              isSubActive ? 'text-[#C59B63]' : 'text-stone-400 group-hover:text-[#C59B63]'
+                            )}
+                          />
+                          <span className="truncate">{subItem.name}</span>
+                        </div>
+                        {subItem.badge && (
+                          <span
+                            className={cn(
+                              'text-[10px] font-semibold px-1.5 py-0.2 rounded-full shrink-0',
+                              isSubActive
+                                ? 'bg-black text-[#C59B63] border border-[#C59B63]/40'
+                                : 'bg-[#FAF5EC] text-[#8C6228] border border-[#E5D0A6]'
+                            )}
+                          >
+                            {subItem.badge}
+                          </span>
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Bottom navigation items (Sales Pipeline, Reports, Settings) */}
+          {bottomNavigation.map((item) => {
+            const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href));
+            const Icon = item.icon;
+
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setMobileOpen?.(false)}
+                className={cn(
+                  'group flex items-center rounded-xl transition-all duration-150 relative',
+                  collapsed
+                    ? 'w-11 h-11 mx-auto justify-center p-0'
+                    : 'gap-3 px-3 py-2.5 w-full text-xs sm:text-sm',
+                  collapsed
+                    ? isActive
+                      ? 'bg-[#0C141F] text-[#C59B63] shadow-md shadow-[#0C141F]/15 border border-[#C59B63]/40'
+                      : 'text-[#0C141F] hover:text-[#C59B63] hover:bg-[#F2EDE4]'
+                    : isActive
+                      ? 'bg-[#F2EDE4] text-[#8C6228] font-bold shadow-xs border-l-4 border-[#C59B63]'
+                      : 'text-stone-700 hover:bg-[#F2EDE4]/70 hover:text-[#0C141F] font-medium'
+                )}
+                title={collapsed ? item.name : undefined}
+              >
+                <Icon
+                  className={cn(
+                    'w-5 h-5 shrink-0 transition-colors',
+                    collapsed
+                      ? isActive
+                        ? 'text-[#C59B63]'
+                        : 'text-[#0C141F] group-hover:text-[#C59B63]'
+                      : isActive
+                        ? 'text-[#C59B63]'
+                        : 'text-stone-500 group-hover:text-[#C59B63]'
+                  )}
+                />
+
+                {!collapsed && (
+                  <span className="truncate flex-1 font-medium">{item.name}</span>
+                )}
+
+                {!collapsed && item.restrictedRole && (
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#FAF5EC] text-[#8C6228] font-medium border border-[#E5D0A6]">
+                    {item.restrictedRole}
+                  </span>
                 )}
               </Link>
             );
           })}
         </div>
 
-        {/* User Role Card at Bottom */}
-        <div className="p-3 border-t border-[#EAE4D9] bg-[#FAF8F5] shrink-0">
+        {/* Sidebar Collapse/Expand Toggle at Bottom (Aligned to Right Edge when Opened) */}
+        <div
+          className={cn(
+            'p-3 border-t border-[#EAE4D9] bg-[#FAF8F5] shrink-0 flex items-center',
+            collapsed ? 'justify-center' : 'justify-end'
+          )}
+        >
           {collapsed ? (
-            <div
-              className="flex items-center justify-center py-0.5 cursor-pointer group/profile"
-              title={`${currentUser.name} (${currentUser.role})`}
+            <button
+              onClick={() => setCollapsed(false)}
+              className="w-11 h-11 rounded-xl bg-white hover:bg-[#F2EDE4] text-[#8C6228] hover:text-[#C59B63] border border-[#EAE4D9] shadow-2xs flex items-center justify-center transition-all active:scale-95 group"
+              title="Expand Sidebar"
+              aria-label="Expand Sidebar"
             >
-              <div className="relative">
-                <img
-                  src={currentUser.avatar}
-                  alt={currentUser.name}
-                  className="w-10 h-10 rounded-full object-cover ring-2 ring-[#E5D0A6] group-hover/profile:ring-[#C59B63] transition-all shadow-xs"
-                />
-                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#C59B63] ring-2 ring-[#FAF8F5]" />
-              </div>
-            </div>
+              <ChevronsRight className="w-5 h-5 text-[#8C6228] group-hover:text-[#C59B63] group-hover:translate-x-0.5 transition-all" />
+            </button>
           ) : (
-            <div className="flex items-center gap-3 rounded-xl p-2.5 bg-[#F2EDE4]/70 border border-[#E5D0A6]/70 hover:bg-[#F2EDE4] transition-all">
-              <div className="relative shrink-0">
-                <img
-                  src={currentUser.avatar}
-                  alt={currentUser.name}
-                  className="w-9 h-9 rounded-full object-cover ring-2 ring-[#E5D0A6]"
-                />
-                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#C59B63] ring-2 ring-[#FAF8F5]" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold text-[#0C141F] truncate">{currentUser.name}</p>
-                <p className="text-[11px] text-[#8C6228] font-medium truncate flex items-center gap-1.5 mt-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C59B63]" />
-                  {currentUser.role}
-                </p>
-              </div>
-            </div>
+            <button
+              onClick={() => setCollapsed(true)}
+              className="w-11 h-11 rounded-xl bg-white hover:bg-[#F2EDE4] text-[#8C6228] hover:text-[#C59B63] border border-[#EAE4D9] shadow-2xs flex items-center justify-center transition-all active:scale-95 group ml-auto"
+              title="Collapse Sidebar"
+              aria-label="Collapse Sidebar"
+            >
+              <ChevronsLeft className="w-5 h-5 text-[#8C6228] group-hover:text-[#C59B63] group-hover:-translate-x-0.5 transition-all" />
+            </button>
           )}
         </div>
       </aside>

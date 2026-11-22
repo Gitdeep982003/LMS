@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import {
   Settings,
   Building,
@@ -9,6 +10,7 @@ import {
   Upload,
   CheckCircle2,
   ShieldCheck,
+  Users2,
   Bell,
   Cpu,
   Layers,
@@ -68,10 +70,10 @@ export default function SettingsPage() {
         <div>
           <h1 className="text-xl sm:text-2xl font-poppins font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
             <Settings className="w-6 h-6 text-[#C59B63]" />
-            <span>Platform Settings & Demo Controls</span>
+            <span>Brokerage Settings & Demo Controls</span>
           </h1>
           <p className="text-xs sm:text-sm text-stone-500 mt-0.5">
-            Configure brokerage information, system localization, and manage demonstration state.
+            Configure brokerage information, currency localization, and manage demonstration state.
           </p>
         </div>
       </div>
@@ -79,6 +81,39 @@ export default function SettingsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left 2 Cols: Brokerage Profile & Config */}
         <div className="lg:col-span-2 space-y-6">
+          {/* Sales Force & Team Management (Moved from sidebar) */}
+          <Card className="border-[#C59B63]/40 bg-white shadow-xs">
+            <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3">
+              <div>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-[#C59B63]" />
+                  <CardTitle>Sales Force & Team Management</CardTitle>
+                </div>
+                <p className="text-xs text-stone-500 mt-0.5">
+                  Manage registered real estate advisors, sales quotas, and executive desks ({agents.length} active agents)
+                </p>
+              </div>
+              <Link href="/team">
+                <Button size="sm" className="bg-[#0C141F] text-[#C59B63] hover:bg-[#16202E] border border-[#C59B63]/30 text-xs shrink-0">
+                  Manage Team &rarr;
+                </Button>
+              </Link>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                {agents.slice(0, 4).map((agent) => (
+                  <div key={agent.id} className="p-2.5 rounded-xl border border-[#EAE4D9] bg-[#FAF8F5]/60 flex items-center gap-2.5">
+                    <img src={agent.avatar} alt={agent.name} className="w-8 h-8 rounded-full object-cover ring-1 ring-[#C59B63]" />
+                    <div className="min-w-0 flex-1">
+                      <p className="font-bold text-[#0C141F] text-xs truncate">{agent.name}</p>
+                      <p className="text-[10px] text-[#8C6228] font-medium truncate">{agent.role}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Company Profile */}
           <Card className="border-[#EAE4D9] bg-white">
             <CardHeader>

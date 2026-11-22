@@ -129,13 +129,13 @@ export default function TeamPage() {
         <CardContent className="p-5 space-y-3">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-5 h-5 text-[#C59B63]" />
-            <h3 className="font-poppins font-bold text-sm text-[#FAF5EC]">Role-Based Access Control (RBAC) System</h3>
+            <h3 className="font-poppins font-bold text-sm text-[#FAF5EC]">Sales Team Roles & Access Hierarchy</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
             <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
               <span className="font-bold text-[#C59B63]">Admin</span>
               <p className="text-stone-300 text-[11px] leading-relaxed">
-                Full administrative clearance. Access to all 12 modules, configuration settings, user management, and system database resets.
+                Full administrative authority. Access to all brokerage records, configuration settings, sales team management, and demo resets.
               </p>
             </div>
             <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1">
@@ -305,7 +305,7 @@ export default function TeamPage() {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">System Role</label>
+              <label className="block font-semibold text-slate-700 mb-1">Assigned Role</label>
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value as UserRole)}

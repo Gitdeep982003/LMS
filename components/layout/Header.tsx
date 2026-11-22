@@ -2,12 +2,9 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import {
   Menu,
-  Search,
   Bell,
-  PlusCircle,
   User,
   LogOut,
   Calendar,
@@ -16,17 +13,13 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { useLmsStore } from '@/store/useLmsStore';
-import { Button } from '@/components/ui/button';
-import { AddLeadModal } from '@/components/leads/AddLeadModal';
 import { useToast } from '@/components/ui/toast';
 
 export function Header({ onMenuClick }: { onMenuClick: () => void }) {
-  const router = useRouter();
-  const { currentUser, followUps, siteVisits, searchQuery, setSearchQuery } = useLmsStore();
+  const { currentUser, followUps, siteVisits } = useLmsStore();
   const { success } = useToast();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [isAddLeadOpen, setIsAddLeadOpen] = useState(false);
 
   // Notifications calculation
   const todayStr = new Date().toISOString().split('T')[0];
@@ -34,18 +27,11 @@ export function Header({ onMenuClick }: { onMenuClick: () => void }) {
   const todayVisits = siteVisits.filter((v) => v.visitDate === todayStr && v.status === 'Scheduled');
   const totalNotifications = todayFollowUps.length + todayVisits.length;
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/leads?search=${encodeURIComponent(searchQuery)}`);
-    }
-  };
-
   return (
     <>
       <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 sm:px-6 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#EAE4D9] shadow-xs">
-        {/* Left Section: Mobile Menu + Search */}
-        <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-4 flex-1 max-w-xl">
+        {/* Left Section: Mobile Menu & Mobile Logo */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <button
             onClick={onMenuClick}
             className="lg:hidden p-2 rounded-xl text-stone-600 hover:bg-[#F2EDE4] focus:outline-none"
@@ -54,48 +40,36 @@ export function Header({ onMenuClick }: { onMenuClick: () => void }) {
             <Menu className="w-5 h-5" />
           </button>
 
-          <Link href="/dashboard" className="lg:hidden shrink-0 flex items-center">
+          <Link href="/dashboard" className="lg:hidden shrink-0 flex items-center gap-2">
             <img
-              src="/kalaivani-logo.png"
-              alt="Kalaivani Real Estate"
-              className="h-9 sm:h-10 w-auto object-contain"
+              src="/kalaivani-emblem.png"
+              alt="Kalaivani Emblem"
+              className="w-9 h-9 rounded-full object-contain"
             />
+            <div className="flex flex-col min-w-0">
+              <span className="font-poppins font-extrabold text-sm tracking-[0.06em] text-[#0C141F] leading-tight">
+                KALAIVANI
+              </span>
+              <span className="font-poppins font-bold text-[8px] text-[#C59B63] tracking-[0.2em] uppercase leading-tight">
+                REAL ESTATE
+              </span>
+            </div>
           </Link>
-
-          <form onSubmit={handleSearchSubmit} className="relative w-full max-w-md">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search leads, phone numbers, properties..."
-              className="w-full pl-9 pr-4 py-2 text-xs sm:text-sm bg-white hover:border-[#C59B63]/60 focus:bg-white border border-[#EAE4D9] rounded-xl text-[#0C141F] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#C59B63]/20 focus:border-[#C59B63] transition-all shadow-xs"
-            />
-          </form>
         </div>
 
-        {/* Right Section: Quick Add, Notifications, Profile */}
+        {/* Right Section: Notifications & Profile */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Quick Add Lead Button - Matching "ENQUIRE NOW" luxury button */}
-          <Button
-            size="sm"
-            onClick={() => setIsAddLeadOpen(true)}
-            className="hidden sm:inline-flex items-center gap-1.5 shadow-xs"
-          >
-            <PlusCircle className="w-4 h-4 text-[#C59B63]" />
-            <span>Add Lead</span>
-          </Button>
-
           {/* Notifications Bell */}
           <div className="relative">
             <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-2 rounded-xl text-stone-600 hover:bg-[#F2EDE4] hover:text-[#0C141F] transition-colors"
+              className="relative w-10 h-10 rounded-xl text-stone-600 hover:bg-[#F2EDE4] hover:text-[#0C141F] flex items-center justify-center transition-colors"
               title="Notifications"
+              aria-label="View Notifications"
             >
-              <Bell className="w-5 h-5" />
+              <Bell className="w-6 h-6 stroke-[1.8]" />
               {totalNotifications > 0 && (
-                <span className="absolute top-1.5 right-1.5 flex h-4 min-w-4 px-1 items-center justify-center rounded-full bg-[#C59B63] text-[10px] font-bold text-white shadow-xs">
+                <span className="absolute -top-1 -right-1 flex h-4 min-w-4 px-1 items-center justify-center rounded-full bg-[#C59B63] text-[10px] font-bold text-white shadow-xs ring-2 ring-[#FAF8F5]">
                   {totalNotifications}
                 </span>
               )}
@@ -250,9 +224,6 @@ export function Header({ onMenuClick }: { onMenuClick: () => void }) {
           </div>
         </div>
       </header>
-
-      {/* Quick Add Lead Modal */}
-      <AddLeadModal isOpen={isAddLeadOpen} onClose={() => setIsAddLeadOpen(false)} />
     </>
   );
 }

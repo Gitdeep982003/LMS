@@ -121,7 +121,7 @@ export default function LoginPage() {
                 />
               </div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF5EC] border border-[#E5D0A6] text-[10px] font-bold text-[#8C6228] uppercase tracking-wider mb-2">
-                Enterprise CRM Portal
+                Sales & Brokerage Management
               </div>
               <h1 className="font-poppins text-2xl sm:text-3xl font-bold text-[#0C141F] tracking-tight">
                 Welcome Back
@@ -134,7 +134,7 @@ export default function LoginPage() {
             {/* Role Persona Switcher Chips */}
             <div className="space-y-1.5 pt-1">
               <label className="text-[10px] font-bold text-[#8C7A63] uppercase tracking-widest block">
-                Select Workspace Role
+                Select Access Role
               </label>
               <div className="grid grid-cols-3 gap-2">
                 <button

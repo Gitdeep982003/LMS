@@ -277,14 +277,14 @@ export default function ReportsPage() {
         <Card className="lg:col-span-2 border-[#EAE4D9] bg-white">
           <CardHeader className="pb-3">
             <CardTitle>Marketing Source ROI & Attribution</CardTitle>
-            <p className="text-xs text-stone-500 mt-0.5">Inquiry volumes and actual closing rates per portal</p>
+            <p className="text-xs text-stone-500 mt-0.5">Inquiry volumes and actual closing rates per marketing channel</p>
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
                   <tr className="border-y border-[#EAE4D9] bg-[#FAF5EC]/60 text-stone-600 font-poppins font-semibold uppercase tracking-wider text-[11px]">
-                    <th className="py-2.5 px-4">Channel / Portal</th>
+                    <th className="py-2.5 px-4">Channel / Source</th>
                     <th className="py-2.5 px-3">Total Inquiries</th>
                     <th className="py-2.5 px-3">Deals Booked</th>
                     <th className="py-2.5 px-3">Conversion Rate</th>
