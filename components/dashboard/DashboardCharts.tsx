@@ -41,7 +41,7 @@ export function DashboardCharts() {
     { month: 'Aug', leads: 42, converted: 11, visits: 31 },
     { month: 'Sep', leads: 38, converted: 9, visits: 28 },
     { month: 'Oct', leads: 48, converted: 14, visits: 36 },
-    { month: 'Nov', leads: leads.length, converted: leads.filter(l => l.status === 'Converted' || l.status === 'Booked').length, visits: 39 },
+    { month: 'Nov', leads: leads.length, converted: leads.filter(l => l.status === 'Won' || (l.status as string) === 'Converted' || (l.status as string) === 'Booked').length, visits: 39 },
   ];
 
   // 2. Lead Source Distribution

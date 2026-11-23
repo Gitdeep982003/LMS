@@ -12,15 +12,11 @@ export type LeadSource =
 
 export type LeadStatus =
   | 'New'
-  | 'Assigned'
   | 'Contacted'
-  | 'Interested'
-  | 'Follow-up'
-  | 'Site Visit Scheduled'
-  | 'Site Visited'
+  | 'Qualified'
+  | 'Site Visit'
   | 'Negotiation'
-  | 'Booked'
-  | 'Converted'
+  | 'Won'
   | 'Lost';
 
 export type LeadPriority = 'High' | 'Medium' | 'Low';

@@ -552,7 +552,7 @@ export const initialLeads: Lead[] = [
     budget: 20000000,
     propertyType: "Apartment",
     leadSource: "MagicBricks",
-    status: "Site Visit Scheduled",
+    status: "Site Visit",
     assignedAgentId: "AGT-102",
     assignedAgentName: "Pooja Hegde",
     followUpDate: "2026-11-18",
@@ -606,7 +606,7 @@ export const initialLeads: Lead[] = [
     budget: 10500000,
     propertyType: "Apartment",
     leadSource: "Housing.com",
-    status: "Booked",
+    status: "Won",
     assignedAgentId: "AGT-106",
     assignedAgentName: "Ananya Iyer",
     followUpDate: "2026-11-20",
@@ -632,7 +632,7 @@ export const initialLeads: Lead[] = [
     budget: 180000000,
     propertyType: "Penthouse",
     leadSource: "Website",
-    status: "Site Visited",
+    status: "Site Visit",
     assignedAgentId: "AGT-104",
     assignedAgentName: "Sneha Roy",
     followUpDate: "2026-11-17",
@@ -658,7 +658,7 @@ export const initialLeads: Lead[] = [
     budget: 39000000,
     propertyType: "Apartment",
     leadSource: "99acres",
-    status: "Converted",
+    status: "Won",
     assignedAgentId: "AGT-107",
     assignedAgentName: "Karthik Reddy",
     followUpDate: "2026-11-25",
@@ -684,7 +684,7 @@ export const initialLeads: Lead[] = [
     budget: 45000000,
     propertyType: "Villa",
     leadSource: "Google Ads",
-    status: "Interested",
+    status: "Qualified",
     assignedAgentId: "AGT-102",
     assignedAgentName: "Pooja Hegde",
     followUpDate: "2026-11-18",
@@ -710,7 +710,7 @@ export const initialLeads: Lead[] = [
     budget: 25000000,
     propertyType: "Villa",
     leadSource: "Facebook Ads",
-    status: "Follow-up",
+    status: "Contacted",
     assignedAgentId: "AGT-105",
     assignedAgentName: "Rohan Deshmukh",
     followUpDate: "2026-11-17",
@@ -736,7 +736,7 @@ export const initialLeads: Lead[] = [
     budget: 12000000,
     propertyType: "Apartment",
     leadSource: "Walk-in",
-    status: "Booked",
+    status: "Won",
     assignedAgentId: "AGT-106",
     assignedAgentName: "Ananya Iyer",
     followUpDate: "2026-11-22",
@@ -824,7 +824,7 @@ export const initialLeads: Lead[] = [
     budget: 80000000,
     propertyType: "Penthouse",
     leadSource: "Referral",
-    status: "Assigned",
+    status: "Contacted",
     assignedAgentId: "AGT-105",
     assignedAgentName: "Rohan Deshmukh",
     followUpDate: "2026-11-18",
@@ -920,7 +920,7 @@ export const initialLeads: Lead[] = [
     const cities = ["Bengaluru", "Mumbai", "Gurugram", "Pune", "Hyderabad", "Chennai"];
     const locs = ["Whitefield", "Bandra West", "Golf Course Road", "Hinjewadi", "Hitec City", "OMR"];
     const sources: Lead["leadSource"][] = ["Website", "MagicBricks", "99acres", "Housing.com", "Referral", "Google Ads", "Walk-in", "Facebook Ads"];
-    const statuses: Lead["status"][] = ["New", "Assigned", "Contacted", "Interested", "Follow-up", "Site Visit Scheduled", "Site Visited", "Negotiation", "Booked", "Converted", "Lost"];
+    const statuses: Lead["status"][] = ["New", "Contacted", "Qualified", "Site Visit", "Negotiation", "Won", "Lost"];
     const pTypes: Lead["propertyType"][] = ["Apartment", "Villa", "Plot", "Commercial", "Penthouse"];
     const agents = initialSalesAgents;
 
@@ -943,7 +943,7 @@ export const initialLeads: Lead[] = [
       status: status,
       assignedAgentId: agent?.id,
       assignedAgentName: agent?.name,
-      followUpDate: status === "Converted" || status === "Lost" ? undefined : `2026-11-${18 + (index % 10)}`,
+      followUpDate: status === "Won" || status === "Lost" ? undefined : `2026-11-${18 + (index % 10)}`,
       remarks: `Customer expressed strong interest in ${pTypes[index % pTypes.length]} with budget of around ₹${(budget / 100000).toFixed(0)} Lakhs.`,
       priority: (index % 3 === 0 ? "High" : index % 3 === 1 ? "Medium" : "Low") as Lead["priority"],
       createdAt: `2026-10-${String((index % 28) + 1).padStart(2, "0")}T10:00:00Z`,

@@ -9,6 +9,7 @@ import {
   User,
   Building,
   MoreVertical,
+  ChevronLeft,
   ChevronRight,
   Sparkles,
   GripVertical,
@@ -21,6 +22,9 @@ import { PriorityBadge } from '@/components/ui/badge';
 import { formatINR } from '@/lib/utils';
 import { LeadDetailsDrawer } from '@/components/leads/LeadDetailsDrawer';
 import { AddLeadModal } from '@/components/leads/AddLeadModal';
+import { DateRangeFilter, DateRangeValue } from '@/components/ui/DateRangeFilter';
+import { PipelineFieldFilter } from '@/components/pipeline/PipelineFieldFilter';
+import { ProjectDropdown } from '@/components/ui/ProjectDropdown';
 import { Lead, LeadStatus } from '@/types';
 
 interface PipelineColumn {
@@ -32,13 +36,13 @@ interface PipelineColumn {
 }
 
 const PIPELINE_COLUMNS: PipelineColumn[] = [
-  { id: 'New', label: 'New Lead', color: 'text-[#8C6228]', bgColor: 'bg-[#FAF5EC]', borderColor: 'border-[#E5D0A6]' },
-  { id: 'Contacted', label: 'Contacted', color: 'text-cyan-700', bgColor: 'bg-cyan-50/60', borderColor: 'border-cyan-200' },
-  { id: 'Interested', label: 'Interested', color: 'text-teal-700', bgColor: 'bg-teal-50/60', borderColor: 'border-teal-200' },
-  { id: 'Site Visit Scheduled', label: 'Site Visit', color: 'text-purple-700', bgColor: 'bg-purple-50/60', borderColor: 'border-purple-200' },
-  { id: 'Negotiation', label: 'Negotiation', color: 'text-orange-700', bgColor: 'bg-orange-50/60', borderColor: 'border-orange-200' },
-  { id: 'Booked', label: 'Booked', color: 'text-emerald-700', bgColor: 'bg-emerald-50/60', borderColor: 'border-emerald-200' },
-  { id: 'Converted', label: 'Converted', color: 'text-green-800', bgColor: 'bg-green-100/60', borderColor: 'border-green-300' },
+  { id: 'New', label: 'New', color: 'text-[#8C6228]', bgColor: 'bg-[#FAF5EC]', borderColor: 'border-[#E5D0A6]' },
+  { id: 'Contacted', label: 'Contacted', color: 'text-sky-800', bgColor: 'bg-sky-50/70', borderColor: 'border-sky-200' },
+  { id: 'Qualified', label: 'Qualified', color: 'text-indigo-800', bgColor: 'bg-indigo-50/70', borderColor: 'border-indigo-200' },
+  { id: 'Site Visit', label: 'Site Visit', color: 'text-purple-800', bgColor: 'bg-purple-50/70', borderColor: 'border-purple-200' },
+  { id: 'Negotiation', label: 'Negotiation', color: 'text-amber-800', bgColor: 'bg-amber-50/70', borderColor: 'border-amber-300' },
+  { id: 'Won', label: 'Won', color: 'text-emerald-800', bgColor: 'bg-emerald-50/70', borderColor: 'border-emerald-300' },
+  { id: 'Lost', label: 'Lost', color: 'text-rose-800', bgColor: 'bg-rose-50/70', borderColor: 'border-rose-200' },
 ];
 
 export default function PipelinePage() {
@@ -47,8 +51,23 @@ export default function PipelinePage() {
 
   const [search, setSearch] = useState('');
   const [selectedAgent, setSelectedAgent] = useState('ALL');
+  const [selectedStage, setSelectedStage] = useState('ALL');
+  const [selectedPriority, setSelectedPriority] = useState('ALL');
+  const [dateFilter, setDateFilter] = useState<DateRangeValue>({ preset: 'all' });
   const [draggedLeadId, setDraggedLeadId] = useState<string | null>(null);
   const [dragOverCol, setDragOverCol] = useState<LeadStatus | null>(null);
+
+  // Pagination for every stage column
+  const STAGE_PAGE_SIZE = 4;
+  const [stagePages, setStagePages] = useState<Record<string, number>>({
+    New: 1,
+    Contacted: 1,
+    Qualified: 1,
+    'Site Visit': 1,
+    Negotiation: 1,
+    Won: 1,
+    Lost: 1,
+  });
 
   // Modals
   const [viewingLead, setViewingLead] = useState<Lead | null>(null);
@@ -58,6 +77,11 @@ export default function PipelinePage() {
   const filteredLeads = useMemo(() => {
     return leads.filter((l) => {
       if (selectedAgent !== 'ALL' && l.assignedAgentId !== selectedAgent) return false;
+      if (selectedStage !== 'ALL' && l.status !== selectedStage) return false;
+      if (selectedPriority !== 'ALL' && l.priority !== selectedPriority) return false;
+      const leadDate = l.createdAt ? l.createdAt.split('T')[0] : '';
+      if (dateFilter.startDate && leadDate < dateFilter.startDate) return false;
+      if (dateFilter.endDate && leadDate > dateFilter.endDate) return false;
       if (search) {
         const query = search.toLowerCase();
         return (
@@ -68,27 +92,31 @@ export default function PipelinePage() {
       }
       return true;
     });
-  }, [leads, selectedAgent, search]);
+  }, [leads, selectedAgent, selectedStage, selectedPriority, search, dateFilter]);
 
   // Group by stage
   const stageGroups = useMemo(() => {
     const groups: Record<LeadStatus, Lead[]> = {
       New: [],
-      Assigned: [],
       Contacted: [],
-      Interested: [],
-      'Follow-up': [],
-      'Site Visit Scheduled': [],
-      'Site Visited': [],
+      Qualified: [],
+      'Site Visit': [],
       Negotiation: [],
-      Booked: [],
-      Converted: [],
+      Won: [],
       Lost: [],
     };
 
     filteredLeads.forEach((l) => {
-      if (groups[l.status]) {
-        groups[l.status].push(l);
+      let targetStatus: LeadStatus = l.status;
+      const raw = l.status as string;
+      if (raw === 'Assigned') targetStatus = 'New';
+      else if (raw === 'Interested') targetStatus = 'Qualified';
+      else if (raw === 'Follow-up') targetStatus = 'Contacted';
+      else if (raw === 'Site Visit Scheduled' || raw === 'Site Visited') targetStatus = 'Site Visit';
+      else if (raw === 'Booked' || raw === 'Converted') targetStatus = 'Won';
+
+      if (groups[targetStatus]) {
+        groups[targetStatus].push(l);
       } else {
         groups.New.push(l);
       }
@@ -146,26 +174,47 @@ export default function PipelinePage() {
         </div>
 
         <div className="flex items-center gap-2.5 shrink-0 flex-wrap sm:flex-nowrap">
-          {/* Agent Filter */}
-          <select
-            value={selectedAgent}
-            onChange={(e) => setSelectedAgent(e.target.value)}
-            className="h-9 px-3 text-xs rounded-xl border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium text-[#0C141F] shadow-xs cursor-pointer"
-          >
-            <option value="ALL">All Executives</option>
-            {agents.map((ag) => (
-              <option key={ag.id} value={ag.id}>
-                {ag.name}
-              </option>
-            ))}
-          </select>
+          <DateRangeFilter
+            value={dateFilter}
+            onChange={setDateFilter}
+            matchingCount={filteredLeads.length}
+            matchingLabel="deals"
+            align="right"
+          />
+
+          {/* Two-Column Field Filter: Stage & Priority */}
+          <PipelineFieldFilter
+            selectedStage={selectedStage}
+            onStageChange={setSelectedStage}
+            selectedPriority={selectedPriority}
+            onPriorityChange={setSelectedPriority}
+            matchingCount={filteredLeads.length}
+          />
+
+          {/* Agent Filter with Custom Project Dropdown */}
+          <div className="w-40 sm:w-44 shrink-0">
+            <ProjectDropdown
+              value={selectedAgent}
+              onChange={setSelectedAgent}
+              options={[
+                { value: 'ALL', label: 'All Executives', dotColor: 'bg-stone-400' },
+                ...agents.map((ag) => ({
+                  value: ag.id,
+                  label: ag.name,
+                  dotColor: 'bg-[#C59B63]',
+                })),
+              ]}
+              placeholder="All Executives"
+              align="right"
+            />
+          </div>
 
           {/* Search */}
-          <div className="relative w-48 sm:w-56">
+          <div className="relative w-40 sm:w-48">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-stone-400" />
             <input
               type="text"
-              placeholder="Search buyer or property..."
+              placeholder="Search buyer..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full h-9 pl-9 pr-3 text-xs rounded-xl border border-[#EAE4D9] focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white text-[#0C141F] shadow-xs placeholder:text-stone-400"
@@ -191,20 +240,39 @@ export default function PipelinePage() {
             const colTotalValue = colLeads.reduce((sum, l) => sum + (l.budget || 0), 0);
             const isTarget = dragOverCol === col.id;
 
+            const totalColumnPages = Math.max(1, Math.ceil(colLeads.length / STAGE_PAGE_SIZE));
+            const currentPage = Math.min(stagePages[col.id] || 1, totalColumnPages);
+            const paginatedColLeads = colLeads.slice(
+              (currentPage - 1) * STAGE_PAGE_SIZE,
+              currentPage * STAGE_PAGE_SIZE
+            );
+
             return (
               <div
                 key={col.id}
                 onDragOver={(e) => handleDragOver(e, col.id)}
                 onDragLeave={handleDragLeave}
                 onDrop={(e) => handleDrop(e, col.id)}
-                className={`w-72 shrink-0 flex flex-col h-full rounded-2xl border transition-all duration-200 bg-slate-100/70 ${
-                  isTarget ? 'ring-2 ring-[#C59B63] border-[#C59B63] bg-[#FAF5EC]/50' : 'border-slate-200'
+                className={`w-72 shrink-0 flex flex-col h-full rounded-2xl border transition-all duration-200 bg-slate-100/70 overflow-hidden ${
+                  isTarget
+                    ? 'ring-2 ring-[#C59B63] border-[#C59B63] bg-[#FAF5EC]/50'
+                    : 'border-slate-200'
                 }`}
               >
                 {/* Column Header */}
-                <div className={`p-3.5 rounded-t-2xl border-b ${col.borderColor} ${col.bgColor} flex items-center justify-between`}>
+                <div
+                  className={`p-3.5 border-b ${col.borderColor} ${col.bgColor} flex items-center justify-between shrink-0`}
+                >
                   <div className="flex items-center gap-2">
-                    <span className={`w-2.5 h-2.5 rounded-full ${col.id === 'Booked' || col.id === 'Converted' ? 'bg-emerald-500' : 'bg-[#C59B63]'}`} />
+                    <span
+                      className={`w-2.5 h-2.5 rounded-full ${
+                        col.id === 'Won'
+                          ? 'bg-emerald-500'
+                          : col.id === 'Lost'
+                          ? 'bg-rose-500'
+                          : 'bg-[#C59B63]'
+                      }`}
+                    />
                     <h3 className={`font-bold text-xs uppercase tracking-wider ${col.color}`}>
                       {col.label}
                     </h3>
@@ -215,7 +283,7 @@ export default function PipelinePage() {
                 </div>
 
                 {/* Column Sub-Header Value */}
-                <div className="px-3.5 py-1.5 bg-white/60 border-b border-slate-200/50 text-[11px] text-slate-500 flex justify-between items-center">
+                <div className="px-3.5 py-1.5 bg-white/60 border-b border-slate-200/50 text-[11px] text-slate-500 flex justify-between items-center shrink-0">
                   <span>Deal Volume:</span>
                   <strong className="text-slate-800">{formatINR(colTotalValue)}</strong>
                 </div>
@@ -227,7 +295,7 @@ export default function PipelinePage() {
                       No deals in this stage
                     </div>
                   ) : (
-                    colLeads.map((lead) => (
+                    paginatedColLeads.map((lead) => (
                       <div
                         key={lead.id}
                         draggable
@@ -263,6 +331,45 @@ export default function PipelinePage() {
                       </div>
                     ))
                   )}
+                </div>
+
+                {/* Column Pagination Footer */}
+                <div className="p-2.5 bg-white border-t border-[#EAE4D9] flex items-center justify-between text-xs text-stone-600 shrink-0">
+                  <button
+                    type="button"
+                    disabled={currentPage <= 1}
+                    onClick={() =>
+                      setStagePages((prev) => ({
+                        ...prev,
+                        [col.id]: Math.max(1, currentPage - 1),
+                      }))
+                    }
+                    className="p-1 rounded-lg border border-[#EAE4D9] hover:bg-[#FAF5EC] disabled:opacity-30 disabled:cursor-not-allowed text-[#0C141F] transition-colors cursor-pointer"
+                    title="Previous Page"
+                  >
+                    <ChevronLeft className="w-3.5 h-3.5" />
+                  </button>
+                  <div className="flex items-center gap-1 text-[11px] font-medium text-stone-600">
+                    <span>Page</span>
+                    <strong className="text-[#0C141F] font-bold">{currentPage}</strong>
+                    <span>of</span>
+                    <strong className="text-[#0C141F] font-bold">{totalColumnPages}</strong>
+                    <span className="text-stone-400 ml-1">({colLeads.length})</span>
+                  </div>
+                  <button
+                    type="button"
+                    disabled={currentPage >= totalColumnPages}
+                    onClick={() =>
+                      setStagePages((prev) => ({
+                        ...prev,
+                        [col.id]: Math.min(totalColumnPages, currentPage + 1),
+                      }))
+                    }
+                    className="p-1 rounded-lg border border-[#EAE4D9] hover:bg-[#FAF5EC] disabled:opacity-30 disabled:cursor-not-allowed text-[#0C141F] transition-colors cursor-pointer"
+                    title="Next Page"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
             );

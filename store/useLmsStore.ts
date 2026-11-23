@@ -115,7 +115,7 @@ export const useLmsStore = create<LmsState>()(
           budget: leadData.budget || 5000000,
           propertyType: leadData.propertyType || 'Apartment',
           leadSource: leadData.leadSource || 'Website',
-          status: leadData.status || (leadData.assignedAgentId ? 'Assigned' : 'New'),
+          status: leadData.status || (leadData.assignedAgentId ? 'Contacted' : 'New'),
           assignedAgentId: leadData.assignedAgentId,
           assignedAgentName: leadData.assignedAgentName,
           followUpDate: leadData.followUpDate,
@@ -220,7 +220,7 @@ export const useLmsStore = create<LmsState>()(
           if (!lead) return state;
 
           const oldAgentId = lead.assignedAgentId;
-          const newStatus = lead.status === 'New' ? 'Assigned' : lead.status;
+          const newStatus = lead.status;
 
           const updatedActivities = [
             {
@@ -276,7 +276,7 @@ export const useLmsStore = create<LmsState>()(
                 ...l,
                 assignedAgentId: agentId,
                 assignedAgentName: agentName,
-                status: l.status === 'New' ? ('Assigned' as LeadStatus) : l.status,
+                status: l.status,
                 updatedAt: now,
                 activities: [
                   {
@@ -349,7 +349,7 @@ export const useLmsStore = create<LmsState>()(
           const lead = state.leads.find((l) => l.id === leadId);
           if (!lead || lead.status === newStatus) return state;
 
-          const isNowConverted = newStatus === 'Converted' && lead.status !== 'Converted';
+          const isNowConverted = newStatus === 'Won' && lead.status !== 'Won';
 
           let updatedAgents = state.agents;
           if (isNowConverted && lead.assignedAgentId) {
@@ -502,14 +502,14 @@ export const useLmsStore = create<LmsState>()(
               ? {
                   ...l,
                   followUpDate: newFlp.scheduledDate,
-                  status: l.status === 'New' || l.status === 'Assigned' ? ('Follow-up' as LeadStatus) : l.status,
+                  status: l.status === 'New' ? ('Contacted' as LeadStatus) : l.status,
                   notes: [
                     {
                       id: `note-${Date.now()}`,
                       text: `Follow-up scheduled (${newFlp.type}) for ${newFlp.scheduledDate} ${newFlp.scheduledTime}: ${newFlp.notes}`,
                       createdAt: now,
                       authorName: newFlp.agentName,
-                      stage: 'Follow-up',
+                      stage: 'Contacted',
                     },
                     ...l.notes,
                   ],
@@ -565,7 +565,7 @@ export const useLmsStore = create<LmsState>()(
             l.id === newVisit.leadId
               ? {
                   ...l,
-                  status: 'Site Visit Scheduled' as LeadStatus,
+                  status: 'Site Visit' as LeadStatus,
                   interestedPropertyId: newVisit.propertyId,
                   interestedPropertyName: newVisit.propertyName,
                   notes: [
@@ -574,7 +574,7 @@ export const useLmsStore = create<LmsState>()(
                       text: `Site visit scheduled at ${newVisit.propertyName} for ${newVisit.visitDate} at ${newVisit.visitTime}. ${newVisit.remarks || ''}`,
                       createdAt: now,
                       authorName: newVisit.agentName,
-                      stage: 'Site Visit Scheduled',
+                      stage: 'Site Visit',
                     },
                     ...l.notes,
                   ],
@@ -599,7 +599,7 @@ export const useLmsStore = create<LmsState>()(
           let updatedLeads = state.leads;
           if (updates.status === 'Completed' && visit.leadId) {
             updatedLeads = state.leads.map((l) =>
-              l.id === visit.leadId ? { ...l, status: 'Site Visited' as LeadStatus } : l
+              l.id === visit.leadId ? { ...l, status: 'Site Visit' as LeadStatus } : l
             );
           }
 
@@ -655,14 +655,14 @@ export const useLmsStore = create<LmsState>()(
             l.id === newBooking.leadId
               ? {
                   ...l,
-                  status: 'Booked' as LeadStatus,
+                  status: 'Won' as LeadStatus,
                   notes: [
                     {
                       id: `note-${Date.now()}`,
                       text: `Booking confirmed! Agreement #${agreementNumber}. Booking Amount: ₹${newBooking.bookingAmount.toLocaleString('en-IN')}`,
                       createdAt: now,
                       authorName: newBooking.agentName,
-                      stage: 'Booked',
+                      stage: 'Won',
                     },
                     ...l.notes,
                   ],

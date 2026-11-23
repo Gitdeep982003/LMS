@@ -63,7 +63,7 @@ export default function ReportsPage() {
     leads.forEach((l) => {
       if (!map[l.leadSource]) map[l.leadSource] = { leads: 0, converted: 0 };
       map[l.leadSource].leads++;
-      if (l.status === 'Converted' || l.status === 'Booked') {
+      if (l.status === 'Won' || (l.status as string) === 'Converted' || (l.status as string) === 'Booked') {
         map[l.leadSource].converted++;
       }
     });

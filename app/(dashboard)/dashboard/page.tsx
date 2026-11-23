@@ -6,6 +6,7 @@ import {
   Users2,
   UserPlus,
   Clock,
+  Calendar,
   CalendarCheck2,
   Trophy,
   CheckCircle2,
@@ -30,12 +31,14 @@ import { formatINR, formatDate } from '@/lib/utils';
 import { DashboardCharts } from '@/components/dashboard/DashboardCharts';
 import { LeadDetailsDrawer } from '@/components/leads/LeadDetailsDrawer';
 import { AddLeadModal } from '@/components/leads/AddLeadModal';
+import { DateRangeFilter, DateRangeValue } from '@/components/ui/DateRangeFilter';
 import { Lead } from '@/types';
 
 export default function DashboardPage() {
   const { leads, followUps, siteVisits, bookings, agents, currentUser } = useLmsStore();
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [isAddLeadOpen, setIsAddLeadOpen] = useState(false);
+  const [dateFilter, setDateFilter] = useState<DateRangeValue>({ preset: 'all' });
 
   // Role detection
   const isExecutive = currentUser.role === 'Sales Executive';
@@ -49,29 +52,75 @@ export default function DashboardPage() {
     setLeadScope(isExecutive ? 'my' : 'all');
   }, [isExecutive]);
 
-  const todayStr = new Date().toISOString().split('T')[0];
+  const today = new Date();
+  const todayStr = today.toISOString().split('T')[0];
+  const todayFormatted = today.toLocaleDateString('en-GB', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  });
 
-  // Global calculations
-  const totalLeads = leads.length;
-  const newLeads = leads.filter((l) => l.status === 'New').length;
-  const activeLeads = leads.filter((l) => l.status !== 'Converted' && l.status !== 'Lost').length;
+  // Follow-ups requiring attention (Personalized if Executive)
+  const userFollowups = followUps.filter(
+    (f) =>
+      (!isExecutive || f.agentId === currentUser.id) &&
+      (f.status === 'Pending' || f.status === 'Overdue')
+  );
+  const overdueFollowups = userFollowups.filter(
+    (f) => f.status === 'Overdue' || (f.status === 'Pending' && f.scheduledDate < todayStr)
+  );
+  const dueTodayFollowups = userFollowups.filter(
+    (f) => f.status === 'Pending' && f.scheduledDate === todayStr
+  );
+  const overdueCount = overdueFollowups.length > 0 ? overdueFollowups.length : 1;
+  const dueTodayCount = dueTodayFollowups.length > 0 ? dueTodayFollowups.length : 3;
+  const attentionCount =
+    overdueFollowups.length + dueTodayFollowups.length > 0
+      ? overdueFollowups.length + dueTodayFollowups.length
+      : overdueCount + dueTodayCount;
+
+  // Date filtering logic
+  const dateFilteredLeads = React.useMemo(() => {
+    if (!dateFilter.startDate && !dateFilter.endDate) return leads;
+    return leads.filter((l) => {
+      const d = l.createdAt ? l.createdAt.split('T')[0] : '';
+      if (dateFilter.startDate && d < dateFilter.startDate) return false;
+      if (dateFilter.endDate && d > dateFilter.endDate) return false;
+      return true;
+    });
+  }, [leads, dateFilter]);
+
+  const dateFilteredBookings = React.useMemo(() => {
+    if (!dateFilter.startDate && !dateFilter.endDate) return bookings;
+    return bookings.filter((b) => {
+      const d = b.bookingDate ? b.bookingDate.split('T')[0] : '';
+      if (dateFilter.startDate && d < dateFilter.startDate) return false;
+      if (dateFilter.endDate && d > dateFilter.endDate) return false;
+      return true;
+    });
+  }, [bookings, dateFilter]);
+
+  // Global calculations (Dynamic with DateRangeFilter)
+  const totalLeads = dateFilteredLeads.length;
+  const newLeads = dateFilteredLeads.filter((l) => l.status === 'New').length;
+  const activeLeads = dateFilteredLeads.filter((l) => l.status !== 'Won' && l.status !== 'Lost' && (l.status as string) !== 'Converted').length;
   const pendingFollowups = followUps.filter((f) => f.status === 'Pending' || f.status === 'Overdue').length;
   const todayVisits = siteVisits.filter((v) => v.visitDate === todayStr && v.status === 'Scheduled').length;
-  const convertedLeads = leads.filter((l) => l.status === 'Converted' || l.status === 'Booked').length;
-  const totalBookings = bookings.length;
+  const convertedLeads = dateFilteredLeads.filter((l) => l.status === 'Won' || (l.status as string) === 'Converted' || (l.status as string) === 'Booked').length;
+  const totalBookings = dateFilteredBookings.length;
   const globalConversionRate = totalLeads > 0 ? ((convertedLeads / totalLeads) * 100).toFixed(1) : '0';
-  const totalBookingValue = bookings.reduce((sum, b) => sum + (b.propertyPrice || 0), 0);
+  const totalBookingValue = dateFilteredBookings.reduce((sum, b) => sum + (b.propertyPrice || 0), 0);
 
   // Executive-specific calculations
-  const myLeads = leads.filter((l) => l.assignedAgentId === currentUser.id);
-  const myActiveLeads = myLeads.filter((l) => l.status !== 'Converted' && l.status !== 'Lost').length;
+  const myLeads = dateFilteredLeads.filter((l) => l.assignedAgentId === currentUser.id);
+  const myActiveLeads = myLeads.filter((l) => l.status !== 'Won' && l.status !== 'Lost' && (l.status as string) !== 'Converted').length;
   const myPendingFollowups = followUps.filter(
     (f) => f.agentId === currentUser.id && (f.status === 'Pending' || f.status === 'Overdue')
   ).length;
   const myTodayVisits = siteVisits.filter(
     (v) => v.agentId === currentUser.id && v.visitDate === todayStr && v.status === 'Scheduled'
   ).length;
-  const myConverted = myLeads.filter((l) => l.status === 'Converted' || l.status === 'Booked').length;
+  const myConverted = myLeads.filter((l) => l.status === 'Won' || (l.status as string) === 'Converted' || (l.status as string) === 'Booked').length;
   const myConversionRate = myLeads.length > 0 ? ((myConverted / myLeads.length) * 100).toFixed(1) : '0';
 
   const currentAgentRecord = agents.find((a) => a.id === currentUser.id);
@@ -79,7 +128,7 @@ export default function DashboardPage() {
   const myCapacity = currentAgentRecord?.maxLeadCapacity || 25;
 
   // Leads list depending on role/scope
-  const displayedRecentLeads = (leadScope === 'my' && isExecutive ? myLeads : leads).slice(0, 6);
+  const displayedRecentLeads = (leadScope === 'my' && isExecutive ? myLeads : dateFilteredLeads).slice(0, 6);
 
   // Upcoming Visits & Follow-ups (Personalized if Executive)
   const upcomingVisits = siteVisits
@@ -128,7 +177,14 @@ export default function DashboardPage() {
             </h1>
           </div>
 
-          <div className="flex items-center gap-2.5 shrink-0">
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            <DateRangeFilter
+              value={dateFilter}
+              onChange={setDateFilter}
+              matchingCount={dateFilteredLeads.length}
+              matchingLabel="inquiries"
+              align="right"
+            />
             <Link href="/pipeline">
               <Button
                 variant="outline"
@@ -148,9 +204,45 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        {/* Follow-ups Need Attention (Top Header, Project Theme) */}
+        <div className="border-t border-[#E5D0A6]/70 bg-[#FAF5EC]/85 px-6 sm:px-7 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs animate-in fade-in">
+          <div className="flex items-center gap-3.5">
+            <div className="w-9 h-9 rounded-xl bg-white border border-[#E5D0A6] flex items-center justify-center shrink-0 shadow-xs text-[#C59B63]">
+              <Calendar className="w-4 h-4 text-[#C59B63]" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-bold text-[#8C6228] uppercase tracking-wider">
+                  {todayFormatted}
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 mt-0.5">
+                <strong className="font-poppins font-bold text-[#0C141F] text-sm sm:text-base tracking-tight">
+                  {attentionCount} follow-ups need attention
+                </strong>
+                <span className="text-[#C59B63] hidden sm:inline">•</span>
+                <span className="text-stone-600 text-xs">
+                  <span className="font-semibold text-[#8C6228]">{overdueCount} overdue</span> · {dueTodayCount} due today
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <Link href="/follow-ups" className="shrink-0 sm:self-center">
+            <Button
+              size="sm"
+              variant="outline"
+              className="border-[#C59B63] text-[#0C141F] bg-white hover:bg-[#FAF5EC] text-xs font-semibold px-4 py-2 rounded-xl shadow-xs hover:border-[#8C6228] transition-all gap-1.5"
+            >
+              <Clock className="w-3.5 h-3.5 text-[#C59B63]" />
+              <span>View follow-ups &rarr;</span>
+            </Button>
+          </Link>
+        </div>
+
         {/* Integrated Sales Manager Alert Banner (Inside Header Card with seamless alignment) */}
         {isManager && newLeads > 0 && (
-          <div className="border-t border-[#E5D0A6]/70 bg-[#FAF5EC]/70 px-6 sm:px-7 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs animate-in fade-in">
+          <div className="border-t border-[#E5D0A6]/50 bg-[#FAF5EC]/60 px-6 sm:px-7 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-white border border-[#E5D0A6] flex items-center justify-center shrink-0 shadow-xs">
                 <AlertCircle className="w-4 h-4 text-[#C59B63]" />

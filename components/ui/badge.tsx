@@ -12,34 +12,29 @@ export function StatusBadge({ status, className }: { status: LeadStatus | string
 
   switch (status) {
     case 'New':
+    case 'Assigned':
       colorClasses = 'bg-[#FAF5EC] text-[#8C6228] border-[#E5D0A6]';
       break;
-    case 'Assigned':
-      colorClasses = 'bg-[#F2EDE4] text-[#0C141F] border-[#EAE4D9]';
-      break;
     case 'Contacted':
-      colorClasses = 'bg-[#FAF8F5] text-stone-700 border-[#EAE4D9]';
-      break;
-    case 'Interested':
-      colorClasses = 'bg-[#FAF5EC] text-[#B88A44] border-[#E5D0A6]';
-      break;
     case 'Follow-up':
-      colorClasses = 'bg-[#FAF3E8] text-[#966D2F] border-[#E5D0A6]';
+      colorClasses = 'bg-sky-50 text-sky-800 border-sky-200';
       break;
+    case 'Qualified':
+    case 'Interested':
+      colorClasses = 'bg-indigo-50 text-indigo-800 border-indigo-200';
+      break;
+    case 'Site Visit':
     case 'Site Visit Scheduled':
-      colorClasses = 'bg-[#FAF5EC] text-[#8C6228] border-[#C59B63]/50 font-medium';
-      break;
     case 'Site Visited':
-      colorClasses = 'bg-[#F2EDE4] text-[#8C6228] border-[#EAE4D9]';
+      colorClasses = 'bg-purple-50 text-purple-800 border-purple-200 font-medium';
       break;
     case 'Negotiation':
-      colorClasses = 'bg-[#FAF3E8] text-[#966D2F] border-[#D4B87C] font-medium';
+      colorClasses = 'bg-amber-50 text-amber-800 border-amber-300 font-medium';
       break;
+    case 'Won':
     case 'Booked':
-      colorClasses = 'bg-emerald-50 text-emerald-800 border-emerald-200 font-semibold';
-      break;
     case 'Converted':
-      colorClasses = 'bg-emerald-100 text-emerald-900 border-emerald-300 font-semibold';
+      colorClasses = 'bg-emerald-50 text-emerald-800 border-emerald-300 font-semibold';
       break;
     case 'Lost':
       colorClasses = 'bg-rose-50 text-rose-700 border-rose-200';

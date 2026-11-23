@@ -35,6 +35,7 @@ import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { ScheduleFollowUpModal } from '@/components/followups/ScheduleFollowUpModal';
 import { ScheduleSiteVisitModal } from '@/components/sitevisits/ScheduleSiteVisitModal';
 import { CreateBookingModal } from '@/components/bookings/CreateBookingModal';
+import { DateRangeFilter, DateRangeValue } from '@/components/ui/DateRangeFilter';
 import { Lead, LeadStatus, LeadSource, PropertyType } from '@/types';
 
 export default function LeadsPage() {
@@ -58,6 +59,7 @@ export default function LeadsPage() {
   const [agentFilter, setAgentFilter] = useState<string>('ALL');
   const [sourceFilter, setSourceFilter] = useState<string>('ALL');
   const [typeFilter, setTypeFilter] = useState<string>('ALL');
+  const [dateFilter, setDateFilter] = useState<DateRangeValue>({ preset: 'all' });
   const [sortBy, setSortBy] = useState<'createdAt' | 'budget' | 'name'>('createdAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
@@ -88,7 +90,12 @@ export default function LeadsPage() {
         const matchesSource = sourceFilter === 'ALL' || l.leadSource === sourceFilter;
         const matchesType = typeFilter === 'ALL' || l.propertyType === typeFilter;
 
-        return matchesSearch && matchesStatus && matchesAgent && matchesSource && matchesType;
+        const leadDate = l.createdAt ? l.createdAt.split('T')[0] : '';
+        const matchesStartDate = !dateFilter.startDate || leadDate >= dateFilter.startDate;
+        const matchesEndDate = !dateFilter.endDate || leadDate <= dateFilter.endDate;
+        const matchesDate = matchesStartDate && matchesEndDate;
+
+        return matchesSearch && matchesStatus && matchesAgent && matchesSource && matchesType && matchesDate;
       })
       .sort((a, b) => {
         let comp = 0;
@@ -97,7 +104,7 @@ export default function LeadsPage() {
         if (sortBy === 'name') comp = a.name.localeCompare(b.name);
         return sortOrder === 'asc' ? -comp : comp;
       });
-  }, [leads, search, statusFilter, agentFilter, sourceFilter, typeFilter, sortBy, sortOrder]);
+  }, [leads, search, statusFilter, agentFilter, sourceFilter, typeFilter, dateFilter, sortBy, sortOrder]);
 
   const totalPages = Math.max(1, Math.ceil(filteredLeads.length / pageSize));
   const paginatedLeads = filteredLeads.slice((currentPage - 1) * pageSize, currentPage * pageSize);
@@ -160,6 +167,7 @@ export default function LeadsPage() {
     setAgentFilter('ALL');
     setSourceFilter('ALL');
     setTypeFilter('ALL');
+    setDateFilter({ preset: 'all' });
     setCurrentPage(1);
     info('Filters Cleared', 'Displaying all records.');
   };
@@ -179,6 +187,17 @@ export default function LeadsPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5">
+          <DateRangeFilter
+            value={dateFilter}
+            onChange={(val) => {
+              setDateFilter(val);
+              setCurrentPage(1);
+            }}
+            matchingCount={filteredLeads.length}
+            matchingLabel="leads"
+            align="right"
+          />
+
           {/* CSV Import Hidden Input */}
           <input
             type="file"
@@ -249,15 +268,11 @@ export default function LeadsPage() {
               >
                 <option value="ALL">Status: All</option>
                 <option value="New">New</option>
-                <option value="Assigned">Assigned</option>
                 <option value="Contacted">Contacted</option>
-                <option value="Interested">Interested</option>
-                <option value="Follow-up">Follow-up</option>
-                <option value="Site Visit Scheduled">Site Visit Scheduled</option>
-                <option value="Site Visited">Site Visited</option>
+                <option value="Qualified">Qualified</option>
+                <option value="Site Visit">Site Visit</option>
                 <option value="Negotiation">Negotiation</option>
-                <option value="Booked">Booked</option>
-                <option value="Converted">Converted</option>
+                <option value="Won">Won</option>
                 <option value="Lost">Lost</option>
               </select>
             </div>
@@ -328,7 +343,7 @@ export default function LeadsPage() {
           {/* Bulk Action Bar */}
           {selectedLeadIds.length > 0 && (
             <div className="flex items-center justify-between p-2.5 bg-[#FAF5EC]/80 border border-[#EAE4D9] rounded-lg text-xs animate-in fade-in">
-              <span className="font-semibold text-blue-900">
+              <span className="font-semibold text-[#0C141F]">
                 {selectedLeadIds.length} leads selected
               </span>
               <div className="flex items-center gap-2">

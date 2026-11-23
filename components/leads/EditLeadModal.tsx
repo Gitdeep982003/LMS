@@ -209,15 +209,11 @@ export function EditLeadModal({ isOpen, onClose, lead }: EditLeadModalProps) {
               className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none bg-white font-medium"
             >
               <option value="New">New</option>
-              <option value="Assigned">Assigned</option>
               <option value="Contacted">Contacted</option>
-              <option value="Interested">Interested</option>
-              <option value="Follow-up">Follow-up</option>
-              <option value="Site Visit Scheduled">Site Visit Scheduled</option>
-              <option value="Site Visited">Site Visited</option>
+              <option value="Qualified">Qualified</option>
+              <option value="Site Visit">Site Visit</option>
               <option value="Negotiation">Negotiation</option>
-              <option value="Booked">Booked</option>
-              <option value="Converted">Converted</option>
+              <option value="Won">Won</option>
               <option value="Lost">Lost</option>
             </select>
           </div>
