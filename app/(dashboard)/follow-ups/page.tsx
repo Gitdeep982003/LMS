@@ -109,7 +109,7 @@ export default function FollowUpsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-poppins font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
+          <h1 className="text-xl sm:text-2xl font-serif font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
             <CalendarClock className="w-6 h-6 text-[#C59B63]" />
             <span>Sales Follow-up Tracker</span>
           </h1>
@@ -261,7 +261,7 @@ export default function FollowUpsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr className="border-b border-[#EAE4D9] bg-[#FAF5EC]/60 text-stone-600 font-poppins font-semibold uppercase tracking-wider text-[11px]">
+                  <tr className="border-b border-[#EAE4D9] bg-[#FAF5EC]/60 text-stone-600 font-serif font-semibold uppercase tracking-wider text-[11px]">
                     <th className="py-3 px-4">Scheduled Date & Time</th>
                     <th className="py-3 px-3">Customer Lead</th>
                     <th className="py-3 px-3">Type</th>
@@ -288,7 +288,7 @@ export default function FollowUpsPage() {
                           <span className="text-[11px] text-[#8C6228] font-medium">{f.scheduledTime}</span>
                         </td>
                         <td className="py-3 px-3">
-                          <p className="font-poppins font-semibold text-[#0C141F]">{f.leadName}</p>
+                          <p className="font-serif font-semibold text-[#0C141F]">{f.leadName}</p>
                           <p className="text-[11px] text-[#8C6228] truncate max-w-[180px]">
                             {f.propertyName || 'Inquiry'}
                           </p>
@@ -376,7 +376,7 @@ export default function FollowUpsPage() {
               </div>
 
               <div>
-                <h4 className="font-poppins font-bold text-[#0C141F] text-sm">{f.leadName}</h4>
+                <h4 className="font-serif font-bold text-[#0C141F] text-sm">{f.leadName}</h4>
                 <p className="text-xs text-stone-500">{f.propertyName || 'General Inquiry'}</p>
               </div>
 
@@ -425,7 +425,7 @@ export default function FollowUpsPage() {
                 value={completionFeedback}
                 onChange={(e) => setCompletionFeedback(e.target.value)}
                 placeholder="e.g. Client agreed on floor plan, requested Saturday site visit with architect..."
-                className="w-full p-2.5 text-xs rounded-lg border border-slate-200 focus:border-[#C59B63] focus:ring-1 focus:ring-[#C59B63] outline-none resize-none"
+                className="w-full p-2.5 text-xs rounded-lg border border-slate-200 focus:border-blue-500 outline-none resize-none"
               />
             </div>
 

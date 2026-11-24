@@ -56,50 +56,43 @@ export default function LoginPage() {
       {/* Background Subtle Luxury Ambience */}
       <div className="fixed inset-0 bg-radial from-[#FAF5EC] via-[#FAF8F5] to-[#F2EDE4] pointer-events-none" />
 
-      {/* Main Split-Screen Luxury Card */}
-      <div className="relative z-10 w-full max-w-5xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-[#EAE4D9] flex flex-col lg:flex-row">
+      {/* Main Split-Screen Luxury Card - Scaled to 80% / 4xl Proportion */}
+      <div className="relative z-10 w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-[#EAE4D9] flex flex-col lg:flex-row">
         {/* ========================================================= */}
         {/* LEFT COLUMN: KALAIVANI HERO BANNER (MATCHES BRANDING)     */}
         {/* ========================================================= */}
-        <div className="relative lg:w-7/12 min-h-[380px] lg:min-h-[580px] flex flex-col justify-between p-6 sm:p-10 text-white overflow-hidden bg-[#0C141F]">
-          {/* Hero Property Backdrop Image */}
+        <div className="relative lg:w-7/12 min-h-[360px] lg:min-h-[520px] flex flex-col justify-end p-6 sm:p-8 text-white overflow-hidden bg-[#0C141F]">
+          {/* Hero Property Backdrop Image - Brand New Ultra-Luxury Architectural Villa */}
           <div
             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
-            style={{ backgroundImage: `url('/kalaivani-hero.jpg')` }}
+            style={{
+              backgroundImage: `url('/kalaivani-estate.jpg')`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+            }}
           />
 
           {/* Gradients to match the screenshot readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0C141F]/90 via-[#0C141F]/30 to-[#0C141F]/40" />
-
-          {/* Top-Left: Kalaivani Luxury Brand Emblem */}
-          <div className="relative z-20 flex items-center">
-            <div className="bg-white/95 backdrop-blur-md rounded-2xl px-4 py-2 shadow-xl border border-[#C59B63]/40">
-              <img
-                src="/kalaivani-logo.png"
-                alt="Kalaivani Real Estate Logo"
-                className="h-12 sm:h-14 md:h-16 w-auto object-contain"
-              />
-            </div>
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0C141F]/90 via-[#0C141F]/35 to-[#0C141F]/30" />
 
           {/* Bottom-Left: Signature Brand Copy from Uploaded Image */}
-          <div className="relative z-20 space-y-4 max-w-lg mt-auto pt-12">
+          <div className="relative z-20 space-y-3.5 max-w-md mt-auto pt-8">
             <div>
-              <h2 className="font-poppins text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight drop-shadow-md">
+              <h2 className="font-poppins text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight drop-shadow-md">
                 Your Dream Property,<br />
                 <span className="text-[#C59B63] italic">Our Commitment.</span>
               </h2>
-              <p className="text-xs sm:text-sm text-stone-200 mt-3 leading-relaxed drop-shadow-sm font-normal">
+              <p className="text-xs text-stone-200 mt-2.5 leading-relaxed drop-shadow-sm font-normal">
                 From finding the perfect property to complete construction and interiors – we provide end-to-end real estate solutions tailored to your needs.
               </p>
             </div>
 
             {/* Visual Action Badges from Hero Banner */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0C141F]/90 border border-[#C59B63]/60 text-[11px] font-semibold text-[#C59B63] tracking-wide shadow-sm">
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#0C141F]/90 border border-[#C59B63]/60 text-[10px] font-semibold text-[#C59B63] tracking-wide shadow-sm">
                 <span>RERA Approved</span>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-[11px] font-medium text-white tracking-wide">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-[10px] font-medium text-white tracking-wide">
                 <span>Direct Developer Pricing</span>
               </div>
             </div>
@@ -109,15 +102,15 @@ export default function LoginPage() {
         {/* ========================================================= */}
         {/* RIGHT COLUMN: REFINED WARM REAL ESTATE PORTAL LOGIN       */}
         {/* ========================================================= */}
-        <div className="lg:w-5/12 flex flex-col justify-center p-6 sm:p-8 lg:p-10 bg-[#FAF8F5] text-[#0C141F]">
-          <div className="w-full space-y-5">
-            {/* Header */}
+        <div className="lg:w-5/12 flex flex-col justify-center p-6 sm:p-7 lg:p-8 bg-[#FAF8F5] text-[#0C141F]">
+          <div className="w-full space-y-4">
+            {/* Header with 80% Scaled Compact Brand Logo */}
             <div>
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-2 mb-2">
                 <img
                   src="/kalaivani-logo.png"
                   alt="Kalaivani Logo"
-                  className="h-12 sm:h-14 w-auto object-contain"
+                  className="h-6 sm:h-[26px] w-auto object-contain"
                 />
               </div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF5EC] border border-[#E5D0A6] text-[10px] font-bold text-[#8C6228] uppercase tracking-wider mb-2">
