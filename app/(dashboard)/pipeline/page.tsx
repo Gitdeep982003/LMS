@@ -161,16 +161,14 @@ export default function PipelinePage() {
   return (
     <div className="space-y-6 pb-12 flex flex-col h-[calc(100vh-6.5rem)]">
       {/* Header & Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0">
-        <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-xl bg-[#FAF5EC] border border-[#E5D0A6] flex items-center justify-center shrink-0 text-[#C59B63] shadow-2xs">
-            <Kanban className="w-5 h-5 text-[#C59B63]" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
+        <div className="flex items-center gap-2.5 shrink-0">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#FAF5EC] border border-[#E5D0A6] flex items-center justify-center shrink-0 text-[#C59B63] shadow-2xs">
+            <Kanban className="w-4 h-4 text-[#C59B63]" />
           </div>
-          <div>
-            <h1 className="font-poppins text-2xl font-bold text-[#0C141F] tracking-tight">
-              Sales Pipeline
-            </h1>
-          </div>
+          <h1 className="font-poppins text-lg sm:text-xl font-bold text-[#0C141F] tracking-tight whitespace-nowrap leading-none">
+            Lead Management
+          </h1>
         </div>
 
         <div className="flex items-center gap-2.5 shrink-0 flex-wrap sm:flex-nowrap">

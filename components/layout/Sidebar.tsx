@@ -102,12 +102,9 @@ export function Sidebar({
   const mainNavigation = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     {
-      name: isExecutive ? 'My Assigned Leads' : 'Leads Management',
-      href: '/leads',
-      icon: Users2,
-      badge: isExecutive
-        ? (myAssignedCount > 0 ? String(myAssignedCount) : undefined)
-        : (newLeadsCount > 0 ? String(newLeadsCount) : undefined),
+      name: 'Lead Management',
+      href: '/pipeline',
+      icon: Kanban,
     },
     {
       name: 'Lead Assignment',
@@ -115,10 +112,17 @@ export function Sidebar({
       icon: UserCheck,
       badge: isManager && unassignedCount > 0 ? String(unassignedCount) : undefined,
     },
+    {
+      name: 'All Customers',
+      href: '/leads',
+      icon: Users2,
+      badge: isExecutive
+        ? (myAssignedCount > 0 ? String(myAssignedCount) : undefined)
+        : (newLeadsCount > 0 ? String(newLeadsCount) : undefined),
+    },
   ];
 
   const bottomNavigation = [
-    { name: 'Sales Pipeline', href: '/pipeline', icon: Kanban },
     { name: 'Reports & Analytics', href: '/reports', icon: BarChart3 },
     {
       name: 'Settings',

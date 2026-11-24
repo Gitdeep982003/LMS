@@ -179,7 +179,7 @@ export default function LeadsPage() {
         <div>
           <h1 className="font-poppins text-2xl sm:text-3xl font-bold text-[#0C141F] tracking-tight flex items-center gap-2.5">
             <Users2 className="w-6 h-6 text-[#C59B63]" />
-            <span>Leads Management</span>
+            <span>All Customers</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
             View, filter, qualify, and assign prospective real estate buyers and investors.

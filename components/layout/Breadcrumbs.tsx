@@ -7,12 +7,12 @@ import { ChevronRight, Home } from 'lucide-react';
 
 const pathNameMap: Record<string, string> = {
   dashboard: 'Dashboard',
-  leads: 'Leads Management',
+  leads: 'All Customers',
   assignments: 'Lead Assignment',
   properties: 'Properties',
   'follow-ups': 'Follow-ups',
   'site-visits': 'Site Visits',
-  pipeline: 'Sales Pipeline',
+  pipeline: 'Lead Management',
   bookings: 'Bookings',
   customers: 'Customers',
   team: 'Sales Team',
